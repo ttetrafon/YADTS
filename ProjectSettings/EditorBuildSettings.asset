@@ -5,8 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/Front Screen.unity
+    guid: 18d478749a963854fa24d6275a707a28
   - enabled: 1
-    path: Assets/Scenes/---/HDRPSampleScene.unity
-    guid: 3db1837cc97a95e4c98610966fac2b0b
+    path: Assets/Scenes/Pen and Paper Scene.unity
+    guid: 3cec6cf4117efa94ba55c29e60484fa4
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: bfcbd2372dcba3041b1b12cb5c198b95, type: 2}

@@ -151,18 +151,18 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""multiplier"",
+                    ""name"": ""Multiplier"",
                     ""id"": ""9acc5f46-efaf-4c81-b158-8c941aa6b98d"",
                     ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Pan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""stick"",
+                    ""name"": ""Stick"",
                     ""id"": ""c4bb1741-b1d4-4258-aa95-1b0720e6f79f"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
@@ -299,7 +299,7 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""MouseLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -321,7 +321,7 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""SlowCameraModifier"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -332,7 +332,7 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""FastCameraModifier"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -832,7 +832,7 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

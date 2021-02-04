@@ -20,7 +20,7 @@ public class MapController : MonoBehaviour {
 	// Map Objects
 	public static List<MapObject> currentlySelectedObjects = new List<MapObject>(); // Holds a list of all currently selected map objects.
 	public static Dictionary<string, MapObject> mapObjects = new Dictionary<string, MapObject>();
-  public float slowMovementModifier = 0.25f;
+  	public float slowMovementModifier = 0.25f;
 	private float xyMovementSensitivity = 0.5f;
 	private float zMovementSensitivity = 0.5f;
 	// private float arrowMovementSensitivity = 5.0f;
@@ -48,11 +48,11 @@ public class MapController : MonoBehaviour {
 
 	// Controls
 	InputControls moControls;
-  Vector2 moMoveXY = Vector2.zero;
-  float moMoveZ = 0;
-  float moRotateZ = 0;
-  float moRotateFront = 0;
-  float moRotateSide = 0;
+	Vector2 moMoveXY = Vector2.zero;
+	float moMoveZ = 0;
+	float moRotateZ = 0;
+	float moRotateFront = 0;
+	float moRotateSide = 0;
 
   private void Awake() {
     //Debug.Log("===> MapController Awake");
