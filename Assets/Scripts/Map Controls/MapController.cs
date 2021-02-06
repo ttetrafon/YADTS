@@ -47,12 +47,6 @@ public class MapController : MonoBehaviour {
 	private MapObject[] distanceMeasurementObjects = new MapObject[2];
 
 	// Controls
-	// InputControls moControls;
-	Vector2 moMoveXY = Vector2.zero;
-	float moMoveZ = 0;
-	float moRotateZ = 0;
-	float moRotateFront = 0;
-	float moRotateSide = 0;
 
   private void Awake() {
     //Debug.Log("===> MapController Awake");
@@ -68,8 +62,6 @@ public class MapController : MonoBehaviour {
     //Debug.Log("mapObjectsDirectory: " + mapObjectsDirectory);
 
     // Set the controls
-    // moControls = new InputControls();
-    // moControls.MapController.Select.performed += ctx => MapClick();
     // moControls.MapController.MoveXY.performed += ctx => moMoveXY = ctx.ReadValue<Vector2>();
     // moControls.MapController.MoveXY.canceled += ctx => moMoveXY = Vector2.zero;
     // moControls.MapController.MoveZ.performed += ctx => moMoveZ = ctx.ReadValue<Vector2>().y;
@@ -90,36 +82,6 @@ public class MapController : MonoBehaviour {
 
 	private void OnDisable() {
 		// moControls.MapController.Disable();
-	}
-
-	private void MapClick() {
-		// Debug.Log("---> Map Click()");
-		// if (!EventSystem.current.IsPointerOverGameObject()) {
-		// 	// Debug.Log("... not over GUI!");
-		// 	Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(moControls.MapController.MousePosition.ReadValue<Vector2>());
-		// 	// Debug.Log(ray);
-		// 	RaycastHit hitInfo;
-		// 	// Target found
-		// 	if (Physics.Raycast(ray, out hitInfo)) {
-		// 		MapObjectClicked(hitInfo.transform.parent.gameObject.GetComponent<MapObject>());
-		// 	}
-		// 	else {
-		// 		UnseslectAllMapObjects();
-		// 	}
-		// 	// No target and no tool
-		// 	if (distanceMeasurementStep == 0) {
-		// 		MainMenu.CloseMenus();
-		// 	}
-      	// 	// Activate the Spatial Data Panel if objects are selected.
-		// 	if (currentlySelectedObjects.Count > 0) {
-		// 		moSpatialDataPanel.SetActive(true);
-		// 		SpatialDataController.PopulateSpatialData();
-		// 	}
-		// 	else {
-		// 		SpatialDataController.CancelRename();
-		// 		moSpatialDataPanel.SetActive(false);
-		// 	}
-		// }
 	}
 
 	private void Start() {
@@ -188,16 +150,16 @@ public class MapController : MonoBehaviour {
 	}
 
 	private void Update() {
-    if (!Helper.isUIActive()) {
-      for (int i = 0; i < currentlySelectedObjects.Count; i++) {
-        currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * moMoveXY.y * xyMovementSensitivity * MapObjectControlsShiftModifier();
-        currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z) * moMoveXY.x * xyMovementSensitivity * MapObjectControlsShiftModifier();
-        currentlySelectedObjects[i].transform.Translate(new Vector3(0, moMoveZ * zMovementSensitivity * MapObjectControlsShiftModifier(), 0));
-        currentlySelectedObjects[i].transform.Rotate(new Vector3(0, moRotateZ * rotationSensitivity * MapObjectControlsShiftModifier()), Space.World);
-        currentlySelectedObjects[i].transform.Rotate(new Vector3(moRotateFront, 0, moRotateSide) * rotationSensitivity * MapObjectControlsShiftModifier(), Space.Self);
-      }
-      UpdatePositionDiplay();
-    }
+		if (!Helper.isUIActive()) {
+			for (int i = 0; i < currentlySelectedObjects.Count; i++) {
+				currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * InputController.moMoveXY.y * xyMovementSensitivity * MapObjectControlsShiftModifier();
+				currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z) * InputController.moMoveXY.x * xyMovementSensitivity * MapObjectControlsShiftModifier();
+				currentlySelectedObjects[i].transform.Translate(new Vector3(0, InputController.moMoveZ * zMovementSensitivity * MapObjectControlsShiftModifier(), 0));
+				currentlySelectedObjects[i].transform.Rotate(new Vector3(0, InputController.moRotateZ * rotationSensitivity * MapObjectControlsShiftModifier()), Space.World);
+				currentlySelectedObjects[i].transform.Rotate(new Vector3(InputController.moRotateFront, 0, InputController.moRotateSide) * rotationSensitivity * MapObjectControlsShiftModifier(), Space.Self);
+			}
+			UpdatePositionDiplay();
+		}
 	}
 
 	public static void MapObjectClicked(MapObject mo) {

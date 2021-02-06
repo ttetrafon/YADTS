@@ -346,6 +346,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MapObjects",
+            "id": "da806085-cc85-4db6-b15e-2725ad9ed5fd",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "81c87e5d-ce05-41ad-85b7-9c28575941a5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "130e3b71-f306-40f2-9640-3e87e758aaa4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
 	public static MainMenu instance = null;
-	// interface controls
-	// public static InputControls interfaceControls;
 	// main menu
 	public Button mainMenuButton;
 	public Button exitAppButton;
@@ -32,7 +30,6 @@ public class MainMenu : MonoBehaviour {
 
 	private void Awake() {
 		if (instance == null) { instance = this; }
-		// interfaceControls = new InputControls();
 	}
 
 	private void Start() {
@@ -80,14 +77,6 @@ public class MainMenu : MonoBehaviour {
 		// Finished initialisation...
 		GameController.loadedMainMenu = true;
 		PostLoad.FinishedInitialLoading();
-	}
-
-	private void OnEnable() {
-		// interfaceControls.Interface.Enable();
-	}
-
-	private void OnDisable() {
-		// interfaceControls.Interface.Disable();
 	}
 
 	///////////////////

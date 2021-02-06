@@ -359,6 +359,33 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MapObjects"",
+            ""id"": ""da806085-cc85-4db6-b15e-2725ad9ed5fd"",
+            ""actions"": [
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""81c87e5d-ce05-41ad-85b7-9c28575941a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""130e3b71-f306-40f2-9640-3e87e758aaa4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -395,6 +422,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Camera_RotateZ = m_Camera.FindAction("RotateZ", throwIfNotFound: true);
         m_Camera_PanFront = m_Camera.FindAction("PanFront", throwIfNotFound: true);
         m_Camera_LookAt = m_Camera.FindAction("LookAt", throwIfNotFound: true);
+        // MapObjects
+        m_MapObjects = asset.FindActionMap("MapObjects", throwIfNotFound: true);
+        m_MapObjects_Click = m_MapObjects.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -578,6 +608,39 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // MapObjects
+    private readonly InputActionMap m_MapObjects;
+    private IMapObjectsActions m_MapObjectsActionsCallbackInterface;
+    private readonly InputAction m_MapObjects_Click;
+    public struct MapObjectsActions
+    {
+        private @Controls m_Wrapper;
+        public MapObjectsActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_MapObjects_Click;
+        public InputActionMap Get() { return m_Wrapper.m_MapObjects; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MapObjectsActions set) { return set.Get(); }
+        public void SetCallbacks(IMapObjectsActions instance)
+        {
+            if (m_Wrapper.m_MapObjectsActionsCallbackInterface != null)
+            {
+                @Click.started -= m_Wrapper.m_MapObjectsActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_MapObjectsActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_MapObjectsActionsCallbackInterface.OnClick;
+            }
+            m_Wrapper.m_MapObjectsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+            }
+        }
+    }
+    public MapObjectsActions @MapObjects => new MapObjectsActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -603,5 +666,9 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnRotateZ(InputAction.CallbackContext context);
         void OnPanFront(InputAction.CallbackContext context);
         void OnLookAt(InputAction.CallbackContext context);
+    }
+    public interface IMapObjectsActions
+    {
+        void OnClick(InputAction.CallbackContext context);
     }
 }

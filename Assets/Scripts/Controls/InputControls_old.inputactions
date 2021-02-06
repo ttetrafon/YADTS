@@ -6,30 +6,6 @@
             "id": "d3b37a24-12dd-4a4b-8f6d-33410be34a1b",
             "actions": [
                 {
-                    "name": "Select",
-                    "type": "Button",
-                    "id": "e52e52e2-e1d1-431d-b3b4-c37684db1b4f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "MousePosition",
-                    "type": "PassThrough",
-                    "id": "a9ee2d42-6864-489b-8351-a3796692984f",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Modifier_Shift",
-                    "type": "Button",
-                    "id": "9c24327d-641a-4aa8-a62c-e796d34d6c2c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "MapObjectMovementEnded",
                     "type": "Button",
                     "id": "e1c3581c-378e-4331-b694-bf848510a217",
@@ -87,39 +63,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "72945cea-6c02-409b-ade5-b258f7901bf0",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard-Mouse",
-                    "action": "Select",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "63c3752f-a9a4-4377-9e3e-105854f3b8c6",
-                    "path": "<Mouse>/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard-Mouse",
-                    "action": "MousePosition",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c5a85fe8-1a2b-46d3-adb3-4620db87cd03",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "Hold",
-                    "processors": "",
-                    "groups": "Keyboard-Mouse",
-                    "action": "Modifier_Shift",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "x+mouse",
                     "id": "004e7418-f92b-4937-801c-83d02d209bd7",
