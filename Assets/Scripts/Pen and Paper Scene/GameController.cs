@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
@@ -91,6 +92,7 @@ public class GameController : MonoBehaviour {
 	///   MOUSE CURSOR   ///
 	////////////////////////
 	public static void ChangeCursor(string option = "") {
+		// Controls the image used by the cursor.
 		if (option == "distance") {
 			Cursor.SetCursor(instance.mouseCursorDistance, Vector2.zero, CursorMode.Auto);
 		}

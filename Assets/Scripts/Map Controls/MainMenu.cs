@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour {
 	public static MainMenu instance = null;
 	// interface controls
-	public static InputControls interfaceControls;
+	// public static InputControls interfaceControls;
 	// main menu
 	public Button mainMenuButton;
 	public Button exitAppButton;
@@ -32,7 +32,7 @@ public class MainMenu : MonoBehaviour {
 
 	private void Awake() {
 		if (instance == null) { instance = this; }
-		interfaceControls = new InputControls();
+		// interfaceControls = new InputControls();
 	}
 
 	private void Start() {
@@ -83,11 +83,11 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	private void OnEnable() {
-		interfaceControls.Interface.Enable();
+		// interfaceControls.Interface.Enable();
 	}
 
 	private void OnDisable() {
-		interfaceControls.Interface.Disable();
+		// interfaceControls.Interface.Disable();
 	}
 
 	///////////////////
@@ -102,6 +102,7 @@ public class MainMenu : MonoBehaviour {
 		TogglePanel("MapInfo", true, false);
 		TogglePanel("AddMapObject", true, false);
 		TogglePanel("MapConfiguration", true, false);
+		CameraControl.cameraBlock = false;
 	}
 
 	public static void TogglePanel(string panel = "none", bool _override = false, bool state = false) {

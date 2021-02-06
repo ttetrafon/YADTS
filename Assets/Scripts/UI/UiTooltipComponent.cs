@@ -60,12 +60,12 @@ public class UiTooltipComponent : MonoBehaviour {
 
 	private void PlaceTooltipInPosition() {
 		//Debug.Log("---> PlaceTooltipInPosition()");
-		Vector2 tooltipPosition = MainMenu.interfaceControls.Interface.MousePosition.ReadValue<Vector2>();
+		// Vector2 tooltipPosition = MainMenu.interfaceControls.Interface.MousePosition.ReadValue<Vector2>();
 		// TODO: Fix ending out of screen.
 		// (1) get screen size
 		// (2) get tooltip's width & height
 		// (3) compare screen size with position + width/height and move to left and bottom instead of top and right
-		rect.anchoredPosition = tooltipPosition;
+		// rect.anchoredPosition = tooltipPosition;
 	}
 
 }

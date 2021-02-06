@@ -3,6 +3,7 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+[Ll]ogs/
 Assets/AssetStoreTools*
 Assets/JSON
 Assets/user.json
@@ -15,6 +16,7 @@ Assets/Samples.meta
 *.psd
 ---/
 TutorialInfo/
+Samples/
 
 # Visual Studio and Visual Studio Code cache directory
 .vs/
