@@ -76,7 +76,7 @@ public class InputController : MonoBehaviour {
   }
 
 	private void MapClick() {
-		Debug.Log("---> Map Click()");
+		// Debug.Log("---> Map Click()");
 		// if (!EventSystem.current.IsPointerOverGameObject()) {
 		// 	// Debug.Log("... not over GUI!");
 		// 	Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(moControls.MapController.MousePosition.ReadValue<Vector2>());

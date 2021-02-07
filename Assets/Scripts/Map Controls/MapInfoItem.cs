@@ -97,6 +97,7 @@ public class MapInfoItem : MonoBehaviour {
 	}
 
 	public void ResizeViewPanel() {
+		// TODO: Use a count (like with ChatElement) to resize elements only twice.
 		//Debug.Log("---> ResizeViewPanel()");
 		float y = textDisplay.textBounds.size.y;
 		var marginsY = textDisplay.margin.y * 2;
