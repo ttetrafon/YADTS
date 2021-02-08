@@ -11,10 +11,9 @@ public class GameController : MonoBehaviour {
 	// Cameras and viewports
 	public static CameraControl activeCamera = null;
 	// Tooltips
-	public GameObject tooltipControllerRef;
 	public static UiTooltipComponent tooltipController;
 	// Mouse
-	public Texture2D mouseCursorDistance;
+	[SerializeField] private Texture2D mouseCursorDistance;
 	// File System
 	public static string baseFolder;
 	public static string saveFolder;
@@ -22,6 +21,7 @@ public class GameController : MonoBehaviour {
 	private List<string> subfolders = new List<string>() {
 		"creatures",
 		"dictionaries",
+		"game system",
 		"maps",
 		"map objects",
 		"map tree hierarchy"
@@ -40,15 +40,11 @@ public class GameController : MonoBehaviour {
 
 	private void Awake() {
 		//Debug.Log("===> GameController Start");
-		if (instance == null) {
-			instance = this;
-		}
-		// TODO: Start loading screen
+		if (instance == null) { instance = this; }
+		// TODO: loading screen starts
 
 		// Set References and hide non-required elements.
 		activeCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
-		//tooltipController = GameObject.FindGameObjectWithTag("Tooltip Controller").GetComponentInChildren<UiTooltipComponent>();
-		tooltipController = tooltipControllerRef.GetComponentInChildren<UiTooltipComponent>();
 
 		// Load the UserData and Options
 		baseFolder = Environment.GetFolderPath(System.Environment.SpecialFolder.Personal).Replace('\\', '/') + "/.YADTS/";
