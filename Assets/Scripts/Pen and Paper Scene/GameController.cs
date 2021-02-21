@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
 	// Tooltips
 	public static UiTooltipComponent tooltipController;
 	// Mouse
+	[Header("Mouse Cursor")]
 	[SerializeField] private Texture2D mouseCursorDistance;
 	// File System
 	public static string baseFolder;
