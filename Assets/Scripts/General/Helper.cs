@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
@@ -22,8 +23,7 @@ public class Helper : MonoBehaviour {
 	}
 
 	public static bool isUIActive() {
-		// return EventSystem.current.currentSelectedGameObject != null;
-		return false;
+		return EventSystem.current.currentSelectedGameObject != null;
 	}
 
 
