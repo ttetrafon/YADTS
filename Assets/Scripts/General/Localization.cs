@@ -31,6 +31,7 @@ public class Localization {
 			{"Magic Axiom Button", "Axiom: Magic"},
 			{"Map Config Button", "Map Configuration"},
 			{"Map Info Button", "Map Info"},
+			{"Map Menu Button", "Map"},
 			{"Map Tools Button", "Map Tools"},
 			{"Move Down Button", "Move Down"},
 			{"Move Up Button", "Move Up"},
