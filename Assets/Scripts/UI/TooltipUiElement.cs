@@ -21,7 +21,7 @@ public class TooltipUiElement : MonoBehaviour {
     if (pos.y + textSize.y > screenSize.y) {
       pos.y -= textSize.y;
     }
-    Debug.Log("tooltip size: " + gameObject.GetComponent<RectTransform>().sizeDelta);
+    // Debug.Log("tooltip size: " + gameObject.GetComponent<RectTransform>().sizeDelta);
     this.gameObject.transform.position = pos;
   }
 

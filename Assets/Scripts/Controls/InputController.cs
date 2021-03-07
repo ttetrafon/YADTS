@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour {
@@ -80,32 +81,31 @@ public class InputController : MonoBehaviour {
 
 	private void MapClick() {
 		Debug.Log("---> Map Click()");
-		// if (!EventSystem.current.IsPointerOverGameObject()) {
-		// 	// Debug.Log("... not over GUI!");
-		// 	Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(moControls.MapController.MousePosition.ReadValue<Vector2>());
-		// 	// Debug.Log(ray);
-		// 	RaycastHit hitInfo;
-		// 	// Target found
-		// 	if (Physics.Raycast(ray, out hitInfo)) {
-		// 		MapObjectClicked(hitInfo.transform.parent.gameObject.GetComponent<MapObject>());
-		// 	}
-		// 	else {
-		// 		UnseslectAllMapObjects();
-		// 	}
-		// 	// No target and no tool
-		// 	if (distanceMeasurementStep == 0) {
-		// 		MainMenu.CloseMenus();
-		// 	}
-      	// 	// Activate the Spatial Data Panel if objects are selected.
-		// 	if (currentlySelectedObjects.Count > 0) {
-		// 		moSpatialDataPanel.SetActive(true);
-		// 		SpatialDataController.PopulateSpatialData();
-		// 	}
-		// 	else {
-		// 		SpatialDataController.CancelRename();
-		// 		moSpatialDataPanel.SetActive(false);
-		// 	}
-		// }
+		if (!EventSystem.current.IsPointerOverGameObject()) {
+			// Debug.Log("... not over GUI!");
+			Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
+			Debug.Log(ray);
+			RaycastHit hitInfo;
+			if (Physics.Raycast(ray, out hitInfo)) {
+			// 	MapObjectClicked(hitInfo.transform.parent.gameObject.GetComponent<MapObject>());
+			}
+			else {
+			// 	UnseslectAllMapObjects();
+			}
+			// No target and no tool
+			// if (distanceMeasurementStep == 0) {
+			// 	MainMenu.CloseMenus();
+			// }
+    	// Activate the Spatial Data Panel if objects are selected.
+			// if (currentlySelectedObjects.Count > 0) {
+			// 	moSpatialDataPanel.SetActive(true);
+			// 	SpatialDataController.PopulateSpatialData();
+			// }
+			// else {
+			// 	SpatialDataController.CancelRename();
+			// 	moSpatialDataPanel.SetActive(false);
+			// }
+		}
 	}
 
 }
