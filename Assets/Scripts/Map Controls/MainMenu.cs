@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
@@ -8,6 +7,8 @@ public class MainMenu : MonoBehaviour {
 	[Header("Panels")]
 	[SerializeField] private GameObject mainMenuPanel;
 	[SerializeField] private GameObject mapMenuPanel;
+	[SerializeField] private GameObject userPanel;
+	[SerializeField] private GameObject campaignsPanel;
 	[SerializeField] private GameObject settingsPanel;
 	[SerializeField] private GameObject newMapPanel;
 	[SerializeField] private GameObject loadMapPanel;
@@ -19,6 +20,8 @@ public class MainMenu : MonoBehaviour {
 	// main menu
 	[Header("Main Menu")]
 	[SerializeField] private Button mainMenuButton;
+	[SerializeField] private Button userButton;
+	[SerializeField] private Button campaignsButton;
 	[SerializeField] private Button settingsButton;
 	[SerializeField] private Button exitAppButton;
 	// map menu
@@ -41,6 +44,12 @@ public class MainMenu : MonoBehaviour {
 		mainMenuButton.onClick.AddListener(delegate {
 			mainMenuPanel.SetActive(!mainMenuPanel.activeSelf);
 			mapMenuPanel.SetActive(false);
+		});
+		userButton.onClick.AddListener(delegate {
+			TogglePanel("UserInfo");
+		});
+		campaignsButton.onClick.AddListener(delegate {
+			TogglePanel("Campaigns");
 		});
 		settingsButton.onClick.AddListener(delegate {
 			TogglePanel("Settings");
@@ -107,6 +116,12 @@ public class MainMenu : MonoBehaviour {
 		}
 		if (instance.settingsPanel) {
 			instance.settingsPanel.SetActive((panel == "Settings") && (_override ? state : !instance.settingsPanel.activeSelf));
+		}
+		if (instance.userPanel) {
+			instance.userPanel.SetActive((panel == "UserInfo") && (_override ? state : !instance.userPanel.activeSelf));
+		}
+		if (instance.campaignsPanel) {
+			instance.campaignsPanel.SetActive((panel == "Campaigns") && (_override ? state : !instance.campaignsPanel.activeSelf));
 		}
 	}
 

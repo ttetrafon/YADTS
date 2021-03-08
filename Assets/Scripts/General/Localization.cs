@@ -17,7 +17,7 @@ public class Localization {
 			{"Confirm Button", "Confirm"},
 			{"Connect to Server Button", "Connect to Server"},
 			{"Done Button", "Done"},
-			{"Campaigns Tab", "Campaigns"},
+			{"Campaigns Button", "Campaign"},
 			{"Create New Map Button", "Create Map"},
 			{"Delete Map Button", "Delete Map"},
 			{"Distance Tool Button", "Measure Distance"},
@@ -25,6 +25,7 @@ public class Localization {
 			{"Edit Map Button", "Edit Map"},
 			{"Exit App Button", "Quit"},
 			{"Help Button", "Help"},
+			{"Load Campaign Button", "Load Selected Campaign"},
 			{"Load Map Button", "Load Map"},
 			{"Main Menu Button", "Menu"},
 			{"Magic Axiom Button", "Axiom: Magic"},
@@ -45,7 +46,7 @@ public class Localization {
 			{"Start Server Button", "Start Server"},
 			{"Tech Axiom Button", "Axiom: Tech"},
 			{"Text Chat Button", "Text Chat"},
-			{"User Tab", "User"}
+			{"User Button", "User"}
 		}}
 	};
 
