@@ -15,7 +15,7 @@ public class MapController : MonoBehaviour {
 	public static string mapObjectsDirectory;
 	//public static string currentMap = rootMap;
 	public static Dictionary<string, MapTreeNode> mapTree = new Dictionary<string, MapTreeNode>();
-	public Button mapInfoButton;
+	[SerializeField] private Button mapInfoButton;
 
 	// Map Objects
 	public static List<MapObject> currentlySelectedObjects = new List<MapObject>(); // Holds a list of all currently selected map objects.
@@ -28,21 +28,21 @@ public class MapController : MonoBehaviour {
 	public GameObject moSpatialDataPanel;
 
 	// Map Object Controls
-	public Button magicAxiomButton;
-	public Dropdown magicAxiomSelector;
-	public Text magicAxiomDisplay;
-	public Button socialAxiomButton;
-	public Dropdown socialAxiomSelector;
-	public Text socialAxiomDisplay;
-	public Button spiritAxiomButton;
-	public Dropdown spiritAxiomSelector;
-	public Text spiritAxiomDisplay;
-	public Button techAxiomButton;
-	public Dropdown techAxiomSelector;
-	public Text techAxiomDisplay;
+	[SerializeField] private Button magicAxiomButton;
+	[SerializeField] private Dropdown magicAxiomSelector;
+	[SerializeField] private Text magicAxiomDisplay;
+	[SerializeField] private Button socialAxiomButton;
+	[SerializeField] private Dropdown socialAxiomSelector;
+	[SerializeField] private Text socialAxiomDisplay;
+	[SerializeField] private Button spiritAxiomButton;
+	[SerializeField] private Dropdown spiritAxiomSelector;
+	[SerializeField] private Text spiritAxiomDisplay;
+	[SerializeField] private Button techAxiomButton;
+	[SerializeField] private Dropdown techAxiomSelector;
+	[SerializeField] private Text techAxiomDisplay;
 
 	// Distance Tool
-	public Button distanceMeasurementButton;
+	[SerializeField] private Button distanceMeasurementButton;
 	private int distanceMeasurementStep = 0;
 	private MapObject[] distanceMeasurementObjects = new MapObject[2];
 

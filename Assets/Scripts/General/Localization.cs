@@ -34,7 +34,7 @@ public class Localization {
 			{"Map Menu Button", "Map"},
 			{"Move Down Button", "Move Down"},
 			{"Move Up Button", "Move Up"},
-			{"Network Tab", "Network"},
+			{"Network Button", "Network"},
 			{"New Map Button", "New Map"},
 			{"Refresh Map Info Button", "Refresh"},
 			{"Remove Campaign Button", "Remove Campaign"},
