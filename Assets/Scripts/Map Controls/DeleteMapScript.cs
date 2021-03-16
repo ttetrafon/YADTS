@@ -5,11 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DeleteMapScript : MonoBehaviour {
-	public Button deleteMapButton;
-	public Toggle deleteChildrenToggle;
+	[SerializeField] private Button deleteMapButton;
+	[SerializeField] private Toggle deleteChildrenToggle;
+	[SerializeField] private Toggle removeOrphanGameObjects;
+	// TODO: If checked, game objects that do not appear in other maps will be deleted from the campaign folder.
 
 	private void OnEnable() {
 		deleteChildrenToggle.isOn = false;
+		removeOrphanGameObjects.isOn = false;
 	}
 
 	private void Start() {
