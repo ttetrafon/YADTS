@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+// This script is attached to any dropdown that lists all maps.
 public class MapHierarchySelectorScript : MonoBehaviour {
 	private Dropdown selector;
 	private string levelIndicator = "| ";

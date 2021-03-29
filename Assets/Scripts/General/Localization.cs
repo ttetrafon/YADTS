@@ -19,6 +19,7 @@ public class Localization {
 			{"Done Button", "Done"},
 			{"Campaigns Button", "Campaign"},
 			{"Create New Map Button", "Create Map"},
+			{"Close Panel Button", "Close Panel"},
 			{"Delete Map Button", "Delete Map"},
 			{"Distance Tool Button", "Measure Distance"},
 			{"Edit Button", "Edit"},

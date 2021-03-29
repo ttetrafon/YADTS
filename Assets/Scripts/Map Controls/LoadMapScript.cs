@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class LoadMapScript : MonoBehaviour {
 
-	public Button loadMapButton;
-	public Dropdown mapSelectionDropdown;
+	[SerializeField] private Button loadMapButton;
+	[SerializeField] private Dropdown mapSelectionDropdown;
 
 	private void Start() {
 		// Add listeners
