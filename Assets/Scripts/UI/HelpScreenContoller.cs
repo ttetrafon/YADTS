@@ -2,10 +2,10 @@
 using UnityEngine.UI;
 
 public class HelpScreenContoller : MonoBehaviour {
-	public Button helpButton;
-	public GameObject helpScreen;
+	[SerializeField] private Button helpButton;
+	[SerializeField] private GameObject helpScreen;
 
-	private void Start() {
+	private void Awake() {
 		// Initialise
 		helpScreen.SetActive(false);
 
