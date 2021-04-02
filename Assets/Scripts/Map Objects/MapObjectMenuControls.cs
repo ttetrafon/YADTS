@@ -18,6 +18,8 @@ public class MapObjectMenuControls : MonoBehaviour {
 
 	[Header("Map Object Creation")]
 	[SerializeField] private Button addMapObjectButton;
+	[SerializeField] private Toggle newMapObjectToggle;
+	[SerializeField] private Toggle existingMapObjectToggle;
 	[SerializeField] private Dropdown addMapObjectSelector;
 	[SerializeField] private GameObject tagsContainer;
 	[SerializeField] private Text selectedPrefabsTagList;

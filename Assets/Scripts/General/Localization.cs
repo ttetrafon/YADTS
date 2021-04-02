@@ -18,6 +18,7 @@ public class Localization {
 			{"Connect to Server Button", "Connect to Server"},
 			{"Done Button", "Done"},
 			{"Campaigns Button", "Campaign"},
+			{"Confirm Add Map Object Button", "Add Selected Map Object"},
 			{"Create New Map Button", "Create Map"},
 			{"Close Panel Button", "Close Panel"},
 			{"Delete Map Button", "Delete Map"},
