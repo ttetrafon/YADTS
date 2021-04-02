@@ -7,12 +7,12 @@ public class SpatialDataController : MonoBehaviour {
 	public static SpatialDataController instance = null;
 
 	// UI
-	public Text moNameLabel;
-	public InputField moNameInput;
-	public Button cancelRenameButton;
+	[SerializeField] private Text moNameLabel;
+	[SerializeField] private InputField moNameInput;
+	[SerializeField] private Button cancelRenameButton;
 
 	// Data
-  public static Vector3 selectedMoPositions = Vector3.zero;
+  	public static Vector3 selectedMoPositions = Vector3.zero;
 
 	private void Awake() {
 		// Debug.Log("SpatialDataController awake!");
