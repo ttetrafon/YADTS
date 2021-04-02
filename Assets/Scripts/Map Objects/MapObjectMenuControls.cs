@@ -14,22 +14,24 @@ public class MapObjectMenuControls : MonoBehaviour {
 	private Dictionary<string, List<string>> prefabTags = new Dictionary<string, List<string>>(); // Contains a list of the tags belonging to each prefab for easy reference when selecting a prefab and toggling a tag.
 	private Dictionary<string, List<string>> tagPrefabs = new Dictionary<string, List<string>>(); // Contains a list of prefabs that correspond to each tag for easy reference when toggling a tag.
 	public static Dictionary<string, string> creatureNameFileDictionary;
-	public Toggle togglePrefab;
+	[SerializeField] private Toggle togglePrefab;
 
-	// UI controls
-	public Button addMapObjectButton;
-	public Dropdown addMapObjectSelector;
-	public GameObject tagsContainer;
-	public Text selectedPrefabsTagList;
-	public Button confirmAddMapObjectButton;
-	public Dropdown mapContainerSelector;
-	public Button mapConfigurationButton;
-	public Toggle gridNoneToggle;
-	public Toggle gridHexToggle;
-	public Toggle gridSquareToggle;
-	public InputField rotationStepVerticalInput;
-	public InputField rotationStepFrontInput;
-	public InputField rotationStepSideInput;
+	[Header("Map Object Creation")]
+	[SerializeField] private Button addMapObjectButton;
+	[SerializeField] private Dropdown addMapObjectSelector;
+	[SerializeField] private GameObject tagsContainer;
+	[SerializeField] private Text selectedPrefabsTagList;
+	[SerializeField] private Button confirmAddMapObjectButton;
+	[SerializeField] private Dropdown mapContainerSelector;
+
+	[Header("Map Configuration")]
+	[SerializeField] private Button mapConfigurationButton;
+	[SerializeField] private Toggle gridNoneToggle;
+	[SerializeField] private Toggle gridHexToggle;
+	[SerializeField] private Toggle gridSquareToggle;
+	[SerializeField] private InputField rotationStepVerticalInput;
+	[SerializeField] private InputField rotationStepFrontInput;
+	[SerializeField] private InputField rotationStepSideInput;
 
 	private void Start() {
 		if (instance == null) { instance = this; }
@@ -84,17 +86,17 @@ public class MapObjectMenuControls : MonoBehaviour {
 				Helper.SaveCurrentMap();
 			}
 		});
-    rotationStepFrontInput.onEndEdit.AddListener(delegate {
+    	rotationStepFrontInput.onEndEdit.AddListener(delegate {
       int rot = GetRotationStep(rotationStepFrontInput);
       MapController.currentMapData.rotationStepFront = rot;
       Helper.SaveCurrentMap();
     });
-    rotationStepSideInput.onEndEdit.AddListener(delegate {
+    	rotationStepSideInput.onEndEdit.AddListener(delegate {
       int rot = GetRotationStep(rotationStepSideInput);
       MapController.currentMapData.rotationStepSide = rot;
       Helper.SaveCurrentMap();
     });
-    rotationStepVerticalInput.onEndEdit.AddListener(delegate {
+    	rotationStepVerticalInput.onEndEdit.AddListener(delegate {
       int rot = GetRotationStep(rotationStepVerticalInput);
       MapController.currentMapData.rotationStepVertical = rot;
       Helper.SaveCurrentMap();
