@@ -115,7 +115,7 @@ public class MapInfoPanel : MonoBehaviour {
 			MapInfoItem mii = mapInfoContainer.transform.GetChild(i).GetComponent<MapInfoItem>();
 			if (mii.index == index) {
 				mii.index = targetIndex;
-				mii.indexDisplay.text = targetIndex.ToString();
+				mii.SetIndexDisplay(targetIndex);
 				break;
 			}
 		}

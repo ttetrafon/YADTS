@@ -12,9 +12,8 @@ public class MapInfoItem : MonoBehaviour {
 
 	[Header("View Mode")]
 	[SerializeField] private GameObject viewMode;
-	[SerializeField] private GameObject textDisplayPanel;
 	[SerializeField] private TMP_Text textDisplay;
-	public Text indexDisplay;
+	[SerializeField] private Text indexDisplay;
 	[SerializeField] private Button moveDownButton;
 	[SerializeField] private Button moveUpButton;
 	[SerializeField] private Image playerVisibleIndicator;
@@ -125,18 +124,22 @@ public class MapInfoItem : MonoBehaviour {
 			if (mii.index == currentIndex) {
 				found++;
 				mii.index = targetIndex;
-				mii.indexDisplay.text = targetIndex.ToString();
+				mii.SetIndexDisplay(targetIndex);
 			}
 			else if (mii.index == targetIndex) {
 				found++;
 				mii.index = currentIndex;
-				mii.indexDisplay.text = currentIndex.ToString();
+				mii.SetIndexDisplay(currentIndex);
 			}
 			if (((found == 2) && targetExists) || ((found == 1) && !targetExists)) {
 				break;
 			}
 		}
 		Helper.SortSelector(parent, "map info item");
+	}
+
+	public void SetIndexDisplay(int index) {
+		this.indexDisplay.text = index.ToString();
 	}
 
 }
