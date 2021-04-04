@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MapInfoPanel : MonoBehaviour {
 	private string mapUid = "";
 	// UI
-	public Button addMapInfoItemButton;
-	public Dropdown mapTypeSelector;
-	public GameObject mapInfoContainer;
-	public Text mapLocationInWorld;
-	public Button addCommonMapInfoComponentsButton;
-	public GameObject mapItemPrefab;
-	public InputField newMapItemIndexInput;
+	[SerializeField] private TMP_Text mapLocationInWorld;
+	[SerializeField] private Dropdown mapTypeSelector;
+	[SerializeField] private GameObject mapInfoContainer;
+	[SerializeField] private GameObject mapItemPrefab;
+	[SerializeField] private Button addCommonMapInfoComponentsButton;
+	[SerializeField] private InputField newMapItemIndexInput;
+	[SerializeField] private Button addMapInfoItemButton;
 
 	private void Start() {
 		// Create required data

@@ -7,26 +7,28 @@ using UnityEngine.UI;
 
 public class MapInfoItem : MonoBehaviour {
 	public int index = -1;
-	// ui
 	private GameObject parent;
-	public GameObject viewMode;
-	public GameObject textDisplayPanel;
-	public TMP_Text textDisplay;
+	[SerializeField] private TMP_StyleSheet stylesheet;
+
+	[Header("View Mode")]
+	[SerializeField] private GameObject viewMode;
+	[SerializeField] private GameObject textDisplayPanel;
+	[SerializeField] private TMP_Text textDisplay;
 	public Text indexDisplay;
-	public Button moveDownButton;
-	public Button moveUpButton;
-	public Image playerVisibleIndicator;
-	public Button editButton;
-	public GameObject editMode;
-	public InputField positionInput;
-	public Toggle moveAssociatedItemsToggle;
-	public Toggle playerVisibleToggle;
-	public Dropdown typeSelector;
-	public InputField textInput;
-	public Button confirmEditButton;
-	public Button cancelEditButton;
-	// info
-	public TMP_StyleSheet stylesheet;
+	[SerializeField] private Button moveDownButton;
+	[SerializeField] private Button moveUpButton;
+	[SerializeField] private Image playerVisibleIndicator;
+	[SerializeField] private Button editButton;
+
+	[Header("Edit Mode")]
+	[SerializeField] private GameObject editMode;
+	[SerializeField] private InputField positionInput;
+	[SerializeField] private Toggle moveAssociatedItemsToggle;
+	[SerializeField] private Toggle playerVisibleToggle;
+	[SerializeField] private Dropdown typeSelector;
+	[SerializeField] private InputField textInput;
+	[SerializeField] private Button confirmEditButton;
+	[SerializeField] private Button cancelEditButton;
 
 	private void Awake() {
 		//Debug.Log("MapInfoItem.Awake()");
