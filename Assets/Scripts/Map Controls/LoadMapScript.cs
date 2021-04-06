@@ -5,9 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LoadMapScript : MonoBehaviour {
-
+	public static LoadMapScript instance;
 	[SerializeField] private Button loadMapButton;
 	[SerializeField] private Dropdown mapSelectionDropdown;
+
+	private void Awake() {
+		Debug.Log("LoadMapScript.Awake()");
+		if (instance == null) {
+			instance = this;
+		}
+	}
 
 	private void Start() {
 		// Add listeners
@@ -33,7 +40,7 @@ public class LoadMapScript : MonoBehaviour {
 
 
 	public static void LoadMap(string uid) {
-		// Debug.Log("---> LoadMap(" + uid + ")");
+		Debug.Log("---> LoadMap(" + uid + ")");
 		// Clear previous map data
 		// TODO: MapObjectControl.UnselectAll();
 		MapController.CleanMapObjects();
@@ -44,14 +51,24 @@ public class LoadMapScript : MonoBehaviour {
 		MainMenu.SetMapName(mapName);
 		MapController.SetAxioms();
 		MapObjectMenuControls.SetMapConfigurationOptions();
-		// Load map objects. (TODO: Do this in parallel if possible...)
-		for (int i = 0; i < loadedMapData.mapObjectsInMap.Count; i++) {
-			LoadMapObject(loadedMapData.mapObjectsInMap[i]);
-		}
-		// Finalise loading.
-		MainMenu.CloseMenus();
 		// Remember the map
 		MapController.RememberLastMap(uid);
+		// Close the menus, all went well up to this point
+		MainMenu.CloseMenus();
+		// Load map objects. (TODO: Do this in parallel if possible...)
+		instance.StartCoroutine(instance.InstantiateMapObjects(loadedMapData.mapObjectsInMap));
+		// for (int i = 0; i < loadedMapData.mapObjectsInMap.Count; i++) {
+		// 	LoadMapObject(loadedMapData.mapObjectsInMap[i]);
+		// }
+	}
+
+	private IEnumerator InstantiateMapObjects(List<string> mos) {
+		Debug.Log("---> InstantiateMapObjects(" + mos.Count + " items)");
+		for (int i = 0; i < mos.Count; i++) {
+			LoadMapObject(mos[i]);
+			yield return new WaitForSeconds(0.01f);
+		}
+		yield return new WaitForSeconds(0.01f);
 	}
 
 	public static void LoadMapObject(string uid) {

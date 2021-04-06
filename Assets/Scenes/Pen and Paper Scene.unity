@@ -1343,6 +1343,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3c9eb49b93de24dbb0a1ddf8c22b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &293885028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2015236549133351554, guid: d225031508a097b48a2ab8d6866f9cd0, type: 3}
+  m_PrefabInstance: {fileID: 1751927516}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &293885029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293885028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3619875ca4c64b342ba8b4fc2ad4b3a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadMapButton: {fileID: 1407750448}
+  mapSelectionDropdown: {fileID: 289272800}
 --- !u!1 &313240125
 GameObject:
   m_ObjectHideFlags: 0
@@ -13477,7 +13496,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686345184}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3619875ca4c64b342ba8b4fc2ad4b3a2, type: 3}
   m_Name: 
@@ -13725,7 +13744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9036751464710764156, guid: cacec6d11efe5594c8af5eb2e37be306, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000019073486
+      value: 0.000015258789
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cacec6d11efe5594c8af5eb2e37be306, type: 3}
