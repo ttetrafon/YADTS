@@ -14,7 +14,7 @@ public class PostLoad : MonoBehaviour {
 		//Debug.Log("... proceed!");
 		// Do extra stuff after initial loading.
 		// TODO: ... load the last selected map
-		// LoadMapScript.LoadMap(GameController.userData.lastMap);
+		LoadMapScript.LoadMap(GameController.userData.lastMap);
 		// TODO: ... hide Loading Screen
 
 		GameController.initiationFinished = true;

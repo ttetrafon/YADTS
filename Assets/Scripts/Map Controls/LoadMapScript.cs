@@ -33,7 +33,7 @@ public class LoadMapScript : MonoBehaviour {
 
 
 	public static void LoadMap(string uid) {
-		//Debug.Log("---> LoadMap(" + uid + ")");
+		// Debug.Log("---> LoadMap(" + uid + ")");
 		// Clear previous map data
 		// TODO: MapObjectControl.UnselectAll();
 		MapController.CleanMapObjects();

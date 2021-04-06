@@ -29,6 +29,7 @@ public class MapInfoPanel : MonoBehaviour {
 	}
 
 	private void Update() {
+		// TODO: Change to use a counter and only do 2 updates (like with text chat) instead of on every update...
 		RefreshMapInfoPanel();
 	}
 
@@ -63,8 +64,9 @@ public class MapInfoPanel : MonoBehaviour {
 	}
 
 	private void CreateMapInfoItems() {
-		//Debug.Log("---> CreateMapInfoItems()");
+		// Debug.Log("---> CreateMapInfoItems()");
 		foreach (KeyValuePair<int, MapInfoItemData> pair in MapController.currentMapData.mapInfoItems) {
+			// Debug.Log("... " + pair.Key);
 			GameObject go = Instantiate(mapItemPrefab, mapInfoContainer.transform);
 			go.GetComponent<MapInfoItem>().FillDisplayElements(pair.Key, pair.Value);
 		}

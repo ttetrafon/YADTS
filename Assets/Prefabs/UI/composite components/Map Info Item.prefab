@@ -1893,6 +1893,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3910110704140244380}
     m_Modifications:
+    - target: {fileID: 7066567728750468311, guid: 9b178435938dee746afcda348d1e4325, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7066567729297332754, guid: 9b178435938dee746afcda348d1e4325, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1978,20 +1982,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7066567729297332755, guid: 9b178435938dee746afcda348d1e4325, type: 3}
+      propertyPath: m_LineType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066567729297332755, guid: 9b178435938dee746afcda348d1e4325, type: 3}
       propertyPath: m_ContentType
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7066567729297332755, guid: 9b178435938dee746afcda348d1e4325, type: 3}
       propertyPath: m_KeyboardType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7066567729297332755, guid: 9b178435938dee746afcda348d1e4325, type: 3}
       propertyPath: m_CharacterValidation
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7066567729297332765, guid: 9b178435938dee746afcda348d1e4325, type: 3}
       propertyPath: m_Name
       value: text input
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066567729371682353, guid: 9b178435938dee746afcda348d1e4325, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066567729371682353, guid: 9b178435938dee746afcda348d1e4325, type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b178435938dee746afcda348d1e4325, type: 3}
