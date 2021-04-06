@@ -57,9 +57,11 @@ public class LoadMapScript : MonoBehaviour {
 		MainMenu.CloseMenus();
 		// Load map objects. (TODO: Do this in parallel if possible...)
 		instance.StartCoroutine(instance.InstantiateMapObjects(loadedMapData.mapObjectsInMap));
-		// for (int i = 0; i < loadedMapData.mapObjectsInMap.Count; i++) {
-		// 	LoadMapObject(loadedMapData.mapObjectsInMap[i]);
-		// }
+		// Instead of calling the coroutine directly, a reference can be set, so it can be stopped later.
+		// i.e.:
+		// IEnumerator moLoader = InstantiateMapObjects(loadedMapData.mapObjectsInMap);
+		// instance.StartCoroutine(moLoader);
+		// instance.StopCoroutine(moLoader);
 	}
 
 	private IEnumerator InstantiateMapObjects(List<string> mos) {
