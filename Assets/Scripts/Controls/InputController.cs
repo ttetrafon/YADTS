@@ -26,28 +26,42 @@ public class InputController : MonoBehaviour {
   private void Awake() {
     controls = new Controls();
     controls.Common.MouseDelta.performed += ctx => MouseDelta(ctx.ReadValue<Vector2>());
-    controls.MapObjects.Click.performed += ctx => MapClick();
-    controls.Camera.Pan.performed += ctx => camPan = ctx.ReadValue<Vector2>();
-    controls.Camera.Pan.canceled += ctx => camPan = Vector2.zero;
-    controls.Camera.Move.performed += ctx => camMove = ctx.ReadValue<float>();
-    controls.Camera.Move.canceled += ctx => camMove = 0.0f;
-    controls.Camera.PanFront.performed += ctx => camFrontPan = ctx.ReadValue<float>();
-    controls.Camera.PanFront.canceled += ctx => camFrontPan = 0;
-    controls.Camera.RotateZ.performed += ctx => camTopRotate = ctx.ReadValue<float>();
-    controls.Camera.RotateZ.canceled += ctx => camTopRotate = 0;
-    controls.Camera.LookAt.performed += ctx => CameraControl.CameraFocusOn();
+    controls.MapMode.Click.performed += ctx => MapClick();
+    controls.MapMode.Pan.performed += ctx => camPan = ctx.ReadValue<Vector2>();
+    controls.MapMode.Pan.canceled += ctx => camPan = Vector2.zero;
+    controls.MapMode.Move.performed += ctx => camMove = ctx.ReadValue<float>();
+    controls.MapMode.Move.canceled += ctx => camMove = 0.0f;
+    controls.MapMode.PanFront.performed += ctx => camFrontPan = ctx.ReadValue<float>();
+    controls.MapMode.PanFront.canceled += ctx => camFrontPan = 0;
+    controls.MapMode.RotateZ.performed += ctx => camTopRotate = ctx.ReadValue<float>();
+    controls.MapMode.RotateZ.canceled += ctx => camTopRotate = 0;
+    controls.MapMode.LookAt.performed += ctx => CameraControl.CameraFocusOn();
   }
 
   private void OnEnable() {
     controls.Common.Enable();
-    controls.Camera.Enable();
-    controls.MapObjects.Enable();
+    controls.MapMode.Enable();
   }
 
   private void OnDisable() {
     controls.Common.Disable();
-    controls.Camera.Disable();
-    controls.MapObjects.Disable();
+    controls.MapMode.Disable();
+  }
+
+  public static void SwitchControlsMode(string mode) {
+    Debug.Log("---> SwitchControlsMode(" + mode + ")");
+    switch(mode) {
+      case "MapMode":
+        Debug.Log("... switching controls to MapMode!");
+        controls.MapMode.Enable();
+        controls.UI.Disable();
+        break;
+      case "UI":
+        Debug.Log("... switching controls to UI!");
+        controls.UI.Enable();
+        controls.MapMode.Disable();
+        break;
+    }
   }
 
   public static float CameraSpeedModifier() {

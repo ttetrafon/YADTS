@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 14483738}
   - component: {fileID: 14483740}
   - component: {fileID: 14483741}
+  - component: {fileID: 14483742}
   m_Layer: 5
   m_Name: over-buttons panel
   m_TagString: Untagged
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.5182007, g: 1, b: 0.3726415, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -215,13 +216,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 2
-    m_Right: 2
-    m_Top: 2
-    m_Bottom: 2
+    m_Left: 5
+    m_Right: 5
+    m_Top: 5
+    m_Bottom: 5
   m_ChildAlignment: 0
   m_Spacing: 2
-  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
@@ -240,8 +241,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
+  m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &14483742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14483736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &32190755
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,6 +738,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &115295051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2177702338737156, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
+  m_PrefabInstance: {fileID: 1645624797}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &115295052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115295051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &126617705
@@ -1375,6 +1405,7 @@ GameObject:
   - component: {fileID: 313240127}
   - component: {fileID: 313240129}
   - component: {fileID: 313240130}
+  - component: {fileID: 313240131}
   m_Layer: 5
   m_Name: axioms panel
   m_TagString: Untagged
@@ -1491,6 +1522,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &313240131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313240125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &323001387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2911,6 +2954,7 @@ GameObject:
   - component: {fileID: 461983766}
   - component: {fileID: 461983765}
   - component: {fileID: 461983764}
+  - component: {fileID: 461983768}
   m_Layer: 5
   m_Name: map controls toolbar
   m_TagString: Untagged
@@ -3019,12 +3063,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461983762}
   m_CullTransparentMesh: 1
+--- !u!114 &461983768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461983762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &471165263 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3748269815148627086, guid: 738b656cf619b7649845c608f0299b8c, type: 3}
   m_PrefabInstance: {fileID: 3748269815485541825}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1554661334}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
@@ -4451,6 +4507,7 @@ GameObject:
   - component: {fileID: 595111677}
   - component: {fileID: 595111678}
   - component: {fileID: 595111679}
+  - component: {fileID: 595111680}
   m_Layer: 5
   m_Name: delete map panel
   m_TagString: Untagged
@@ -4575,6 +4632,18 @@ MonoBehaviour:
   deleteMapButton: {fileID: 1849567525}
   deleteChildrenToggle: {fileID: 766974481}
   removeOrphanGameObjects: {fileID: 1035364692}
+--- !u!114 &595111680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595111673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &604339555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5609,6 +5678,7 @@ GameObject:
   - component: {fileID: 704856789}
   - component: {fileID: 704856788}
   - component: {fileID: 704856787}
+  - component: {fileID: 704856791}
   m_Layer: 5
   m_Name: map menu
   m_TagString: Untagged
@@ -5718,6 +5788,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704856785}
   m_CullTransparentMesh: 1
+--- !u!114 &704856791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704856785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &713326416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6946,6 +7028,7 @@ GameObject:
   - component: {fileID: 943920238}
   - component: {fileID: 943920240}
   - component: {fileID: 943920241}
+  - component: {fileID: 943920242}
   m_Layer: 5
   m_Name: main menu
   m_TagString: Untagged
@@ -7054,6 +7137,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &943920242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943920236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &947933475
 GameObject:
   m_ObjectHideFlags: 0
@@ -8966,6 +9061,7 @@ GameObject:
   - component: {fileID: 1243128767}
   - component: {fileID: 1243128770}
   - component: {fileID: 1243128769}
+  - component: {fileID: 1243128771}
   m_Layer: 5
   m_Name: add map item panel
   m_TagString: Untagged
@@ -9075,6 +9171,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &1243128771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243128765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1250330614
 GameObject:
   m_ObjectHideFlags: 0
@@ -9577,6 +9685,7 @@ GameObject:
   - component: {fileID: 1307955695}
   - component: {fileID: 1307955697}
   - component: {fileID: 1307955698}
+  - component: {fileID: 1307955699}
   m_Layer: 5
   m_Name: map configuration panel
   m_TagString: Untagged
@@ -9687,6 +9796,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1307955699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307955693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1328469014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10275,6 +10396,7 @@ GameObject:
   - component: {fileID: 1384138395}
   - component: {fileID: 1384138394}
   - component: {fileID: 1384138396}
+  - component: {fileID: 1384138397}
   m_Layer: 5
   m_Name: help screen
   m_TagString: Untagged
@@ -10350,6 +10472,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d108ae22d4e037c4ba9f13d1a3e6342a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1384138397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384138392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1385789063
@@ -11375,6 +11509,7 @@ GameObject:
   - component: {fileID: 1537252459}
   - component: {fileID: 1537252458}
   - component: {fileID: 1537252462}
+  - component: {fileID: 1537252463}
   m_Layer: 5
   m_Name: new map panel
   m_TagString: Untagged
@@ -11499,6 +11634,18 @@ MonoBehaviour:
   createNewMapButton: {fileID: 530963396}
   newMapNameInput: {fileID: 1682278240}
   parentDropdown: {fileID: 1779194001}
+--- !u!114 &1537252463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537252456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1545908695
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11720,6 +11867,7 @@ GameObject:
   - component: {fileID: 1550153161}
   - component: {fileID: 1550153160}
   - component: {fileID: 1550153159}
+  - component: {fileID: 1550153158}
   m_Layer: 5
   m_Name: campaigns panel
   m_TagString: Untagged
@@ -11748,6 +11896,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 350, y: 40}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1550153158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550153156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1550153159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11947,6 +12107,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1554661334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3748269815148627084, guid: 738b656cf619b7649845c608f0299b8c, type: 3}
+  m_PrefabInstance: {fileID: 3748269815485541825}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1554661335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554661334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1566484619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12067,6 +12244,7 @@ GameObject:
   - component: {fileID: 1577212902}
   - component: {fileID: 1577212901}
   - component: {fileID: 1577212905}
+  - component: {fileID: 1577212906}
   m_Layer: 5
   m_Name: settings panel
   m_TagString: Untagged
@@ -12182,6 +12360,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd2772df1cab63d4399f49b0e041ca26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1577212906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577212899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1585578614
@@ -12605,7 +12795,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2177702338737158, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
   m_PrefabInstance: {fileID: 1645624797}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 115295051}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -13380,7 +13570,7 @@ GameObject:
   - component: {fileID: 1686345188}
   - component: {fileID: 1686345187}
   - component: {fileID: 1686345186}
-  - component: {fileID: 1686345190}
+  - component: {fileID: 1686345191}
   m_Layer: 5
   m_Name: load map panel
   m_TagString: Untagged
@@ -13489,20 +13679,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686345184}
   m_CullTransparentMesh: 1
---- !u!114 &1686345190
+--- !u!114 &1686345191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1686345184}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3619875ca4c64b342ba8b4fc2ad4b3a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadMapButton: {fileID: 1407750448}
-  mapSelectionDropdown: {fileID: 289272800}
 --- !u!1001 &1724995198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15480,6 +15668,7 @@ GameObject:
   - component: {fileID: 1944525900}
   - component: {fileID: 1944525899}
   - component: {fileID: 1944525901}
+  - component: {fileID: 1944525902}
   m_Layer: 5
   m_Name: Chat Panel
   m_TagString: Untagged
@@ -15572,6 +15761,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1944525902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944525897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1974108576
 GameObject:
   m_ObjectHideFlags: 0
@@ -15586,6 +15787,7 @@ GameObject:
   - component: {fileID: 1974108581}
   - component: {fileID: 1974108580}
   - component: {fileID: 1974108582}
+  - component: {fileID: 1974108583}
   m_Layer: 5
   m_Name: map info panel
   m_TagString: Untagged
@@ -15715,6 +15917,18 @@ MonoBehaviour:
   addCommonMapInfoComponentsButton: {fileID: 126617709}
   newMapItemIndexInput: {fileID: 713326418}
   addMapInfoItemButton: {fileID: 2093849849}
+--- !u!114 &1974108583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1974108576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1990339844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15963,6 +16177,7 @@ GameObject:
   - component: {fileID: 2036573658}
   - component: {fileID: 2036573657}
   - component: {fileID: 2036573656}
+  - component: {fileID: 2036573661}
   m_Layer: 5
   m_Name: user panel
   m_TagString: Untagged
@@ -16081,6 +16296,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2036573654}
   m_CullTransparentMesh: 1
+--- !u!114 &2036573661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036573654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2045191336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16461,6 +16688,7 @@ GameObject:
   - component: {fileID: 2085601702}
   - component: {fileID: 2085601701}
   - component: {fileID: 2085601705}
+  - component: {fileID: 2085601706}
   m_Layer: 5
   m_Name: map objects spatial panel
   m_TagString: Untagged
@@ -16584,6 +16812,18 @@ MonoBehaviour:
   moNameLabel: {fileID: 1397501675}
   moNameInput: {fileID: 1305830151}
   cancelRenameButton: {fileID: 1328469015}
+--- !u!114 &2085601706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085601699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3867eb0bc1a31a84991cfc590d6aaeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2093849845
 PrefabInstance:
   m_ObjectHideFlags: 0

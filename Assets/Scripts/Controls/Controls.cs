@@ -137,7 +137,7 @@ public class @Controls : IInputActionCollection, IDisposable
             ]
         },
         {
-            ""name"": ""Camera"",
+            ""name"": ""MapMode"",
             ""id"": ""038cb53f-52c3-4927-95e7-a0283716362a"",
             ""actions"": [
                 {
@@ -176,6 +176,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""name"": ""LookAt"",
                     ""type"": ""Button"",
                     ""id"": ""0ced2612-e62e-4810-9b02-d2dcb545cb65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""7e4527b0-c9e0-42a9-9447-f00c74f1465e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -357,26 +365,10 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""LookAt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""MapObjects"",
-            ""id"": ""da806085-cc85-4db6-b15e-2725ad9ed5fd"",
-            ""actions"": [
-                {
-                    ""name"": ""Click"",
-                    ""type"": ""Button"",
-                    ""id"": ""81c87e5d-ce05-41ad-85b7-9c28575941a5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": """",
-                    ""id"": ""130e3b71-f306-40f2-9640-3e87e758aaa4"",
+                    ""id"": ""53900bab-1640-49c4-aba3-604b1c5b6016"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -921,16 +913,14 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Common_FastModifier = m_Common.FindAction("FastModifier", throwIfNotFound: true);
         m_Common_SlowModifier = m_Common.FindAction("SlowModifier", throwIfNotFound: true);
         m_Common_MousePosition = m_Common.FindAction("MousePosition", throwIfNotFound: true);
-        // Camera
-        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
-        m_Camera_Pan = m_Camera.FindAction("Pan", throwIfNotFound: true);
-        m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
-        m_Camera_RotateZ = m_Camera.FindAction("RotateZ", throwIfNotFound: true);
-        m_Camera_PanFront = m_Camera.FindAction("PanFront", throwIfNotFound: true);
-        m_Camera_LookAt = m_Camera.FindAction("LookAt", throwIfNotFound: true);
-        // MapObjects
-        m_MapObjects = asset.FindActionMap("MapObjects", throwIfNotFound: true);
-        m_MapObjects_Click = m_MapObjects.FindAction("Click", throwIfNotFound: true);
+        // MapMode
+        m_MapMode = asset.FindActionMap("MapMode", throwIfNotFound: true);
+        m_MapMode_Pan = m_MapMode.FindAction("Pan", throwIfNotFound: true);
+        m_MapMode_Move = m_MapMode.FindAction("Move", throwIfNotFound: true);
+        m_MapMode_RotateZ = m_MapMode.FindAction("RotateZ", throwIfNotFound: true);
+        m_MapMode_PanFront = m_MapMode.FindAction("PanFront", throwIfNotFound: true);
+        m_MapMode_LookAt = m_MapMode.FindAction("LookAt", throwIfNotFound: true);
+        m_MapMode_Click = m_MapMode.FindAction("Click", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1062,49 +1052,54 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public CommonActions @Common => new CommonActions(this);
 
-    // Camera
-    private readonly InputActionMap m_Camera;
-    private ICameraActions m_CameraActionsCallbackInterface;
-    private readonly InputAction m_Camera_Pan;
-    private readonly InputAction m_Camera_Move;
-    private readonly InputAction m_Camera_RotateZ;
-    private readonly InputAction m_Camera_PanFront;
-    private readonly InputAction m_Camera_LookAt;
-    public struct CameraActions
+    // MapMode
+    private readonly InputActionMap m_MapMode;
+    private IMapModeActions m_MapModeActionsCallbackInterface;
+    private readonly InputAction m_MapMode_Pan;
+    private readonly InputAction m_MapMode_Move;
+    private readonly InputAction m_MapMode_RotateZ;
+    private readonly InputAction m_MapMode_PanFront;
+    private readonly InputAction m_MapMode_LookAt;
+    private readonly InputAction m_MapMode_Click;
+    public struct MapModeActions
     {
         private @Controls m_Wrapper;
-        public CameraActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Pan => m_Wrapper.m_Camera_Pan;
-        public InputAction @Move => m_Wrapper.m_Camera_Move;
-        public InputAction @RotateZ => m_Wrapper.m_Camera_RotateZ;
-        public InputAction @PanFront => m_Wrapper.m_Camera_PanFront;
-        public InputAction @LookAt => m_Wrapper.m_Camera_LookAt;
-        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public MapModeActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pan => m_Wrapper.m_MapMode_Pan;
+        public InputAction @Move => m_Wrapper.m_MapMode_Move;
+        public InputAction @RotateZ => m_Wrapper.m_MapMode_RotateZ;
+        public InputAction @PanFront => m_Wrapper.m_MapMode_PanFront;
+        public InputAction @LookAt => m_Wrapper.m_MapMode_LookAt;
+        public InputAction @Click => m_Wrapper.m_MapMode_Click;
+        public InputActionMap Get() { return m_Wrapper.m_MapMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
-        public void SetCallbacks(ICameraActions instance)
+        public static implicit operator InputActionMap(MapModeActions set) { return set.Get(); }
+        public void SetCallbacks(IMapModeActions instance)
         {
-            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
+            if (m_Wrapper.m_MapModeActionsCallbackInterface != null)
             {
-                @Pan.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnPan;
-                @Pan.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnPan;
-                @Pan.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnPan;
-                @Move.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMove;
-                @RotateZ.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateZ;
-                @RotateZ.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateZ;
-                @RotateZ.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotateZ;
-                @PanFront.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnPanFront;
-                @PanFront.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnPanFront;
-                @PanFront.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnPanFront;
-                @LookAt.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnLookAt;
-                @LookAt.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnLookAt;
-                @LookAt.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnLookAt;
+                @Pan.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnPan;
+                @Pan.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnPan;
+                @Pan.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnPan;
+                @Move.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMove;
+                @RotateZ.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnRotateZ;
+                @RotateZ.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnRotateZ;
+                @RotateZ.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnRotateZ;
+                @PanFront.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnPanFront;
+                @PanFront.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnPanFront;
+                @PanFront.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnPanFront;
+                @LookAt.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnLookAt;
+                @LookAt.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnLookAt;
+                @LookAt.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnLookAt;
+                @Click.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnClick;
             }
-            m_Wrapper.m_CameraActionsCallbackInterface = instance;
+            m_Wrapper.m_MapModeActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Pan.started += instance.OnPan;
@@ -1122,43 +1117,13 @@ public class @Controls : IInputActionCollection, IDisposable
                 @LookAt.started += instance.OnLookAt;
                 @LookAt.performed += instance.OnLookAt;
                 @LookAt.canceled += instance.OnLookAt;
-            }
-        }
-    }
-    public CameraActions @Camera => new CameraActions(this);
-
-    // MapObjects
-    private readonly InputActionMap m_MapObjects;
-    private IMapObjectsActions m_MapObjectsActionsCallbackInterface;
-    private readonly InputAction m_MapObjects_Click;
-    public struct MapObjectsActions
-    {
-        private @Controls m_Wrapper;
-        public MapObjectsActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Click => m_Wrapper.m_MapObjects_Click;
-        public InputActionMap Get() { return m_Wrapper.m_MapObjects; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MapObjectsActions set) { return set.Get(); }
-        public void SetCallbacks(IMapObjectsActions instance)
-        {
-            if (m_Wrapper.m_MapObjectsActionsCallbackInterface != null)
-            {
-                @Click.started -= m_Wrapper.m_MapObjectsActionsCallbackInterface.OnClick;
-                @Click.performed -= m_Wrapper.m_MapObjectsActionsCallbackInterface.OnClick;
-                @Click.canceled -= m_Wrapper.m_MapObjectsActionsCallbackInterface.OnClick;
-            }
-            m_Wrapper.m_MapObjectsActionsCallbackInterface = instance;
-            if (instance != null)
-            {
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
             }
         }
     }
-    public MapObjectsActions @MapObjects => new MapObjectsActions(this);
+    public MapModeActions @MapMode => new MapModeActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -1282,16 +1247,13 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnSlowModifier(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
     }
-    public interface ICameraActions
+    public interface IMapModeActions
     {
         void OnPan(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnRotateZ(InputAction.CallbackContext context);
         void OnPanFront(InputAction.CallbackContext context);
         void OnLookAt(InputAction.CallbackContext context);
-    }
-    public interface IMapObjectsActions
-    {
         void OnClick(InputAction.CallbackContext context);
     }
     public interface IUIActions
