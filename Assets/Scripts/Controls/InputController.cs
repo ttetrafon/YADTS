@@ -49,15 +49,15 @@ public class InputController : MonoBehaviour {
   }
 
   public static void SwitchControlsMode(string mode) {
-    Debug.Log("---> SwitchControlsMode(" + mode + ")");
+    // Debug.Log("---> SwitchControlsMode(" + mode + ")");
     switch(mode) {
       case "MapMode":
-        Debug.Log("... switching controls to MapMode!");
+        // Debug.Log("... switching controls to MapMode!");
         controls.MapMode.Enable();
         controls.UI.Disable();
         break;
       case "UI":
-        Debug.Log("... switching controls to UI!");
+        // Debug.Log("... switching controls to UI!");
         controls.UI.Enable();
         controls.MapMode.Disable();
         break;

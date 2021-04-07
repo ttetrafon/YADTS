@@ -10,7 +10,7 @@ public class LoadMapScript : MonoBehaviour {
 	[SerializeField] private Dropdown mapSelectionDropdown;
 
 	private void Awake() {
-		Debug.Log("LoadMapScript.Awake()");
+		// Debug.Log("LoadMapScript.Awake()");
 		if (instance == null) {
 			instance = this;
 		}
@@ -40,7 +40,7 @@ public class LoadMapScript : MonoBehaviour {
 
 
 	public static void LoadMap(string uid) {
-		Debug.Log("---> LoadMap(" + uid + ")");
+		// Debug.Log("---> LoadMap(" + uid + ")");
 		// Clear previous map data
 		// TODO: MapObjectControl.UnselectAll();
 		MapController.CleanMapObjects();
@@ -65,12 +65,11 @@ public class LoadMapScript : MonoBehaviour {
 	}
 
 	private IEnumerator InstantiateMapObjects(List<string> mos) {
-		Debug.Log("---> InstantiateMapObjects(" + mos.Count + " items)");
+		// Debug.Log("---> InstantiateMapObjects(" + mos.Count + " items)");
 		for (int i = 0; i < mos.Count; i++) {
 			LoadMapObject(mos[i]);
-			yield return new WaitForSeconds(0.01f);
+			yield return new WaitForSeconds(GeneralSettings.yieldLoop);
 		}
-		yield return new WaitForSeconds(0.01f);
 	}
 
 	public static void LoadMapObject(string uid) {

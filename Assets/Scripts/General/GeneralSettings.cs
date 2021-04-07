@@ -2,17 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GeneralSettings : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class GeneralSettings : MonoBehaviour {
+    [Header("Internal Settings")]
+    public static float yieldLoop = 0.001f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
