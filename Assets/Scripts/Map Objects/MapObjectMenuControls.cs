@@ -44,6 +44,7 @@ public class MapObjectMenuControls : MonoBehaviour {
 		mapObjectPrefabs = new Dictionary<string, GameObject>();
 		//Debug.Log("map objects loaded: " + mapObjectPrefabsList.Length);
 		PopulateMapObjectDropdownAndTags();
+		Helper.FillDropdown(mapContainerSelector, Localization.dropdowns["eng"]["Map Object Types"]);
 
 		// Listeners
 		//   Map Objects
@@ -88,21 +89,21 @@ public class MapObjectMenuControls : MonoBehaviour {
 				Helper.SaveCurrentMap();
 			}
 		});
-    	rotationStepFrontInput.onEndEdit.AddListener(delegate {
-      int rot = GetRotationStep(rotationStepFrontInput);
-      MapController.currentMapData.rotationStepFront = rot;
-      Helper.SaveCurrentMap();
-    });
-    	rotationStepSideInput.onEndEdit.AddListener(delegate {
-      int rot = GetRotationStep(rotationStepSideInput);
-      MapController.currentMapData.rotationStepSide = rot;
-      Helper.SaveCurrentMap();
-    });
-    	rotationStepVerticalInput.onEndEdit.AddListener(delegate {
-      int rot = GetRotationStep(rotationStepVerticalInput);
-      MapController.currentMapData.rotationStepVertical = rot;
-      Helper.SaveCurrentMap();
-    });
+		rotationStepFrontInput.onEndEdit.AddListener(delegate {
+      	int rot = GetRotationStep(rotationStepFrontInput);
+      	MapController.currentMapData.rotationStepFront = rot;
+      	Helper.SaveCurrentMap();
+		});
+		rotationStepSideInput.onEndEdit.AddListener(delegate {
+		int rot = GetRotationStep(rotationStepSideInput);
+		MapController.currentMapData.rotationStepSide = rot;
+		Helper.SaveCurrentMap();
+		});
+		rotationStepVerticalInput.onEndEdit.AddListener(delegate {
+		int rot = GetRotationStep(rotationStepVerticalInput);
+		MapController.currentMapData.rotationStepVertical = rot;
+		Helper.SaveCurrentMap();
+		});
 
 		// Finalise
 		GameController.loadedMapObjectMenuControls = true;

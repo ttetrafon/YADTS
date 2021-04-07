@@ -65,6 +65,9 @@ public class Localization {
 				"Building",
 				"Vehicle"
 			}},
+			{"Map Object Types", new List<string>() {
+				"Terrain", "Item", "Vehicle", "Creature", "Effect"
+			}},
 			{"Text Format Choices", new List<string>() {
 				"Section",
 				"Sub-Section",
