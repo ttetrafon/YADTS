@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class MapObjectMenuControls : MonoBehaviour {
 	public static MapObjectMenuControls instance = null;
-	// Resources
+	[Header("Resources")]
 	public static GameObject[] mapObjectPrefabsList;
 	public static Dictionary<string, GameObject> mapObjectPrefabs;
 	private Dictionary<string, bool> mapObjectTags = new Dictionary<string, bool>(); // Controls which tags are shown and which are not.

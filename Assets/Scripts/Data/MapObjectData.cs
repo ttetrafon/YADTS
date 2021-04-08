@@ -10,14 +10,15 @@ public class MapObjectData {
 	public string objectUuid = "";
 	public string prefabName = "";
 	// General Data
+	public string owner = "GM";
 	public string description = "";
 	// Spatial Data
-	public Dictionary<string, MapObjectSpacialData> spacialData = new Dictionary<string, MapObjectSpacialData>();
+	public Dictionary<string, MapObjectSpacialData> spacialData = new Dictionary<string, MapObjectSpacialData>(); // Spatial data of mo for each map.
 	// Map Object Parent(s)
 	public bool isInGroup = false; // Boolean that remembers if the object is part of a group.
 	// Map Object Children Group
 	public List<string> mapObjectChildrenGroup = new List<string>();
-	public bool isContainer = false; // Boolean to remember if the the item contains other map objects
+	public bool isContainer = false; // Boolean to remember if the the item contains other map objects.
 }
 
 public class MapObjectSpacialData {
@@ -32,8 +33,8 @@ public class MapObjectSpacialData {
 	public float scaleZ = 1;
 
 	public override string ToString() {
-		return "spatial data: (" + positionX + ", " + positionY + ", " + positionZ
-			+ ") - (" + zRotation + ", " + frontPan + ", " + sidePan
-			+ ") - (" + scaleX + ", " + scaleY + ", " + scaleZ + ")";
+		return "spatial data: position (" + positionX + ", " + positionY + ", " + positionZ
+			+ "), rotation (" + zRotation + ", " + frontPan + ", " + sidePan
+			+ "), scale (" + scaleX + ", " + scaleY + ", " + scaleZ + ")";
 	}
 }

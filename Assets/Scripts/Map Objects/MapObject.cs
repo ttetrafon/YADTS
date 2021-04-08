@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
 /// The MapObject class is the parent for all map objects that are used when creating maps, from the terrain, to creatures, to vehicles, and to effects.
 /// </summary>
-public class MapObject: MonoBehaviour {
-	// General
+public class MapObject: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+	[Header("General")]
 	public bool hasChanged = false; // Boolean to control if the objet will be resaved with the map.
 	public bool isSelected = false; // Boolean that remembers if the object is selected.
 	public bool isNameDisplayed = false; // Boolean to control the name visibility of a map object.
 	public float distanceFromCamera = 0.0f;
 	public List<string> tags = new List<string>(); // Quick selection of map objects and filtering within the new map object menu.
 
-	// References
+	[Header("References")]
 	public GameObject modelNormal; // The normal model, visible by eyes in the typical spectrum.
 	public TextMesh floatingName = null; // Reference to the in-game 3D floating text that holds the map object's name.
 	public Text mapReferenceSelector = null; // Connects the map object with its selector in the current map panel.
 	public GameObject initiativeSelector = null; // Connects the map object with its selector in the initiate panel.
 
-	// Data
+	[Header("Data")]
 	public MapObjectData mapObjectData = new MapObjectData();
-
 
 	private void Awake() {
 		// Get and display the object's name.
@@ -55,6 +55,16 @@ public class MapObject: MonoBehaviour {
 			}
 		}
 	}
+
+	void IPointerEnterHandler.OnPointerEnter(PointerEventData pd) {
+        // Debug.Log("IPointerEnterHandler.OnPointerEnter: " + mapObjectData.objectName);
+		TooltipController.ShowMoTooltip(mapObjectData.objectName);
+    }
+
+	void IPointerExitHandler.OnPointerExit(PointerEventData pd) {
+        // Debug.Log("IPointerExitHandler.OnPointerExit: " + mapObjectData.objectName);
+		TooltipController.HideMoTooltip();
+    }
 
 	private float adaptCharacterSize(float distance) {
 		if (distance < 3) {
