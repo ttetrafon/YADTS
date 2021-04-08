@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-// This script should be attached on all UI containers so that UI functionality will be
+// This script should be attached on all UI containers so that UI functionality will be resumed and suspended as needed when the mouse moves over them!
 public class UiControlBlocker : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
   public void OnPointerEnter(PointerEventData eventData) {

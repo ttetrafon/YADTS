@@ -27,7 +27,7 @@ public class MapController : MonoBehaviour {
 	private float rotationSensitivity = 5.0f;
 	public GameObject moSpatialDataPanel;
 
-	// Map Object Controls
+    [Header("Axioms")]
 	[SerializeField] private Button magicAxiomButton;
 	[SerializeField] private Dropdown magicAxiomSelector;
 	[SerializeField] private Text magicAxiomDisplay;
@@ -41,40 +41,26 @@ public class MapController : MonoBehaviour {
 	[SerializeField] private Dropdown techAxiomSelector;
 	[SerializeField] private Text techAxiomDisplay;
 
-	// Distance Tool
+    [Header("Map Tools")]
 	[SerializeField] private Button distanceMeasurementButton;
 	private int distanceMeasurementStep = 0;
 	private MapObject[] distanceMeasurementObjects = new MapObject[2];
 
 	// Controls
 
-  private void Awake() {
-    //Debug.Log("===> MapController Awake");
-    if (instance == null) {
-      instance = this;
+    private void Awake() {
+        //Debug.Log("===> MapController Awake");
+        if (instance == null) {
+        instance = this;
+        }
+        // Assign the references.
+        treeNodesDirectory = GameController.saveFolder + "map tree hierarchy" + "/";
+        //Debug.Log("treeNodesDirectory: " + treeNodesDirectory);
+        mapDirectory = GameController.saveFolder + "maps" + "/";
+        //Debug.Log("mapDirectory: " + mapDirectory);
+        mapObjectsDirectory = GameController.saveFolder + "map objects" + "/";
+        //Debug.Log("mapObjectsDirectory: " + mapObjectsDirectory);
     }
-    // Assign the references.
-    treeNodesDirectory = GameController.saveFolder + "map tree hierarchy" + "/";
-    //Debug.Log("treeNodesDirectory: " + treeNodesDirectory);
-    mapDirectory = GameController.saveFolder + "maps" + "/";
-    //Debug.Log("mapDirectory: " + mapDirectory);
-    mapObjectsDirectory = GameController.saveFolder + "map objects" + "/";
-    //Debug.Log("mapObjectsDirectory: " + mapObjectsDirectory);
-
-    // Set the controls
-    // moControls.MapController.MoveXY.performed += ctx => moMoveXY = ctx.ReadValue<Vector2>();
-    // moControls.MapController.MoveXY.canceled += ctx => moMoveXY = Vector2.zero;
-    // moControls.MapController.MoveZ.performed += ctx => moMoveZ = ctx.ReadValue<Vector2>().y;
-    // moControls.MapController.MoveZ.canceled += ctx => moMoveZ = 0.0f;
-    // moControls.MapController.RotateZ.performed += ctx => moRotateZ = ctx.ReadValue<Vector2>().x;
-    // moControls.MapController.RotateZ.canceled += ctx => moRotateZ = 0.0f;
-    // moControls.MapController.RotateFront.performed += ctx => moRotateFront = (-1) * ctx.ReadValue<Vector2>().y;
-    // moControls.MapController.RotateFront.canceled += ctx => moRotateFront = 0.0f;
-    // moControls.MapController.RotateSide.performed += ctx => moRotateSide = ctx.ReadValue<Vector2>().x;
-    // moControls.MapController.RotateSide.canceled += ctx => moRotateSide = 0.0f;
-    // moControls.MapController.MapObjectMovementEnded.performed += ctx => MapObjectMovementEnded();
-    // moControls.MapController.CancelMapOperations.performed += ctx => CancelAllMapOperations();
-  }
 
 	private void OnEnable() {
 		// moControls.MapController.Enable();

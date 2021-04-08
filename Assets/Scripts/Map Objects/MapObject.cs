@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /// <summary>
 /// The MapObject class is the parent for all map objects that are used when creating maps, from the terrain, to creatures, to vehicles, and to effects.
 /// </summary>
-public class MapObject: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+// public class MapObject: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class MapObject: MonoBehaviour {
 	[Header("General")]
 	public bool hasChanged = false; // Boolean to control if the objet will be resaved with the map.
 	public bool isSelected = false; // Boolean that remembers if the object is selected.
@@ -56,15 +56,15 @@ public class MapObject: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		}
 	}
 
-	void IPointerEnterHandler.OnPointerEnter(PointerEventData pd) {
-        // Debug.Log("IPointerEnterHandler.OnPointerEnter: " + mapObjectData.objectName);
-		TooltipController.ShowMoTooltip(mapObjectData.objectName);
-    }
+	// void IPointerEnterHandler.OnPointerEnter(PointerEventData pd) {
+    //     // Debug.Log("IPointerEnterHandler.OnPointerEnter: " + mapObjectData.objectName);
+	// 	TooltipController.ShowMoTooltip(mapObjectData.objectName);
+    // }
 
-	void IPointerExitHandler.OnPointerExit(PointerEventData pd) {
-        // Debug.Log("IPointerExitHandler.OnPointerExit: " + mapObjectData.objectName);
-		TooltipController.HideMoTooltip();
-    }
+	// void IPointerExitHandler.OnPointerExit(PointerEventData pd) {
+    //     // Debug.Log("IPointerExitHandler.OnPointerExit: " + mapObjectData.objectName);
+	// 	TooltipController.HideMoTooltip();
+    // }
 
 	private float adaptCharacterSize(float distance) {
 		if (distance < 3) {

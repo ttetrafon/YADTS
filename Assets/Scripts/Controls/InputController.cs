@@ -48,6 +48,19 @@ public class InputController : MonoBehaviour {
     controls.MapMode.Disable();
   }
 
+  private void Update() {
+    // Custom implementation of camera's raycast (purpose is to replicate IPointer functionality that suits this program - IPointer always stops on the first hit).
+    if (controls.MapMode.enabled) {
+      Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
+      RaycastHit[] hitInfo = new RaycastHit[100];
+      var layerMask = ~0;
+      int hits = Physics.RaycastNonAlloc(ray, hitInfo, Mathf.Infinity, layerMask);
+      if (hits > 0) {
+        Debug.Log(hits + " object(s) hit!");
+      }
+    }
+  }
+
   public static void SwitchControlsMode(string mode) {
     // Debug.Log("---> SwitchControlsMode(" + mode + ")");
     switch(mode) {
