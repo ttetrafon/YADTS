@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class InputController : MonoBehaviour {
   public static Controls controls;
   public static float fastCameraMultiplier = 25.0f; // TODO: Make user changeable property.
   public static float slowCameraMultiplier = 0.25f; // TODO: Make user changeable property.
+
+  // Operational
+  private String hoveringOverMo = null;
 
   // Camera
   public static Vector2 camPan = Vector2.zero;
@@ -51,12 +55,21 @@ public class InputController : MonoBehaviour {
   private void Update() {
     // Custom implementation of camera's raycast (purpose is to replicate IPointer functionality that suits this program - IPointer always stops on the first hit).
     if (controls.MapMode.enabled) {
+
       Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
-      RaycastHit[] hitInfo = new RaycastHit[100];
-      var layerMask = ~0;
-      int hits = Physics.RaycastNonAlloc(ray, hitInfo, Mathf.Infinity, layerMask);
-      if (hits > 0) {
-        Debug.Log(hits + " object(s) hit!");
+			// Debug.Log(ray);
+			RaycastHit hitInfo;
+			if (Physics.Raycast(ray, out hitInfo)) {
+        // Debug.Log("Mouse over: " + hitInfo.transform.gameObject.name);
+        MapObject mo = hitInfo.transform.gameObject.GetComponent<MapObject>();
+        if ((this.hoveringOverMo == null) || (this.hoveringOverMo != mo.mapObjectData.objectUuid)) {
+          this.hoveringOverMo = mo.mapObjectData.objectUuid;
+          TooltipController.ShowMoTooltip(mo.mapObjectData.objectName);
+        }
+			}
+      else {
+        this.hoveringOverMo = null;
+        TooltipController.HideMoTooltip();
       }
     }
   }
@@ -108,31 +121,14 @@ public class InputController : MonoBehaviour {
 
 	private void MapClick() {
 		// Debug.Log("---> Map Click()");
-		if (!EventSystem.current.IsPointerOverGameObject()) {
-			// Debug.Log("... not over GUI!");
-			Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
-			// Debug.Log(ray);
-			RaycastHit hitInfo;
-			if (Physics.Raycast(ray, out hitInfo)) {
-			// 	MapObjectClicked(hitInfo.transform.parent.gameObject.GetComponent<MapObject>());
-			}
-			else {
-			// 	UnseslectAllMapObjects();
-			}
-			// No target and no tool
-			// if (distanceMeasurementStep == 0) {
-			// 	MainMenu.CloseMenus();
-			// }
-    	// Activate the Spatial Data Panel if objects are selected.
-			// if (currentlySelectedObjects.Count > 0) {
-			// 	moSpatialDataPanel.SetActive(true);
-			// 	SpatialDataController.PopulateSpatialData();
-			// }
-			// else {
-			// 	SpatialDataController.CancelRename();
-			// 	moSpatialDataPanel.SetActive(false);
-			// }
-		}
-	}
+    // TODO: Use multiple targets to cycle the selection between the visible and hidden map objects.
+    // Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
+    // var layerMask = ~0;
+    // RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, layerMask);
+    // if (hits.Length > 0) {
+    //   Debug.Log(hits.Length + " object(s) hit!");
+    //   Array.Sort(hits, delegate(RaycastHit hit1, RaycastHit hit2) { return hit1.distance.CompareTo(hit2.distance); } );
+    // }
+  }
 
 }
