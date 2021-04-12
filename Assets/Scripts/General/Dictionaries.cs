@@ -17,6 +17,7 @@ public class Dictionaries {
 	public Dictionaries() {
 		this.goNames = new Dictionary<string, string>();
 	}
+
 	public Dictionaries(Dictionary<string, string> goNames) {
 		this.goNames = goNames;
 	}
@@ -34,6 +35,7 @@ public class Dictionaries {
 			return "unknown?";
 		}
 	}
+
 	public void NameAdd(string uuid, string newName) {
 		//Debug.Log("---> Dictionary.NameAdd(" + uuid + ", " + newName + ")");
 		if (!goNames.ContainsKey(uuid)) {
@@ -44,6 +46,7 @@ public class Dictionaries {
 			Debug.LogError("NameAdd: uuid already exists!");
 		}
 	}
+
 	public void NameRemove(string uuid, bool debug = false) {
 		if (debug) { Debug.Log("---> Dictionary.NameRemove(" + uuid + ")"); }
 		if (goNames.ContainsKey(uuid)) {
@@ -55,7 +58,8 @@ public class Dictionaries {
 			if (debug) { Debug.LogError("NameRemove: uuid not present!"); }
 		}
 	}
-	public void NameSet(string uuid, string newName) {
+
+	public void NameUpdate(string uuid, string newName) {
 		//Debug.Log("---> Dictionary.NameSet(" + uuid + ", " + newName + ")");
 		if (goNames.ContainsKey(uuid)) {
 			goNames[uuid] = newName;
@@ -72,6 +76,7 @@ public class Dictionaries {
 	public bool UuidExists(string uuid) {
 		return goNames.ContainsKey(uuid);
 	}
+
 	public void SaveDictionaries(bool debug = false) {
 		if (debug) { Debug.Log("---> SaveDictionaries()"); }
 		string filename = GameController.saveFolder + "dictionaries/dictionaries.json";

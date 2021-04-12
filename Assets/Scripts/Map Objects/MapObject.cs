@@ -115,6 +115,19 @@ public class MapObject: MonoBehaviour {
 
 	public void RenameSelf(string newName) {
 		Debug.Log("---> RenameSelf(" + newName + ")");
+		// change the name in map object data
+		this.mapObjectData.objectName = newName;
+		// change the name in the dictionary
+		GameController.dictionaries.NameUpdate(this.mapObjectData.objectUuid, newName);
+		// update names in selector references
+		if (mapReferenceSelector) {
+			// mapReferenceSelector.Rename();
+		}
+		if (initiativeSelector) {
+			// initiativeSelector.Rename();
+		}
+		// update the file on disk
+		Helper.SaveMapObject(this);
 	}
 
 	public void DeleteSelf() {
