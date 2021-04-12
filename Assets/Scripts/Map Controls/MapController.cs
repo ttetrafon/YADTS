@@ -20,14 +20,14 @@ public class MapController : MonoBehaviour {
 	// Map Objects
 	public static List<MapObject> currentlySelectedObjects = new List<MapObject>(); // Holds a list of all currently selected map objects.
 	public static Dictionary<string, MapObject> mapObjects = new Dictionary<string, MapObject>();
-  	public float slowMovementModifier = 0.25f;
+  public float slowMovementModifier = 0.25f;
 	private float xyMovementSensitivity = 0.5f;
 	private float zMovementSensitivity = 0.5f;
 	// private float arrowMovementSensitivity = 5.0f;
 	private float rotationSensitivity = 5.0f;
 	public GameObject moSpatialDataPanel;
 
-    [Header("Axioms")]
+  [Header("Axioms")]
 	[SerializeField] private Button magicAxiomButton;
 	[SerializeField] private Dropdown magicAxiomSelector;
 	[SerializeField] private Text magicAxiomDisplay;
@@ -41,26 +41,28 @@ public class MapController : MonoBehaviour {
 	[SerializeField] private Dropdown techAxiomSelector;
 	[SerializeField] private Text techAxiomDisplay;
 
-    [Header("Map Tools")]
+  [Header("Map Tools")]
 	[SerializeField] private Button distanceMeasurementButton;
 	private int distanceMeasurementStep = 0;
 	private MapObject[] distanceMeasurementObjects = new MapObject[2];
 
-	// Controls
 
-    private void Awake() {
-        //Debug.Log("===> MapController Awake");
-        if (instance == null) {
-        instance = this;
-        }
-        // Assign the references.
-        treeNodesDirectory = GameController.saveFolder + "map tree hierarchy" + "/";
-        //Debug.Log("treeNodesDirectory: " + treeNodesDirectory);
-        mapDirectory = GameController.saveFolder + "maps" + "/";
-        //Debug.Log("mapDirectory: " + mapDirectory);
-        mapObjectsDirectory = GameController.saveFolder + "map objects" + "/";
-        //Debug.Log("mapObjectsDirectory: " + mapObjectsDirectory);
+  /////////////////////
+  ///   LIFECYCLE   ///
+  /////////////////////
+  private void Awake() {
+    //Debug.Log("===> MapController Awake");
+    if (instance == null) {
+    instance = this;
     }
+    // Assign the references.
+    treeNodesDirectory = GameController.saveFolder + "map tree hierarchy" + "/";
+    //Debug.Log("treeNodesDirectory: " + treeNodesDirectory);
+    mapDirectory = GameController.saveFolder + "maps" + "/";
+    //Debug.Log("mapDirectory: " + mapDirectory);
+    mapObjectsDirectory = GameController.saveFolder + "map objects" + "/";
+    //Debug.Log("mapObjectsDirectory: " + mapObjectsDirectory);
+  }
 
 	private void OnEnable() {
 		// moControls.MapController.Enable();
@@ -138,17 +140,19 @@ public class MapController : MonoBehaviour {
 	private void Update() {
 		if (!Helper.isUIActive()) {
 			for (int i = 0; i < currentlySelectedObjects.Count; i++) {
+        if (currentlySelectedObjects[i]) {
 				currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * InputController.moMoveXY.y * xyMovementSensitivity * MapObjectControlsShiftModifier();
 				currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z) * InputController.moMoveXY.x * xyMovementSensitivity * MapObjectControlsShiftModifier();
 				currentlySelectedObjects[i].transform.Translate(new Vector3(0, InputController.moMoveZ * zMovementSensitivity * MapObjectControlsShiftModifier(), 0));
 				currentlySelectedObjects[i].transform.Rotate(new Vector3(0, InputController.moRotateZ * rotationSensitivity * MapObjectControlsShiftModifier()), Space.World);
 				currentlySelectedObjects[i].transform.Rotate(new Vector3(InputController.moRotateFront, 0, InputController.moRotateSide) * rotationSensitivity * MapObjectControlsShiftModifier(), Space.Self);
+        }
 			}
-			UpdatePositionDiplay();
+			// UpdatePositionDiplay();
 		}
 	}
 
-	public static void MapObjectClicked(MapObject mo) {
+	// public static void MapObjectClicked(MapObject mo) {
 		// Debug.Log("---> MapObjectClicked called from " + mo.mapObjectData.objectName);
 		// Distance tool selected
 		// if (instance.distanceMeasurementStep > 0) {
@@ -164,21 +168,7 @@ public class MapController : MonoBehaviour {
 		// 		GameController.ChangeCursor();
 		// 	}
 		// }
-	}
-
-  private void MapObjectMovementEnded() {
-    Debug.Log("---> MapObjectMovementEnded()");
-    for (int i = 0; i < currentlySelectedObjects.Count; i++) {
-      if (currentMapData.gridType != Constants.gridTypeNone) {
-        SetGridPosition(currentlySelectedObjects[i]);
-      }
-      if (currentMapData.rotationStepFront + currentMapData.rotationStepSide + currentMapData.rotationStepVertical > 0) {
-        SetRotation(currentlySelectedObjects[i]);
-      }
-      currentlySelectedObjects[i].UpdateSpacialData(currentlySelectedObjects[i].gameObject);
-      Helper.SaveMapObject(currentlySelectedObjects[i]);
-    }
-  }
+	// }
 
   private float MapObjectControlsShiftModifier() {
     // if (moControls.MapController.Modifier_Shift.ReadValue<float>() > 0) {
@@ -193,58 +183,161 @@ public class MapController : MonoBehaviour {
     GameController.ChangeCursor();
   }
 
-	private void UpdatePositionDiplay() {
 
+  ////////////////////////
+  ///   MO SELECTION   ///
+  ////////////////////////
+	public static void CleanMapObjects() {
+		List<string> mos = new List<string>(mapObjects.Keys);
+		for (int i = 0; i < mos.Count; i++) {
+			Destroy(mapObjects[mos[i]].gameObject);
+		}
+		mapObjects = new Dictionary<string, MapObject>();
+	}
+
+  public static void DeleteSelectedMapObjects() {
+
+    for (int i = currentlySelectedObjects.Count - 1; i >=0; i--) {
+      currentlySelectedObjects[i].DeleteSelf();
+      // yield...
+    }
+    currentlySelectedObjects = new List<MapObject>();
+    SaveCurrentMap();
   }
 
-	public static void SaveCurrentMap() {
-		//Debug.Log("---> SaveCurrentMap()");
-		// Update the current map data into the currentMapData object wherever required.
-
-		// Save the files.
-		Helper.SaveCurrentMap();
-		mapTree[currentMapData.mapUid].UpdateSelf();
-		// Finish
-		MainMenu.CloseMenus();
-	}
-
-	public static void ConstructMapTree(string rootMapFile) {
-		//Debug.Log("---> ConstructMapTree()");
-		mapTree = new Dictionary<string, MapTreeNode>();
-		MapTreeNode rootMapTreeNode = new MapTreeNode(rootMap);
-		if (File.Exists(rootMapFile)) {
-			//Debug.Log("Reading the root map!");
-			rootMapTreeNode = (MapTreeNode)JsonObject.FromJson(rootMapTreeNode, Helper.ReadFile(rootMapFile));
+	public static void ToggleMapObjectInSelection(MapObject mo) {
+		// Debug.Log("---> ToggleMapObjectInSelection(" + mo.mapObjectData.objectName + ")");
+		// add/remove the mo from the selection list
+		if (currentlySelectedObjects.Contains(mo)) {
+			currentlySelectedObjects.Remove(mo);
 		}
 		else {
-			//Debug.Log("Root map not found: creating new node!");
-			Helper.SaveFile(rootMapFile, JsonObject.ToJson(rootMapTreeNode));
+			currentlySelectedObjects.Add(mo);
 		}
-		mapTree.Add(rootMapTreeNode.uid, rootMapTreeNode);
-		ReadChildTreeNodes(rootMapTreeNode.uid);
+		// Debug.Log("... " + currentlySelectedObjects.Count + " in selection");
+		// toggle the spatial data panel
+		if (MapController.currentlySelectedObjects.Count > 0) {
+			// moSpatialDataPanel.SetActive(true);
+      		// SpatialDataController.PopulateSpatialData();
+    	}
+    	else {
+      		// SpatialDataController.CancelRename();
+      		// moSpatialDataPanel.SetActive(false);
+    	}
 	}
 
-	private static void ReadChildTreeNodes(string uuid) {
-		//Debug.Log("---> ReadChildTreeNodes(" + uuid + ")");
-		List<string> children = mapTree[uuid].GetChildren();
-		//Debug.Log("... has " + children.Count + " children!");
-		//Debug.Log(Helper.PrintStringList(children));
-		for (int i = 0; i < children.Count; i++) {
-			MapTreeNode node = new MapTreeNode();
-			//Debug.Log(uuid + " child: " + (i + 1));
-			string filename = treeNodesDirectory + children[i] + ".json";
-			if (File.Exists(filename)) {
-				node = (MapTreeNode)JsonObject.FromJson(node, Helper.ReadFile(filename));
-				mapTree.Add(node.uid, node);
-				ReadChildTreeNodes(node.uid);
+	public static void UnseslectAllMapObjects() {
+		//Debug.Log("---> UnseslectAllMapObjects()");
+		for (int i = 0; i < currentlySelectedObjects.Count; i++) {
+			currentlySelectedObjects[i].ToggleSelection();
+		}
+		currentlySelectedObjects = new List<MapObject>();
+	}
+
+
+  ///////////////////////
+  ///   MO MOVEMENT   ///
+  ///////////////////////
+  private void MapObjectMovementEnded() {
+    Debug.Log("---> MapObjectMovementEnded()");
+    for (int i = 0; i < currentlySelectedObjects.Count; i++) {
+      if (currentMapData.gridType != Constants.gridTypeNone) {
+        SetGridPosition(currentlySelectedObjects[i]);
+      }
+      if (currentMapData.rotationStepFront + currentMapData.rotationStepSide + currentMapData.rotationStepVertical > 0) {
+        SetRotation(currentlySelectedObjects[i]);
+      }
+      currentlySelectedObjects[i].UpdateSpacialData(currentlySelectedObjects[i].gameObject);
+      Helper.SaveMapObject(currentlySelectedObjects[i]);
+    }
+  }
+
+	private float QuantiseRotation(float angle, int quantum) {
+		// Debug.Log("---> QuantiseRotation(" + angle + ", " + quantum + ")");
+		float mod = Mathf.Floor(angle / quantum);
+		// Debug.Log("mod: " + mod);
+		if (mod == 0) {
+			return angle;
+		}
+		float low = mod * quantum;
+		float high = low + quantum;
+		// Debug.Log(">>> " + low + " - " + high + " <<<");
+		if ((angle - low) < (high - angle)) {
+			// Debug.Log("returning " + low);
+			return low;
+		}
+		else {
+			// Debug.Log("returning " + high);
+			return high;
+		}
+	}
+
+	private void SetGridPosition(MapObject mo) {
+		// Debug.Log("---> SetGridPosition(" + mo.gameObject.name + ")");
+		float gridX = mo.gameObject.transform.position.x, gridY = mo.gameObject.transform.position.y, gridZ = mo.gameObject.transform.position.z;
+		// Get the closest integer for y.
+		//Debug.Log("initial position: " + mo.gameObject.transform.position.ToString());
+		gridY = (gridY - Mathf.Floor(gridY) < Mathf.Ceil(gridY) - gridY ? Mathf.Floor(gridY) : Mathf.Ceil(gridY));
+		if (currentMapData.gridType == Constants.gridTypeHex) {
+			//Debug.Log("... hex!");
+			int z1 = Mathf.FloorToInt(gridZ);
+			int z2 = Mathf.CeilToInt(gridZ);
+			int zOdd = (z1 % 2 == 0 ? z2 : z1);
+			int zEven = (z1 % 2 == 0 ? z1 : z2);
+			//Debug.Log("z: " + gridZ + " -> " + zOdd + ", " + zEven);
+			int lambda = Mathf.FloorToInt(gridX/3);
+			float xOdd = 3 * lambda + 1.5f;
+			float xEven = (xOdd < gridX ? 3 * lambda + 3 : 3 * lambda);
+			//Debug.Log("x: " + gridX+ " -> " + xOdd + ", " + xEven);
+			Vector2 point = new Vector2(gridX, gridZ);
+			Vector2 odd = new Vector2(xOdd, zOdd);
+			Vector2 even = new Vector2(xEven, zEven);
+			//Debug.Log("point: " + point);
+			float distanceOdd = Vector2.Distance(point, odd);
+			float distanceEven = Vector2.Distance(point, even);
+			//Debug.Log("odd centre: " + odd + " (" + distanceOdd + ")");
+			//Debug.Log("even centre: " + even + " (" + distanceEven + ")");
+			if (distanceOdd < distanceEven) {
+				gridX = xOdd;
+				gridZ = zOdd;
 			}
 			else {
-				Helper.SaveFile(filename, JsonObject.ToJson(node));
-			// TODO: Fix errors in the children/parent relationships... Especially missing links!
+				gridX = xEven;
+				gridZ = zEven;
 			}
+			//Debug.Log("chosen centre: (" + gridX + ", " + gridZ + ")");
+		}
+		else {
+			//Debug.Log("... square!");
+			gridX = (gridX - Mathf.Floor(gridX) < Mathf.Ceil(gridX) - gridX ? Mathf.Floor(gridX) : Mathf.Ceil(gridX));
+			gridZ = (gridZ - Mathf.Floor(gridZ) < Mathf.Ceil(gridZ) - gridZ ? Mathf.Floor(gridZ) : Mathf.Ceil(gridZ));
+		}
+		// Debug.Log("final position: " + (new Vector3(gridX, gridY, gridZ)).ToString());
+		mo.gameObject.transform.position = new Vector3(gridX, gridY, gridZ);
+	}
+
+	private void SetRotation(MapObject mo) {
+		if (currentMapData.rotationStepFront > 0) {
+		float rotationFront = mo.gameObject.transform.localEulerAngles.x;
+		float targetRotationFront = QuantiseRotation(rotationFront, currentMapData.rotationStepFront);
+			mo.gameObject.transform.Rotate(new Vector3(targetRotationFront - rotationFront, 0, 0), Space.Self);
+		}
+		if (currentMapData.rotationStepSide > 0) {
+		float rotationSide = mo.gameObject.transform.localEulerAngles.z;
+		float targetRotationSide = QuantiseRotation(rotationSide, currentMapData.rotationStepSide);
+			mo.gameObject.transform.Rotate(new Vector3(0, 0, targetRotationSide - rotationSide), Space.Self);
+		}
+		if (currentMapData.rotationStepVertical > 0) {
+		float rotationZ = mo.gameObject.transform.eulerAngles.y;
+		float targetRotationZ = QuantiseRotation(rotationZ, currentMapData.rotationStepVertical);;
+			mo.gameObject.transform.Rotate(new Vector3(0, targetRotationZ - rotationZ, 0), Space.World);
 		}
 	}
 
+
+  //////////////////
+  ///   AXIOMS   ///
+  //////////////////
 	public static void SetAxioms() {
 		int magicAxiom = GetAxiom(currentMapData.mapUid, "Magic", instance.magicAxiomDisplay);
 		Helper.SelectDropdownValue(instance.magicAxiomSelector, magicAxiom.ToString());
@@ -292,12 +385,45 @@ public class MapController : MonoBehaviour {
 		return res;
 	}
 
-	public static void CleanMapObjects() {
-		List<string> mos = new List<string>(mapObjects.Keys);
-		for (int i = 0; i < mos.Count; i++) {
-			Destroy(mapObjects[mos[i]].gameObject);
+
+  ///////////////////
+  ///   GENERAL   ///
+  ///////////////////
+	public static void ConstructMapTree(string rootMapFile) {
+		//Debug.Log("---> ConstructMapTree()");
+		mapTree = new Dictionary<string, MapTreeNode>();
+		MapTreeNode rootMapTreeNode = new MapTreeNode(rootMap);
+		if (File.Exists(rootMapFile)) {
+			//Debug.Log("Reading the root map!");
+			rootMapTreeNode = (MapTreeNode)JsonObject.FromJson(rootMapTreeNode, Helper.ReadFile(rootMapFile));
 		}
-		mapObjects = new Dictionary<string, MapObject>();
+		else {
+			//Debug.Log("Root map not found: creating new node!");
+			Helper.SaveFile(rootMapFile, JsonObject.ToJson(rootMapTreeNode));
+		}
+		mapTree.Add(rootMapTreeNode.uid, rootMapTreeNode);
+		ReadChildTreeNodes(rootMapTreeNode.uid);
+	}
+
+	private static void ReadChildTreeNodes(string uuid) {
+		//Debug.Log("---> ReadChildTreeNodes(" + uuid + ")");
+		List<string> children = mapTree[uuid].GetChildren();
+		//Debug.Log("... has " + children.Count + " children!");
+		//Debug.Log(Helper.PrintStringList(children));
+		for (int i = 0; i < children.Count; i++) {
+			MapTreeNode node = new MapTreeNode();
+			//Debug.Log(uuid + " child: " + (i + 1));
+			string filename = treeNodesDirectory + children[i] + ".json";
+			if (File.Exists(filename)) {
+				node = (MapTreeNode)JsonObject.FromJson(node, Helper.ReadFile(filename));
+				mapTree.Add(node.uid, node);
+				ReadChildTreeNodes(node.uid);
+			}
+			else {
+				Helper.SaveFile(filename, JsonObject.ToJson(node));
+			// TODO: Fix errors in the children/parent relationships... Especially missing links!
+			}
+		}
 	}
 
 	public static void RememberLastMap(string uid) {
@@ -306,115 +432,15 @@ public class MapController : MonoBehaviour {
 		Helper.SaveUserData();
 	}
 
-	public static void ToggleMapObjectInSelection(MapObject mo) {
-		// Debug.Log("---> ToggleMapObjectInSelection(" + mo.mapObjectData.objectName + ")");
-		// add/remove the mo from the selection list
-		if (currentlySelectedObjects.Contains(mo)) {
-			currentlySelectedObjects.Remove(mo);
-		}
-		else {
-			currentlySelectedObjects.Add(mo);
-		}
-		// Debug.Log("... " + currentlySelectedObjects.Count + " in selection");
-		// toggle the spatial data panel
-		if (MapController.currentlySelectedObjects.Count > 0) {
-			// moSpatialDataPanel.SetActive(true);
-      		// SpatialDataController.PopulateSpatialData();
-    	}
-    	else {
-      		// SpatialDataController.CancelRename();
-      		// moSpatialDataPanel.SetActive(false);
-    	}
+	public static void SaveCurrentMap() {
+		//Debug.Log("---> SaveCurrentMap()");
+		// Update the current map data into the currentMapData object wherever required.
+
+		// Save the files.
+		Helper.SaveCurrentMap();
+		mapTree[currentMapData.mapUid].UpdateSelf();
+		// Finish
+		MainMenu.CloseMenus();
 	}
-
-	public static void UnseslectAllMapObjects() {
-		//Debug.Log("---> UnseslectAllMapObjects()");
-		for (int i = 0; i < currentlySelectedObjects.Count; i++) {
-			currentlySelectedObjects[i].ToggleSelection();
-		}
-		currentlySelectedObjects = new List<MapObject>();
-	}
-
-	private void SetGridPosition(MapObject mo) {
-		// Debug.Log("---> SetGridPosition(" + mo.gameObject.name + ")");
-		float gridX = mo.gameObject.transform.position.x, gridY = mo.gameObject.transform.position.y, gridZ = mo.gameObject.transform.position.z;
-		// Get the closest integer for y.
-		//Debug.Log("initial position: " + mo.gameObject.transform.position.ToString());
-		gridY = (gridY - Mathf.Floor(gridY) < Mathf.Ceil(gridY) - gridY ? Mathf.Floor(gridY) : Mathf.Ceil(gridY));
-		if (currentMapData.gridType == Constants.gridTypeHex) {
-			//Debug.Log("... hex!");
-			int z1 = Mathf.FloorToInt(gridZ);
-			int z2 = Mathf.CeilToInt(gridZ);
-			int zOdd = (z1 % 2 == 0 ? z2 : z1);
-			int zEven = (z1 % 2 == 0 ? z1 : z2);
-			//Debug.Log("z: " + gridZ + " -> " + zOdd + ", " + zEven);
-			int lambda = Mathf.FloorToInt(gridX/3);
-			float xOdd = 3 * lambda + 1.5f;
-			float xEven = (xOdd < gridX ? 3 * lambda + 3 : 3 * lambda);
-			//Debug.Log("x: " + gridX+ " -> " + xOdd + ", " + xEven);
-			Vector2 point = new Vector2(gridX, gridZ);
-			Vector2 odd = new Vector2(xOdd, zOdd);
-			Vector2 even = new Vector2(xEven, zEven);
-			//Debug.Log("point: " + point);
-			float distanceOdd = Vector2.Distance(point, odd);
-			float distanceEven = Vector2.Distance(point, even);
-			//Debug.Log("odd centre: " + odd + " (" + distanceOdd + ")");
-			//Debug.Log("even centre: " + even + " (" + distanceEven + ")");
-			if (distanceOdd < distanceEven) {
-				gridX = xOdd;
-				gridZ = zOdd;
-			}
-			else {
-				gridX = xEven;
-				gridZ = zEven;
-			}
-			//Debug.Log("chosen centre: (" + gridX + ", " + gridZ + ")");
-		}
-		else {
-			//Debug.Log("... square!");
-			gridX = (gridX - Mathf.Floor(gridX) < Mathf.Ceil(gridX) - gridX ? Mathf.Floor(gridX) : Mathf.Ceil(gridX));
-			gridZ = (gridZ - Mathf.Floor(gridZ) < Mathf.Ceil(gridZ) - gridZ ? Mathf.Floor(gridZ) : Mathf.Ceil(gridZ));
-		}
-		// Debug.Log("final position: " + (new Vector3(gridX, gridY, gridZ)).ToString());
-		mo.gameObject.transform.position = new Vector3(gridX, gridY, gridZ);
-	}
-
-  private void SetRotation(MapObject mo) {
-    if (currentMapData.rotationStepFront > 0) {
-      float rotationFront = mo.gameObject.transform.localEulerAngles.x;
-      float targetRotationFront = QuantiseRotation(rotationFront, currentMapData.rotationStepFront);
-	  	mo.gameObject.transform.Rotate(new Vector3(targetRotationFront - rotationFront, 0, 0), Space.Self);
-    }
-    if (currentMapData.rotationStepSide > 0) {
-      float rotationSide = mo.gameObject.transform.localEulerAngles.z;
-      float targetRotationSide = QuantiseRotation(rotationSide, currentMapData.rotationStepSide);
-  		mo.gameObject.transform.Rotate(new Vector3(0, 0, targetRotationSide - rotationSide), Space.Self);
-    }
-    if (currentMapData.rotationStepVertical > 0) {
-      float rotationZ = mo.gameObject.transform.eulerAngles.y;
-      float targetRotationZ = QuantiseRotation(rotationZ, currentMapData.rotationStepVertical);;
-  		mo.gameObject.transform.Rotate(new Vector3(0, targetRotationZ - rotationZ, 0), Space.World);
-    }
-  }
-
-  private float QuantiseRotation(float angle, int quantum) {
-    // Debug.Log("---> QuantiseRotation(" + angle + ", " + quantum + ")");
-    float mod = Mathf.Floor(angle / quantum);
-    // Debug.Log("mod: " + mod);
-    if (mod == 0) {
-      return angle;
-    }
-    float low = mod * quantum;
-    float high = low + quantum;
-    // Debug.Log(">>> " + low + " - " + high + " <<<");
-    if ((angle - low) < (high - angle)) {
-      // Debug.Log("returning " + low);
-      return low;
-    }
-    else {
-      // Debug.Log("returning " + high);
-      return high;
-    }
-  }
 
 }

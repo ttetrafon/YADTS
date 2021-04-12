@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,16 +57,6 @@ public class MapObject: MonoBehaviour {
 		}
 	}
 
-	// void IPointerEnterHandler.OnPointerEnter(PointerEventData pd) {
-    //     // Debug.Log("IPointerEnterHandler.OnPointerEnter: " + mapObjectData.objectName);
-	// 	TooltipController.ShowMoTooltip(mapObjectData.objectName);
-    // }
-
-	// void IPointerExitHandler.OnPointerExit(PointerEventData pd) {
-    //     // Debug.Log("IPointerExitHandler.OnPointerExit: " + mapObjectData.objectName);
-	// 	TooltipController.HideMoTooltip();
-    // }
-
 	private float adaptCharacterSize(float distance) {
 		if (distance < 3) {
 			return 0.1f;
@@ -90,11 +81,11 @@ public class MapObject: MonoBehaviour {
 		spacialData.scaleX = go.transform.localScale.x;
 		spacialData.scaleY = go.transform.localScale.y;
 		spacialData.scaleZ = go.transform.localScale.z;
-		if (mapObjectData.spacialData.ContainsKey(MapController.currentMapData.mapUid)) {
-			mapObjectData.spacialData[MapController.currentMapData.mapUid] = spacialData;
+		if (mapObjectData.spatialData.ContainsKey(MapController.currentMapData.mapUid)) {
+			mapObjectData.spatialData[MapController.currentMapData.mapUid] = spacialData;
 		}
 		else {
-			mapObjectData.spacialData.Add(MapController.currentMapData.mapUid, spacialData);
+			mapObjectData.spatialData.Add(MapController.currentMapData.mapUid, spacialData);
 		}
 	}
 
@@ -124,7 +115,31 @@ public class MapObject: MonoBehaviour {
 
 	public void RenameSelf(string newName) {
 		Debug.Log("---> RenameSelf(" + newName + ")");
+	}
 
+	public void DeleteSelf() {
+		// Remove from the current map's list of map objects.
+		MapController.currentMapData.RemoveMapObjectInMap(mapObjectData.objectUuid);
+		// Remove the location for the current map.
+		mapObjectData.RemovedFromMap(MapController.currentMapData.mapUid);
+		// Check if it is the last instance and, if not a creature or vehicle, remove the file itself and the names dictionary entry.
+		if (mapObjectData.isLastInstace() && !mapObjectData.isCreatureOrVehicle()) {
+			GameController.dictionaries.NameRemove(mapObjectData.objectUuid);
+			string filename = MapController.mapObjectsDirectory + mapObjectData.objectUuid + ".json";
+			if (File.Exists(filename)) {
+				File.Delete(filename);
+			}
+			else {
+				Debug.LogError(filename + " not found and was not removed...");
+			}
+		}
+		// Remove the map object's references
+		// ... map selector
+		mapReferenceSelector = null;
+		// ... initiative selector
+		initiativeSelector = null;
+		// ... and finally gameobject
+		Destroy(this.gameObject);
 	}
 
 }

@@ -13,12 +13,31 @@ public class MapObjectData {
 	public string owner = "GM";
 	public string description = "";
 	// Spatial Data
-	public Dictionary<string, MapObjectSpacialData> spacialData = new Dictionary<string, MapObjectSpacialData>(); // Spatial data of mo for each map.
+	public Dictionary<string, MapObjectSpacialData> spatialData = new Dictionary<string, MapObjectSpacialData>(); // Spatial data of mo for each map (based on uid).
 	// Map Object Parent(s)
 	public bool isInGroup = false; // Boolean that remembers if the object is part of a group.
 	// Map Object Children Group
 	public List<string> mapObjectChildrenGroup = new List<string>();
 	public bool isContainer = false; // Boolean to remember if the the item contains other map objects.
+
+
+	///////////////////
+	///   METHODS   ///
+	///////////////////
+	public bool isCreatureOrVehicle() {
+		return (objectType == "creature") || (objectType == "vehicle");
+	}
+
+	public bool isLastInstace() {
+		return spatialData.Keys.Count == 0;
+	}
+
+	public void RemovedFromMap(string mapUid) {
+		if (spatialData.ContainsKey(mapUid)) {
+			spatialData.Remove(mapUid);
+		}
+	}
+
 }
 
 public class MapObjectSpacialData {

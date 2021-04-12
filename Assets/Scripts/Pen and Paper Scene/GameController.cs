@@ -25,7 +25,8 @@ public class GameController : MonoBehaviour {
 		"game system",
 		"maps",
 		"map objects",
-		"map tree hierarchy"
+		"map tree hierarchy",
+		"vehicles"
 	};
 	// General Game Data
 	public static Dictionaries dictionaries = new Dictionaries();

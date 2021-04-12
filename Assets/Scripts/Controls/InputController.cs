@@ -40,6 +40,7 @@ public class InputController : MonoBehaviour {
     controls.MapMode.RotateZ.performed += ctx => camTopRotate = ctx.ReadValue<float>();
     controls.MapMode.RotateZ.canceled += ctx => camTopRotate = 0;
     controls.MapMode.LookAt.performed += ctx => CameraControl.CameraFocusOn();
+    controls.MapMode.Delete.performed += ctx => MapController.DeleteSelectedMapObjects();
   }
 
   private void OnEnable() {
@@ -107,10 +108,10 @@ public class InputController : MonoBehaviour {
     if (Helper.isUIActive()) {
       return;
     }
-    if (controls.Common.MiddleMouse.ReadValue<float>() > 0) {
+    if (controls.MapMode.MiddleMouse.ReadValue<float>() > 0) {
       camPan = delta;
     }
-    else if (controls.Common.RightMouse.ReadValue<float>() > 0) {
+    else if (controls.MapMode.RightMouse.ReadValue<float>() > 0) {
       camMouseLook = 2.5f * delta;
     }
     else {

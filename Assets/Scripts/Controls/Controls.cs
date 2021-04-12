@@ -27,22 +27,6 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""MiddleMouse"",
-                    ""type"": ""Button"",
-                    ""id"": ""79a33da9-f2c9-41bb-b2d9-1ce8767cf5cd"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""RightMouse"",
-                    ""type"": ""Button"",
-                    ""id"": ""1d77381b-83f2-432f-9786-6a6d8e185a0e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""FastModifier"",
                     ""type"": ""Button"",
                     ""id"": ""dee9325b-2a19-45fe-98b6-e0454045c11d"",
@@ -76,28 +60,6 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""MouseDelta"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5f4bd3b2-2d3b-4264-b6b2-3b441f88e088"",
-                    ""path"": ""<Mouse>/middleButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""MiddleMouse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a3ce51ad-1e15-48d7-a51d-8815c387cd70"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""RightMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -184,6 +146,30 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""name"": ""Click"",
                     ""type"": ""Button"",
                     ""id"": ""7e4527b0-c9e0-42a9-9447-f00c74f1465e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MiddleMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""cef914b5-34e6-4e03-a5af-036bfcfb6dfe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RightMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""b11f6a7a-795c-48cb-b8a1-e074bc610c3b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Delete"",
+                    ""type"": ""Button"",
+                    ""id"": ""cbfcb78c-9e5e-4476-9bcc-f550b76c910b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -374,6 +360,39 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""19276792-e41e-4ff9-a3ca-47856b85b519"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MiddleMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""450e481a-64c0-465d-a2e4-b31e78a6cf3c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""RightMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17281e94-4dd2-487e-912a-cef717f7c7ca"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""Delete"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -908,8 +927,6 @@ public class @Controls : IInputActionCollection, IDisposable
         // Common
         m_Common = asset.FindActionMap("Common", throwIfNotFound: true);
         m_Common_MouseDelta = m_Common.FindAction("MouseDelta", throwIfNotFound: true);
-        m_Common_MiddleMouse = m_Common.FindAction("MiddleMouse", throwIfNotFound: true);
-        m_Common_RightMouse = m_Common.FindAction("RightMouse", throwIfNotFound: true);
         m_Common_FastModifier = m_Common.FindAction("FastModifier", throwIfNotFound: true);
         m_Common_SlowModifier = m_Common.FindAction("SlowModifier", throwIfNotFound: true);
         m_Common_MousePosition = m_Common.FindAction("MousePosition", throwIfNotFound: true);
@@ -921,6 +938,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_MapMode_PanFront = m_MapMode.FindAction("PanFront", throwIfNotFound: true);
         m_MapMode_LookAt = m_MapMode.FindAction("LookAt", throwIfNotFound: true);
         m_MapMode_Click = m_MapMode.FindAction("Click", throwIfNotFound: true);
+        m_MapMode_MiddleMouse = m_MapMode.FindAction("MiddleMouse", throwIfNotFound: true);
+        m_MapMode_RightMouse = m_MapMode.FindAction("RightMouse", throwIfNotFound: true);
+        m_MapMode_Delete = m_MapMode.FindAction("Delete", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -983,8 +1003,6 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Common;
     private ICommonActions m_CommonActionsCallbackInterface;
     private readonly InputAction m_Common_MouseDelta;
-    private readonly InputAction m_Common_MiddleMouse;
-    private readonly InputAction m_Common_RightMouse;
     private readonly InputAction m_Common_FastModifier;
     private readonly InputAction m_Common_SlowModifier;
     private readonly InputAction m_Common_MousePosition;
@@ -993,8 +1011,6 @@ public class @Controls : IInputActionCollection, IDisposable
         private @Controls m_Wrapper;
         public CommonActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MouseDelta => m_Wrapper.m_Common_MouseDelta;
-        public InputAction @MiddleMouse => m_Wrapper.m_Common_MiddleMouse;
-        public InputAction @RightMouse => m_Wrapper.m_Common_RightMouse;
         public InputAction @FastModifier => m_Wrapper.m_Common_FastModifier;
         public InputAction @SlowModifier => m_Wrapper.m_Common_SlowModifier;
         public InputAction @MousePosition => m_Wrapper.m_Common_MousePosition;
@@ -1010,12 +1026,6 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MouseDelta.started -= m_Wrapper.m_CommonActionsCallbackInterface.OnMouseDelta;
                 @MouseDelta.performed -= m_Wrapper.m_CommonActionsCallbackInterface.OnMouseDelta;
                 @MouseDelta.canceled -= m_Wrapper.m_CommonActionsCallbackInterface.OnMouseDelta;
-                @MiddleMouse.started -= m_Wrapper.m_CommonActionsCallbackInterface.OnMiddleMouse;
-                @MiddleMouse.performed -= m_Wrapper.m_CommonActionsCallbackInterface.OnMiddleMouse;
-                @MiddleMouse.canceled -= m_Wrapper.m_CommonActionsCallbackInterface.OnMiddleMouse;
-                @RightMouse.started -= m_Wrapper.m_CommonActionsCallbackInterface.OnRightMouse;
-                @RightMouse.performed -= m_Wrapper.m_CommonActionsCallbackInterface.OnRightMouse;
-                @RightMouse.canceled -= m_Wrapper.m_CommonActionsCallbackInterface.OnRightMouse;
                 @FastModifier.started -= m_Wrapper.m_CommonActionsCallbackInterface.OnFastModifier;
                 @FastModifier.performed -= m_Wrapper.m_CommonActionsCallbackInterface.OnFastModifier;
                 @FastModifier.canceled -= m_Wrapper.m_CommonActionsCallbackInterface.OnFastModifier;
@@ -1032,12 +1042,6 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MouseDelta.started += instance.OnMouseDelta;
                 @MouseDelta.performed += instance.OnMouseDelta;
                 @MouseDelta.canceled += instance.OnMouseDelta;
-                @MiddleMouse.started += instance.OnMiddleMouse;
-                @MiddleMouse.performed += instance.OnMiddleMouse;
-                @MiddleMouse.canceled += instance.OnMiddleMouse;
-                @RightMouse.started += instance.OnRightMouse;
-                @RightMouse.performed += instance.OnRightMouse;
-                @RightMouse.canceled += instance.OnRightMouse;
                 @FastModifier.started += instance.OnFastModifier;
                 @FastModifier.performed += instance.OnFastModifier;
                 @FastModifier.canceled += instance.OnFastModifier;
@@ -1061,6 +1065,9 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_MapMode_PanFront;
     private readonly InputAction m_MapMode_LookAt;
     private readonly InputAction m_MapMode_Click;
+    private readonly InputAction m_MapMode_MiddleMouse;
+    private readonly InputAction m_MapMode_RightMouse;
+    private readonly InputAction m_MapMode_Delete;
     public struct MapModeActions
     {
         private @Controls m_Wrapper;
@@ -1071,6 +1078,9 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @PanFront => m_Wrapper.m_MapMode_PanFront;
         public InputAction @LookAt => m_Wrapper.m_MapMode_LookAt;
         public InputAction @Click => m_Wrapper.m_MapMode_Click;
+        public InputAction @MiddleMouse => m_Wrapper.m_MapMode_MiddleMouse;
+        public InputAction @RightMouse => m_Wrapper.m_MapMode_RightMouse;
+        public InputAction @Delete => m_Wrapper.m_MapMode_Delete;
         public InputActionMap Get() { return m_Wrapper.m_MapMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1098,6 +1108,15 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Click.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnClick;
                 @Click.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnClick;
                 @Click.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnClick;
+                @MiddleMouse.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMiddleMouse;
+                @MiddleMouse.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMiddleMouse;
+                @MiddleMouse.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMiddleMouse;
+                @RightMouse.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnRightMouse;
+                @RightMouse.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnRightMouse;
+                @RightMouse.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnRightMouse;
+                @Delete.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnDelete;
+                @Delete.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnDelete;
+                @Delete.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnDelete;
             }
             m_Wrapper.m_MapModeActionsCallbackInterface = instance;
             if (instance != null)
@@ -1120,6 +1139,15 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @MiddleMouse.started += instance.OnMiddleMouse;
+                @MiddleMouse.performed += instance.OnMiddleMouse;
+                @MiddleMouse.canceled += instance.OnMiddleMouse;
+                @RightMouse.started += instance.OnRightMouse;
+                @RightMouse.performed += instance.OnRightMouse;
+                @RightMouse.canceled += instance.OnRightMouse;
+                @Delete.started += instance.OnDelete;
+                @Delete.performed += instance.OnDelete;
+                @Delete.canceled += instance.OnDelete;
             }
         }
     }
@@ -1241,8 +1269,6 @@ public class @Controls : IInputActionCollection, IDisposable
     public interface ICommonActions
     {
         void OnMouseDelta(InputAction.CallbackContext context);
-        void OnMiddleMouse(InputAction.CallbackContext context);
-        void OnRightMouse(InputAction.CallbackContext context);
         void OnFastModifier(InputAction.CallbackContext context);
         void OnSlowModifier(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
@@ -1255,6 +1281,9 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnPanFront(InputAction.CallbackContext context);
         void OnLookAt(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
+        void OnMiddleMouse(InputAction.CallbackContext context);
+        void OnRightMouse(InputAction.CallbackContext context);
+        void OnDelete(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

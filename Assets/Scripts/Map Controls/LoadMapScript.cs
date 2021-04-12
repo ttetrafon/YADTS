@@ -97,9 +97,9 @@ public class LoadMapScript : MonoBehaviour {
 		//Debug.Log("... spacial data: " + Helper.PrintDictionaryStringSpatialData(mod.spacialData));
 		//Debug.Log("... current map: " + MapController.currentMapData.mapUid);
 		MapObject loadedMapObject = newGameObject.GetComponent<MapObject>();
-		if (mod.spacialData.ContainsKey(MapController.currentMapData.mapUid)) {
+		if (mod.spatialData.ContainsKey(MapController.currentMapData.mapUid)) {
 			//Debug.Log(mod.spacialData[MapController.currentMapData.mapUid].ToString());
-			loadedMapObject.SetSpacialData(mod.spacialData[MapController.currentMapData.mapUid]);
+			loadedMapObject.SetSpacialData(mod.spatialData[MapController.currentMapData.mapUid]);
 		}
 		loadedMapObject.mapObjectData = mod;
 		loadedMapObject.floatingName.text = mod.objectName;
