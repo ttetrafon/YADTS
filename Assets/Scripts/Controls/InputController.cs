@@ -121,14 +121,29 @@ public class InputController : MonoBehaviour {
 
 	private void MapClick() {
 		// Debug.Log("---> Map Click()");
-    // TODO: Use multiple targets to cycle the selection between the visible and hidden map objects.
-    // Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
-    // var layerMask = ~0;
-    // RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, layerMask);
-    // if (hits.Length > 0) {
-    //   Debug.Log(hits.Length + " object(s) hit!");
-    //   Array.Sort(hits, delegate(RaycastHit hit1, RaycastHit hit2) { return hit1.distance.CompareTo(hit2.distance); } );
-    // }
+    // Use multiple targets to cycle the selection between the visible and hidden map objects.
+    Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
+    var layerMask = ~0;
+    RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, layerMask);
+    Debug.Log(hits.Length + " object(s) hit!");
+    if (hits.Length > 0) {
+      Array.Sort(hits, delegate(RaycastHit hit1, RaycastHit hit2) { return hit1.distance.CompareTo(hit2.distance); } );
+      MapObject mo = hits[0].transform.gameObject.GetComponent<MapObject>();
+      // control selection based on Shift pressed
+      if (controls.Common.FastModifier.ReadValue<float>() > 0) {
+        mo.ToggleSelection();
+        MapController.ToggleMapObjectInSelection(mo);
+      }
+      else {
+        MapController.UnseslectAllMapObjects();
+        mo.ToggleSelection();
+        MapController.ToggleMapObjectInSelection(mo);
+      }
+    }
+    else {
+      MapController.UnseslectAllMapObjects();
+      MainMenu.CloseMenus();
+    }
   }
 
 }

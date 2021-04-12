@@ -151,31 +151,19 @@ public class MapController : MonoBehaviour {
 	public static void MapObjectClicked(MapObject mo) {
 		// Debug.Log("---> MapObjectClicked called from " + mo.mapObjectData.objectName);
 		// Distance tool selected
-		if (instance.distanceMeasurementStep > 0) {
-			if (instance.distanceMeasurementStep == 1) {
-				instance.distanceMeasurementObjects[0] = mo;
-				instance.distanceMeasurementStep = 2;
-			}
-			else {
-				instance.distanceMeasurementObjects[1] = mo;
-				float distance = Vector3.Distance(instance.distanceMeasurementObjects[0].gameObject.transform.position, instance.distanceMeasurementObjects[1].gameObject.transform.position);
-				// Debug.Log("> distance: " + distance.ToString());
-				instance.distanceMeasurementStep = 0;
-				GameController.ChangeCursor();
-			}
-		}
-		// Map object clicked
-		else {
-			// if (instance.moControls.MapController.Modifier_Shift.ReadValue<float>() > 0) {
-			// 	mo.ToggleSelection();
-			// 	ToggleMapObjectInSelection(mo);
-			// }
-			// else {
-			// 	UnseslectAllMapObjects();
-			// 	mo.ToggleSelection();
-			// 	ToggleMapObjectInSelection(mo);
-			// }
-		}
+		// if (instance.distanceMeasurementStep > 0) {
+		// 	if (instance.distanceMeasurementStep == 1) {
+		// 		instance.distanceMeasurementObjects[0] = mo;
+		// 		instance.distanceMeasurementStep = 2;
+		// 	}
+		// 	else {
+		// 		instance.distanceMeasurementObjects[1] = mo;
+		// 		float distance = Vector3.Distance(instance.distanceMeasurementObjects[0].gameObject.transform.position, instance.distanceMeasurementObjects[1].gameObject.transform.position);
+		// 		// Debug.Log("> distance: " + distance.ToString());
+		// 		instance.distanceMeasurementStep = 0;
+		// 		GameController.ChangeCursor();
+		// 	}
+		// }
 	}
 
   private void MapObjectMovementEnded() {
@@ -320,6 +308,7 @@ public class MapController : MonoBehaviour {
 
 	public static void ToggleMapObjectInSelection(MapObject mo) {
 		// Debug.Log("---> ToggleMapObjectInSelection(" + mo.mapObjectData.objectName + ")");
+		// add/remove the mo from the selection list
 		if (currentlySelectedObjects.Contains(mo)) {
 			currentlySelectedObjects.Remove(mo);
 		}
@@ -327,6 +316,15 @@ public class MapController : MonoBehaviour {
 			currentlySelectedObjects.Add(mo);
 		}
 		// Debug.Log("... " + currentlySelectedObjects.Count + " in selection");
+		// toggle the spatial data panel
+		if (MapController.currentlySelectedObjects.Count > 0) {
+			// moSpatialDataPanel.SetActive(true);
+      		// SpatialDataController.PopulateSpatialData();
+    	}
+    	else {
+      		// SpatialDataController.CancelRename();
+      		// moSpatialDataPanel.SetActive(false);
+    	}
 	}
 
 	public static void UnseslectAllMapObjects() {
