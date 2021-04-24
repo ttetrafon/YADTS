@@ -80,6 +80,7 @@ public class MapInfoPanel : MonoBehaviour {
 			MoveMapInfoItemForward(newIndex);
 		}
 		MapController.currentMapData.mapInfoItems.Add(newIndex, new MapInfoItemData());
+		Helper.SaveCurrentMap();
 		GameObject go = Instantiate(mapItemPrefab, mapInfoContainer.transform);
 		go.GetComponent<MapInfoItem>().FillDisplayElements(newIndex, new MapInfoItemData());
 		SetNewMapItemIndex();

@@ -28,6 +28,7 @@ public class MapInfoItem : MonoBehaviour {
 	[SerializeField] private InputField textInput;
 	[SerializeField] private Button confirmEditButton;
 	[SerializeField] private Button cancelEditButton;
+	[SerializeField] private Button deleteEditButton;
 
 	private void Awake() {
 		//Debug.Log("MapInfoItem.Awake()");
@@ -51,6 +52,9 @@ public class MapInfoItem : MonoBehaviour {
 		moveUpButton.onClick.AddListener(delegate {
 			MoveMapInfoItem(index, index - 1);
 		});
+		deleteEditButton.onClick.AddListener(delegate {
+			DeleteItem();
+		});
 	}
 
 	public void ToggleMode() {
@@ -60,7 +64,7 @@ public class MapInfoItem : MonoBehaviour {
 		if (viewMode.activeSelf) {
 			ResizeViewPanel();
 		}
-		// TODO: This forced layout rebuild is probably needed to a mistake in how the layout components in MapItemData is set...
+		// TODO: This forced layout rebuild is probably needed due to a mistake in how the layout components in MapItemData are set...
 		LayoutRebuilder.ForceRebuildLayoutImmediate(parent.GetComponent<RectTransform>());
 	}
 
@@ -68,6 +72,11 @@ public class MapInfoItem : MonoBehaviour {
 		// text
 		MapController.currentMapData.mapInfoItems[index].text = textInput.text;
 		textDisplay.text = textInput.text;
+		// player visible
+		playerVisibleIndicator.gameObject.SetActive(this.playerVisibleToggle.isOn);
+		if (MapController.currentMapData.mapInfoItems.ContainsKey(this.index)) {
+			MapController.currentMapData.mapInfoItems[index].playerVisibile = this.playerVisibleToggle.isOn;
+		}
 		// type
 		MapController.currentMapData.mapInfoItems[index].type = Helper.GetDropdownSelectedText(typeSelector);
 		textDisplay.textStyle = stylesheet.GetStyle(Localization.tmpProStyleHashes[MapController.currentMapData.mapInfoItems[index].type]);
@@ -82,6 +91,8 @@ public class MapInfoItem : MonoBehaviour {
 	}
 
 	public void FillDisplayElements(int ind, MapInfoItemData data) {
+		// Debug.Log("---> FillDisplayElements(" + ind + ")");
+		// Debug.Log(data.Print());
 		index = ind;
 		indexDisplay.text = index.ToString();
 		textDisplay.text = data.text;
@@ -140,6 +151,17 @@ public class MapInfoItem : MonoBehaviour {
 
 	public void SetIndexDisplay(int index) {
 		this.indexDisplay.text = index.ToString();
+	}
+
+	public void DeleteItem() {
+		// remove:
+		//		item info from map data
+		if (MapController.currentMapData.mapInfoItems.ContainsKey(this.index)) {
+			MapController.currentMapData.mapInfoItems.Remove(this.index);
+		}
+		Helper.SaveCurrentMap();
+		//		item object from hierarchy
+		Destroy(this.gameObject);
 	}
 
 }

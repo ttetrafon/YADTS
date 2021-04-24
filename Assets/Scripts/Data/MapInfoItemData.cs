@@ -2,7 +2,7 @@
 
 [Serializable]
 public class MapInfoItemData {
-	public string type = "";
+	public string type = "Paragraph";
 	public string text = "";
 	public bool playerVisibile = false;
 
