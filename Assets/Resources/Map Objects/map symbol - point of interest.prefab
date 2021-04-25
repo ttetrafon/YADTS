@@ -11,6 +11,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1876729998085573114, guid: 12198a835bf232d4c901a5b01702b09f, type: 3}
+    - target: {fileID: 5894713076283554902, guid: 4f203d5f7da751b4ea18ba499d1f6747, type: 3}
+      propertyPath: PrefabHash
+      value: 4237018142249500743
+      objectReference: {fileID: 0}
+    - target: {fileID: 5894713076283554902, guid: 4f203d5f7da751b4ea18ba499d1f6747, type: 3}
+      propertyPath: PrefabHashGenerator
+      value: map symbol - point of interest
+      objectReference: {fileID: 0}
     - target: {fileID: 6567926960843780250, guid: 4f203d5f7da751b4ea18ba499d1f6747, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0

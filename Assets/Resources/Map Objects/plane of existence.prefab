@@ -11,6 +11,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4203048013794963842, guid: 12198a835bf232d4c901a5b01702b09f, type: 3}
+    - target: {fileID: 5894713076283554902, guid: 4f203d5f7da751b4ea18ba499d1f6747, type: 3}
+      propertyPath: PrefabHash
+      value: 2672617361292646568
+      objectReference: {fileID: 0}
+    - target: {fileID: 5894713076283554902, guid: 4f203d5f7da751b4ea18ba499d1f6747, type: 3}
+      propertyPath: PrefabHashGenerator
+      value: plane of existence
+      objectReference: {fileID: 0}
     - target: {fileID: 6567926960843780251, guid: 4f203d5f7da751b4ea18ba499d1f6747, type: 3}
       propertyPath: m_IsActive
       value: 0

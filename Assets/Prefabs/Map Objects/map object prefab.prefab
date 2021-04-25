@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8030968625908029311}
   - component: {fileID: 3668337986076830239}
   - component: {fileID: 8030968625908029296}
+  - component: {fileID: 5894713076283554902}
   m_Layer: 0
   m_Name: map object prefab
   m_TagString: Untagged
@@ -79,6 +80,23 @@ MonoBehaviour:
     isInGroup: 0
     mapObjectChildrenGroup: []
     isContainer: 0
+--- !u!114 &5894713076283554902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8030968625908029310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NetworkInstanceId: 0
+  PrefabHash: 940901287772156060
+  PrefabHashGenerator: map object prefab
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 1
 --- !u!1 &8030968626483330340
 GameObject:
   m_ObjectHideFlags: 0
