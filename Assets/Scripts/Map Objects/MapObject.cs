@@ -12,11 +12,11 @@ public class MapObject: MonoBehaviour {
 	[Header("General")]
 	public bool hasChanged = false; // Boolean to control if the objet will be resaved with the map.
 	public bool isSelected = false; // Boolean that remembers if the object is selected.
-	public float distanceFromCamera = 0.0f;
 	public List<string> tags = new List<string>(); // Quick selection of map objects and filtering within the new map object menu.
 
 	[Header("References")]
 	public GameObject modelNormal; // The normal model, visible by eyes in the typical spectrum.
+	public GameObject selectionSphere; // The sphere that highlights an object when it is selected.
 	public Text mapReferenceSelector = null; // Connects the map object with its selector in the current map panel.
 	public GameObject initiativeSelector = null; // Connects the map object with its selector in the initiate panel.
 
