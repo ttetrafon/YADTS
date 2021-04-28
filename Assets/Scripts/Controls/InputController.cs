@@ -56,7 +56,6 @@ public class InputController : MonoBehaviour {
   private void Update() {
     // Custom implementation of camera's raycast (purpose is to replicate IPointer functionality that suits this program - IPointer always stops on the first hit).
     if (controls.MapMode.enabled) {
-
       Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
 			// Debug.Log(ray);
 			RaycastHit hitInfo;
@@ -122,6 +121,11 @@ public class InputController : MonoBehaviour {
 
 	private void MapClick() {
 		// Debug.Log("---> Map Click()");
+    if (Helper.isMouseOverUI()) {
+      // Debug.Log("Over UI!!!");
+      return;
+    }
+
     // Use multiple targets to cycle the selection between the visible and hidden map objects.
     Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
     var layerMask = ~0;

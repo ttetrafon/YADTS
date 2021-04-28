@@ -26,6 +26,10 @@ public class Helper : MonoBehaviour {
 		return EventSystem.current.currentSelectedGameObject != null;
 	}
 
+	public static bool isMouseOverUI() {
+		return EventSystem.current.IsPointerOverGameObject();
+	}
+
 
 	///////////////////////////////
 	///   REGULAR EXPRESSIONS   ///
