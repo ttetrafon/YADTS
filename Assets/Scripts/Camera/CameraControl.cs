@@ -20,7 +20,7 @@ public class CameraControl : MonoBehaviour {
   private void Update() {
     if (!Helper.isUIActive() && !cameraBlock) {
       float modifier = InputController.CameraSpeedModifier();
-      thisCamera.transform.Translate((InputController.camMove * Vector3.forward + InputController.camPan.x * Vector3.right + InputController.camPan.y * Vector3.up) * cameraSpeed * Time.deltaTime * modifier);
+      thisCamera.transform.Translate((InputController.camMove * 5 * Vector3.forward + InputController.camPan.x * Vector3.right + InputController.camPan.y * Vector3.up) * cameraSpeed * Time.deltaTime * modifier);
       thisCamera.transform.Rotate(new Vector3(InputController.camFrontPan - InputController.camMouseLook.y, 0, 0) * cameraSensitivity * Time.deltaTime * modifier, Space.Self);
       thisCamera.transform.Rotate(new Vector3(0, InputController.camTopRotate + InputController.camMouseLook.x, 0) * cameraSensitivity * Time.deltaTime * modifier, Space.World);
     }

@@ -20,14 +20,14 @@ public class MapController : MonoBehaviour {
 	// Map Objects
 	public static List<MapObject> currentlySelectedObjects = new List<MapObject>(); // Holds a list of all currently selected map objects.
 	public static Dictionary<string, MapObject> mapObjects = new Dictionary<string, MapObject>();
-  public float slowMovementModifier = 0.25f;
+  	public float slowMovementModifier = 0.25f;
 	private float xyMovementSensitivity = 0.5f;
 	private float zMovementSensitivity = 0.5f;
 	// private float arrowMovementSensitivity = 5.0f;
 	private float rotationSensitivity = 5.0f;
 	public GameObject moSpatialDataPanel;
 
-  [Header("Axioms")]
+	[Header("Axioms")]
 	[SerializeField] private Button magicAxiomButton;
 	[SerializeField] private Dropdown magicAxiomSelector;
 	[SerializeField] private Text magicAxiomDisplay;
@@ -41,35 +41,27 @@ public class MapController : MonoBehaviour {
 	[SerializeField] private Dropdown techAxiomSelector;
 	[SerializeField] private Text techAxiomDisplay;
 
-  [Header("Map Tools")]
+	[Header("Map Tools")]
 	[SerializeField] private Button distanceMeasurementButton;
 	private int distanceMeasurementStep = 0;
 	private MapObject[] distanceMeasurementObjects = new MapObject[2];
 
 
-  /////////////////////
-  ///   LIFECYCLE   ///
-  /////////////////////
-  private void Awake() {
-    //Debug.Log("===> MapController Awake");
-    if (instance == null) {
-    instance = this;
-    }
-    // Assign the references.
-    treeNodesDirectory = GameController.saveFolder + "map tree hierarchy" + "/";
-    //Debug.Log("treeNodesDirectory: " + treeNodesDirectory);
-    mapDirectory = GameController.saveFolder + "maps" + "/";
-    //Debug.Log("mapDirectory: " + mapDirectory);
-    mapObjectsDirectory = GameController.saveFolder + "map objects" + "/";
-    //Debug.Log("mapObjectsDirectory: " + mapObjectsDirectory);
-  }
-
-	private void OnEnable() {
-		// moControls.MapController.Enable();
-	}
-
-	private void OnDisable() {
-		// moControls.MapController.Disable();
+	/////////////////////
+	///   LIFECYCLE   ///
+	/////////////////////
+	private void Awake() {
+		//Debug.Log("===> MapController Awake");
+		if (instance == null) {
+		instance = this;
+		}
+		// Assign the references.
+		treeNodesDirectory = GameController.saveFolder + "map tree hierarchy" + "/";
+		//Debug.Log("treeNodesDirectory: " + treeNodesDirectory);
+		mapDirectory = GameController.saveFolder + "maps" + "/";
+		//Debug.Log("mapDirectory: " + mapDirectory);
+		mapObjectsDirectory = GameController.saveFolder + "map objects" + "/";
+		//Debug.Log("mapObjectsDirectory: " + mapObjectsDirectory);
 	}
 
 	private void Start() {
@@ -170,18 +162,18 @@ public class MapController : MonoBehaviour {
 		// }
 	// }
 
-  private float MapObjectControlsShiftModifier() {
-    // if (moControls.MapController.Modifier_Shift.ReadValue<float>() > 0) {
-    //   return slowMovementModifier;
-    // }
-    return 1.0f;
-  }
+	private float MapObjectControlsShiftModifier() {
+		// if (moControls.MapController.Modifier_Shift.ReadValue<float>() > 0) {
+		//   return slowMovementModifier;
+		// }
+		return 1.0f;
+	}
 
-  private void CancelAllMapOperations() {
-    // Distance tool
-    distanceMeasurementStep = 0;
-    GameController.ChangeCursor();
-  }
+	private void CancelAllMapOperations() {
+		// Distance tool
+		distanceMeasurementStep = 0;
+		GameController.ChangeCursor();
+	}
 
 
   ////////////////////////
@@ -195,15 +187,14 @@ public class MapController : MonoBehaviour {
 		mapObjects = new Dictionary<string, MapObject>();
 	}
 
-  public static void DeleteSelectedMapObjects() {
-
-    for (int i = currentlySelectedObjects.Count - 1; i >=0; i--) {
-      currentlySelectedObjects[i].DeleteSelf();
-      // yield...
-    }
-    currentlySelectedObjects = new List<MapObject>();
-    SaveCurrentMap();
-  }
+  	public static void DeleteSelectedMapObjects() {
+		for (int i = currentlySelectedObjects.Count - 1; i >=0; i--) {
+			currentlySelectedObjects[i].DeleteSelf();
+			// TODO: yield...
+		}
+    	currentlySelectedObjects = new List<MapObject>();
+    	SaveCurrentMap();
+  	}
 
 	public static void ToggleMapObjectInSelection(MapObject mo) {
 		// Debug.Log("---> ToggleMapObjectInSelection(" + mo.mapObjectData.objectName + ")");
@@ -235,22 +226,22 @@ public class MapController : MonoBehaviour {
 	}
 
 
-  ///////////////////////
-  ///   MO MOVEMENT   ///
-  ///////////////////////
-  private void MapObjectMovementEnded() {
-    Debug.Log("---> MapObjectMovementEnded()");
-    for (int i = 0; i < currentlySelectedObjects.Count; i++) {
-      if (currentMapData.gridType != Constants.gridTypeNone) {
-        SetGridPosition(currentlySelectedObjects[i]);
-      }
-      if (currentMapData.rotationStepFront + currentMapData.rotationStepSide + currentMapData.rotationStepVertical > 0) {
-        SetRotation(currentlySelectedObjects[i]);
-      }
-      currentlySelectedObjects[i].UpdateSpacialData(currentlySelectedObjects[i].gameObject);
-      Helper.SaveMapObject(currentlySelectedObjects[i]);
-    }
-  }
+	///////////////////////
+	///   MO MOVEMENT   ///
+	///////////////////////
+	private void MapObjectMovementEnded() {
+		Debug.Log("---> MapObjectMovementEnded()");
+		for (int i = 0; i < currentlySelectedObjects.Count; i++) {
+			if (currentMapData.gridType != Constants.gridTypeNone) {
+				SetGridPosition(currentlySelectedObjects[i]);
+			}
+			if (currentMapData.rotationStepFront + currentMapData.rotationStepSide + currentMapData.rotationStepVertical > 0) {
+				SetRotation(currentlySelectedObjects[i]);
+			}
+			currentlySelectedObjects[i].UpdateSpacialData(currentlySelectedObjects[i].gameObject);
+			Helper.SaveMapObject(currentlySelectedObjects[i]);
+		}
+	}
 
 	private float QuantiseRotation(float angle, int quantum) {
 		// Debug.Log("---> QuantiseRotation(" + angle + ", " + quantum + ")");
@@ -335,9 +326,9 @@ public class MapController : MonoBehaviour {
 	}
 
 
-  //////////////////
-  ///   AXIOMS   ///
-  //////////////////
+	//////////////////
+	///   AXIOMS   ///
+	//////////////////
 	public static void SetAxioms() {
 		int magicAxiom = GetAxiom(currentMapData.mapUid, "Magic", instance.magicAxiomDisplay);
 		Helper.SelectDropdownValue(instance.magicAxiomSelector, magicAxiom.ToString());
@@ -386,9 +377,9 @@ public class MapController : MonoBehaviour {
 	}
 
 
-  ///////////////////
-  ///   GENERAL   ///
-  ///////////////////
+	///////////////////
+	///   GENERAL   ///
+	///////////////////
 	public static void ConstructMapTree(string rootMapFile) {
 		//Debug.Log("---> ConstructMapTree()");
 		mapTree = new Dictionary<string, MapTreeNode>();
