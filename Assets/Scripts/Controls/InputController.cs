@@ -55,7 +55,7 @@ public class InputController : MonoBehaviour {
 
   private void Update() {
     // Custom implementation of camera's raycast (purpose is to replicate IPointer functionality that suits this program - IPointer always stops on the first hit).
-    if (controls.MapMode.enabled) {
+    if (controls.MapMode.enabled && !Helper.isMouseOverUI()) {
       Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
 			// Debug.Log(ray);
 			RaycastHit hitInfo;
@@ -121,6 +121,7 @@ public class InputController : MonoBehaviour {
 
 	private void MapClick() {
 		// Debug.Log("---> Map Click()");
+    // Ignore the hits if we are over a UI element.
     if (Helper.isMouseOverUI()) {
       // Debug.Log("Over UI!!!");
       return;

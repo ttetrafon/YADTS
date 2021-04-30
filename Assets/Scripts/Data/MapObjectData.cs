@@ -12,6 +12,7 @@ public class MapObjectData {
 	// General Data
 	public string owner = "GM";
 	public string description = "";
+	public List<string> materials = new List<string>();
 	// Spatial Data
 	public Dictionary<string, MapObjectSpacialData> spatialData = new Dictionary<string, MapObjectSpacialData>(); // Spatial data of mo for each map (based on uid).
 	// Map Object Parent(s)

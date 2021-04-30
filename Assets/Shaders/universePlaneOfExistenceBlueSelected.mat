@@ -7,21 +7,21 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: (universe) plane of existence, blue
-  m_Shader: {fileID: -6465566751694194690, guid: 8232215808778c64da61c484293ca191, type: 3}
-  m_ShaderKeywords: _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_Name: universePlaneOfExistenceBlueSelected
+  m_Shader: {fileID: -6465566751694194690, guid: 3171849fde2e1764eacde0044ec43f1e, type: 3}
+  m_ShaderKeywords: _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
   stringTagMap:
     MotionVector: User
     RenderType: Transparent
   disabledShaderPasses:
-  - TransparentBackface
+  - MOTIONVECTORS
   - TransparentDepthPrepass
   - TransparentDepthPostpass
-  - MOTIONVECTORS
+  - TransparentBackface
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -50,10 +50,10 @@ Material:
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 0
-    - _CullMode: 0
-    - _CullModeForward: 0
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _DoubleSidedEnable: 1
+    - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
     - _EnableBlendModePreserveSpecularLighting: 0
@@ -84,17 +84,16 @@ Material:
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 0
-    - _dissolve: 3.41
-    - _scale: 7.02
-    - _speed: 0.217
-    - _strength: 8.2
+    - _dissolve: 2
+    - _scale: 3
+    - _speed: 0.5
+    - _strength: 10
     m_Colors:
-    - _Color: {r: 0.8396226, g: 0.6859799, b: 0.01188143, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _colour: {r: 2.8777742, g: 3.223431, b: 35.887535, a: 0}
+    - _colour: {r: 1.8237655, g: 2.0856752, b: 18.411348, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &726467366884255081
+--- !u!114 &7923502451242124053
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

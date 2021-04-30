@@ -10,38 +10,59 @@ using UnityEngine.UI;
 // public class MapObject: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 public class MapObject: MonoBehaviour {
 	[Header("General")]
-	public bool hasChanged = false; // Boolean to control if the objet will be resaved with the map.
+	public bool hasChanged = false; // Boolean to control if the objet will be re-saved with the map.
 	public bool isSelected = false; // Boolean that remembers if the object is selected.
 	public List<string> tags = new List<string>(); // Quick selection of map objects and filtering within the new map object menu.
 
 	[Header("References")]
 	public GameObject modelNormal; // The normal model, visible by eyes in the typical spectrum.
-	public GameObject selectionSphere; // The sphere that highlights an object when it is selected.
+	private Material[] modelMaterials; // The names of the materials used by the model.
 	public Text mapReferenceSelector = null; // Connects the map object with its selector in the current map panel.
 	public GameObject initiativeSelector = null; // Connects the map object with its selector in the initiate panel.
 
 	[Header("Data")]
 	public MapObjectData mapObjectData = new MapObjectData();
 
-	private void Awake() {
-
-	}
-
-	private void Update() {
-
-	}
-
-	private float adaptCharacterSize(float distance) {
-		if (distance < 3) {
-			return 0.1f;
-		}
-		else if (distance > 30) {
-			return 0.3f;
+	private void Start() {
+		// get the materials!
+		this.modelMaterials = this.modelNormal.GetComponent<MeshRenderer>().materials;
+		// Debug.Log("materials found: " + this.modelMaterials.Length);
+		// Debug.Log("materials saved: " + this.mapObjectData.materials.Count);
+		if (this.mapObjectData.materials.Count == 0) {
+			// Debug.Log("Save the materials, we didn't know about them!");
+			// if they had not been saved yet (usually on first initiation), save their names
+			for (int i = 0; i < this.modelMaterials.Length; i++) {
+				String mat = this.modelMaterials[i].name;
+				// Debug.Log("mat[" + i + "]: '" + mat.Substring(0, mat.IndexOf(" ")) + "'");
+				this.mapObjectData.materials.Add(mat.Substring(0, mat.IndexOf(" "))); // TEST: substring may be a problem if (instance) is not appended to all materials!
+			}
+			// Debug.Log("materials to be saved: " + Helper.PrintStringList(this.mapObjectData.materials));
+			// re-save the object so we remember the materials!
+			Helper.SaveMapObject(this); // TEST: This may cause issues on first initiation!!
 		}
 		else {
-			return ((0.2f * distance) + 2.1f)/27;
+			// if they are already saved, compare one by one and assign the proper materials as required
+			// Debug.Log("materials already set");
+			Boolean sameLength = this.modelMaterials.Length == this.mapObjectData.materials.Count;
+			// ... take into account a possible missmatch of list lengths!
+			if (sameLength) {
+				// since we have the same number of materials, assign the proper ones to the map object based on what was saved
+				for (int i = 0; i < this.modelMaterials.Length; i++) {
+					String mat = this.modelMaterials[i].name;
+					mat = mat.Substring(0, mat.IndexOf(" "));
+					if (mat != this.mapObjectData.materials[i]) {
+						// TODO: assign the proper material
+						// ...
+					}
+				}
+			}
+			else {
+				// ...
+			}
 		}
 	}
+
+	private void Update() {}
 
 	public void UpdateSpacialData(GameObject go) {
 		// rotation: (eulerAngles.y, localEulerAngles.x, localEulerAngles.z)
@@ -71,7 +92,8 @@ public class MapObject: MonoBehaviour {
 	}
 
 	public void ToggleSelection(int active = 0) {
-		isSelected = (active == Constants.gameObjectActiveNoOverride ? !isSelected : (active == Constants.gameObjectActiveOverrideTrue));
+		this.isSelected = (active == Constants.gameObjectActiveNoOverride ? !isSelected : (active == Constants.gameObjectActiveOverrideTrue));
+		HighlightSelf();
 	}
 
 	public void RenameSelf(string newName) {
@@ -89,6 +111,23 @@ public class MapObject: MonoBehaviour {
 		}
 		// update the file on disk
 		Helper.SaveMapObject(this);
+	}
+
+	public void HighlightSelf() {
+		// This method changes all materials of a map object's model to their highlighted version.
+        // Debug.Log("---> HighlightSelf(" + this.mapObjectData.objectName + ", " + this.isSelected + ")");
+		Material[] mats = this.modelNormal.GetComponent<MeshRenderer>().materials;
+        for (int i = 0; i < this.mapObjectData.materials.Count; i++) {
+            string mat = this.mapObjectData.materials[i];
+            // Debug.Log("mat: " + mat);
+            if (Materials.materialsDictionary.ContainsKey(mat)) {
+                // Debug.Log(Materials.materialsDictionary[mat][0].name);
+                // Debug.Log(Materials.materialsDictionary[mat][1].name);
+                // Debug.Log("... changing material from " + this.modelNormal.GetComponent<MeshRenderer>().materials[i].name + " to (" + (this.isSelected ? 1 : 0) + "): " + Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)].name);
+				mats[i] = Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)];
+            }
+        }
+		this.modelNormal.GetComponent<MeshRenderer>().materials = mats;
 	}
 
 	public void DeleteSelf() {

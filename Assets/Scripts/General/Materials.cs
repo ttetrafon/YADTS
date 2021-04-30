@@ -1,27 +1,42 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Materials : MonoBehaviour {
-    Materials instance = null;
+    public static Materials instance = null;
 
-	[Header("Meta")]
-    [SerializeField] private Material selectionSphereBlue;
-    [SerializeField] private Material selectionSphereGreen;
-    [SerializeField] private Material selectionSphereOrange;
-    [SerializeField] private Material selectionSphereRed;
+    [Header("Materials")]
+    [SerializeField] private Material checkerPattern;
+    [SerializeField] private Material checkerPatternSelected;
+    [SerializeField] private Material universePlaneOfExistenceBlue;
+    [SerializeField] private Material universePlaneOfExistenceBlueSelected;
+    [SerializeField] private Material universePlaneOfExistenceGreen;
+    [SerializeField] private Material universePlaneOfExistenceGreenSelected;
+    [SerializeField] private Material universePlaneOfExistenceOrange;
+    [SerializeField] private Material universePlaneOfExistenceOrangeSelected;
+    [SerializeField] private Material universePlaneOfExistenceYellow;
+    [SerializeField] private Material universePlaneOfExistenceYellowSelected;
 
-	[Header("Cosmos")]
-    [SerializeField] private Material universeBlue;
-    [SerializeField] private Material universeGreen;
-    [SerializeField] private Material universeOrange;
-    [SerializeField] private Material universeYellow;
+    [Header("Structures")]
+    public static Dictionary<string, List<Material>> materialsDictionary;
 
     public void Awake() {
         if (instance == null) {
             instance = this;
         }
+        materialsDictionary = new Dictionary<string, List<Material>>() {
+            {"universePlaneOfExistenceBlue", new List<Material>() { universePlaneOfExistenceBlue, universePlaneOfExistenceBlueSelected }},
+            {"universePlaneOfExistenceGreen", new List<Material>() { universePlaneOfExistenceGreen, universePlaneOfExistenceGreenSelected }},
+            {"universePlaneOfExistenceOrange", new List<Material>() { universePlaneOfExistenceOrange, universePlaneOfExistenceOrangeSelected }},
+            {"universePlaneOfExistenceYellow", new List<Material>() { universePlaneOfExistenceYellow, universePlaneOfExistenceYellowSelected }}
+        };
     }
+
+
+    ///////////////////
+    ///   METHODS   ///
+    ///////////////////
 
 
 }
