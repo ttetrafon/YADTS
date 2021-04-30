@@ -27,20 +27,6 @@ public class MapController : MonoBehaviour {
 	private float rotationSensitivity = 5.0f;
 	public GameObject moSpatialDataPanel;
 
-	[Header("Axioms")]
-	[SerializeField] private Button magicAxiomButton;
-	[SerializeField] private Dropdown magicAxiomSelector;
-	[SerializeField] private Text magicAxiomDisplay;
-	[SerializeField] private Button socialAxiomButton;
-	[SerializeField] private Dropdown socialAxiomSelector;
-	[SerializeField] private Text socialAxiomDisplay;
-	[SerializeField] private Button spiritAxiomButton;
-	[SerializeField] private Dropdown spiritAxiomSelector;
-	[SerializeField] private Text spiritAxiomDisplay;
-	[SerializeField] private Button techAxiomButton;
-	[SerializeField] private Dropdown techAxiomSelector;
-	[SerializeField] private Text techAxiomDisplay;
-
 	[Header("Map Tools")]
 	[SerializeField] private Button distanceMeasurementButton;
 	private int distanceMeasurementStep = 0;
@@ -70,7 +56,6 @@ public class MapController : MonoBehaviour {
 		rootMapFile = treeNodesDirectory + rootMap + ".json";
 		//Debug.Log("rootMapFile: " + rootMapFile);
 		ConstructMapTree(rootMapFile);
-		SetAxioms();
 		//Debug.Log("initial map: " + currentMapData.mapUid);
 
 		// Add listeners.
@@ -86,42 +71,6 @@ public class MapController : MonoBehaviour {
 		});
 		mapInfoButton.onClick.AddListener(delegate {
 			MainMenu.TogglePanel("MapInfo");
-		});
-		magicAxiomButton.onClick.AddListener(delegate {
-			magicAxiomSelector.gameObject.SetActive(!magicAxiomSelector.gameObject.activeSelf);
-			magicAxiomDisplay.gameObject.SetActive(!magicAxiomDisplay.gameObject.activeSelf);
-		});
-		magicAxiomSelector.onValueChanged.AddListener(delegate {
-			int value = -1;
-			int.TryParse(magicAxiomSelector.options[magicAxiomSelector.value].text, out value);
-			SetAxiom("Magic", value, instance.magicAxiomDisplay);
-		});
-		socialAxiomButton.onClick.AddListener(delegate {
-			socialAxiomSelector.gameObject.SetActive(!socialAxiomSelector.gameObject.activeSelf);
-			socialAxiomDisplay.gameObject.SetActive(!socialAxiomDisplay.gameObject.activeSelf);
-		});
-		socialAxiomSelector.onValueChanged.AddListener(delegate {
-			int value = -1;
-			int.TryParse(socialAxiomSelector.options[socialAxiomSelector.value].text, out value);
-			SetAxiom("Social", value, instance.socialAxiomDisplay);
-		});
-		spiritAxiomButton.onClick.AddListener(delegate {
-			spiritAxiomSelector.gameObject.SetActive(!spiritAxiomSelector.gameObject.activeSelf);
-			spiritAxiomDisplay.gameObject.SetActive(!spiritAxiomDisplay.gameObject.activeSelf);
-		});
-		spiritAxiomSelector.onValueChanged.AddListener(delegate {
-			int value = -1;
-			int.TryParse(spiritAxiomSelector.options[spiritAxiomSelector.value].text, out value);
-			SetAxiom("Spirit", value, instance.spiritAxiomDisplay);
-		});
-		techAxiomButton.onClick.AddListener(delegate {
-			techAxiomSelector.gameObject.SetActive(!techAxiomSelector.gameObject.activeSelf);
-			techAxiomDisplay.gameObject.SetActive(!techAxiomDisplay.gameObject.activeSelf);
-		});
-		techAxiomSelector.onValueChanged.AddListener(delegate {
-			int value = -1;
-			int.TryParse(techAxiomSelector.options[techAxiomSelector.value].text, out value);
-			SetAxiom("Tech", value, instance.techAxiomDisplay);
 		});
 
 		// Finished Loading
@@ -323,57 +272,6 @@ public class MapController : MonoBehaviour {
 		float targetRotationZ = QuantiseRotation(rotationZ, currentMapData.rotationStepVertical);;
 			mo.gameObject.transform.Rotate(new Vector3(0, targetRotationZ - rotationZ, 0), Space.World);
 		}
-	}
-
-
-	//////////////////
-	///   AXIOMS   ///
-	//////////////////
-	public static void SetAxioms() {
-		int magicAxiom = GetAxiom(currentMapData.mapUid, "Magic", instance.magicAxiomDisplay);
-		Helper.SelectDropdownValue(instance.magicAxiomSelector, magicAxiom.ToString());
-		int socialAxiom = GetAxiom(currentMapData.mapUid, "Social", instance.socialAxiomDisplay);
-		Helper.SelectDropdownValue(instance.socialAxiomSelector, socialAxiom.ToString());
-		int spiritAxiom = GetAxiom(currentMapData.mapUid, "Spirit", instance.spiritAxiomDisplay);
-		Helper.SelectDropdownValue(instance.spiritAxiomSelector, spiritAxiom.ToString());
-		int techAxiom = GetAxiom(currentMapData.mapUid, "Tech", instance.techAxiomDisplay);
-		Helper.SelectDropdownValue(instance.techAxiomSelector, techAxiom.ToString());
-	}
-
-	private void SetAxiom(string axiom, int value, Text axiomDisplay) {
-		currentMapData.axioms[axiom] = value;
-		if (value < 0) {
-			axiomDisplay.text = GetParentAxiom(currentMapData.mapUid, axiom).ToString();
-		}
-		else {
-			axiomDisplay.text = value.ToString();
-		}
-	}
-
-	private static int GetParentAxiom(string mapUid, string axiom) {
-		int res;
-		string parent = mapTree[mapUid].parent;
-		if (string.IsNullOrEmpty(parent)) {
-			return 10;
-		}
-		MapData md = LoadMapScript.GetMapData(parent);
-		res = md.axioms[axiom];
-		if (res < 0) {
-			return GetParentAxiom(parent, axiom);
-		}
-		return res;
-	}
-
-	private static int GetAxiom(string mapUid, string axiom, Text axiomDisplay) {
-		int res;
-		res = currentMapData.axioms[axiom];
-		if (res < 0) {
-			axiomDisplay.text = GetParentAxiom(mapUid, axiom).ToString();
-		}
-		else {
-			axiomDisplay.text = res.ToString();
-		}
-		return res;
 	}
 
 

@@ -7,12 +7,6 @@ public class MapData {
 	public string mapName = "Not Set";
 	public string mapUid = "00000000-0000-0000-0000-000000000000";
 	public Dictionary<int, MapInfoItemData> mapInfoItems = new Dictionary<int, MapInfoItemData>();
-	public Dictionary<string, int> axioms = new Dictionary<string, int>() {
-		{"Magic", -1},
-		{"Social", -1},
-		{"Spirit", -1},
-		{"Tech", -1},
-	};
 	public string mapType = "Plane of Existence";
 	public List<string> mapObjectsInMap = new List<string>();
 	public string gridType = Constants.gridTypeNone;

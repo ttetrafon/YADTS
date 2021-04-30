@@ -49,7 +49,6 @@ public class LoadMapScript : MonoBehaviour {
 		string mapName = GameController.dictionaries.NameGet(uid);
 		MapController.currentMapData = loadedMapData;
 		MainMenu.SetMapName(mapName);
-		MapController.SetAxioms();
 		MapObjectMenuControls.SetMapConfigurationOptions();
 		// Remember the map
 		MapController.RememberLastMap(uid);
