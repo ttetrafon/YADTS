@@ -40,6 +40,7 @@ public class Localization {
 			{"New Map Button", "New Map"},
 			{"Refresh Map Info Button", "Refresh"},
 			{"Remove Campaign Button", "Remove Campaign"},
+			{"Rename Button", "Rename"},
 			{"Save Map Button", "Save Map"},
 			{"Settings Button", "Settings"},
 			{"Social Axiom Button", "Axiom: Social"},

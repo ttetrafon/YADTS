@@ -131,7 +131,7 @@ public class InputController : MonoBehaviour {
     Ray ray = GameController.activeCamera.gameObject.GetComponent<Camera>().ScreenPointToRay(controls.Common.MousePosition.ReadValue<Vector2>());
     var layerMask = ~0;
     RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, layerMask);
-    Debug.Log(hits.Length + " object(s) hit!");
+    // Debug.Log(hits.Length + " object(s) hit!");
     if (hits.Length > 0) {
       Array.Sort(hits, delegate(RaycastHit hit1, RaycastHit hit2) { return hit1.distance.CompareTo(hit2.distance); } );
       MapObject mo = hits[0].transform.gameObject.GetComponent<MapObject>();

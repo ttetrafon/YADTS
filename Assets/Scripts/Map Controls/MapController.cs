@@ -74,6 +74,7 @@ public class MapController : MonoBehaviour {
 		});
 
 		// Finished Loading
+		moSpatialDataPanel.SetActive(false);
 		GameController.loadedMapController = true;
 		PostLoad.FinishedInitialLoading();
 	}
@@ -157,12 +158,12 @@ public class MapController : MonoBehaviour {
 		// Debug.Log("... " + currentlySelectedObjects.Count + " in selection");
 		// toggle the spatial data panel
 		if (MapController.currentlySelectedObjects.Count > 0) {
-			// moSpatialDataPanel.SetActive(true);
-      		// SpatialDataController.PopulateSpatialData();
+			instance.moSpatialDataPanel.SetActive(true);
+      		SpatialDataController.PopulateSpatialData();
     	}
     	else {
-      		// SpatialDataController.CancelRename();
-      		// moSpatialDataPanel.SetActive(false);
+      		SpatialDataController.CancelRename();
+      		instance.moSpatialDataPanel.SetActive(false);
     	}
 	}
 
@@ -172,6 +173,7 @@ public class MapController : MonoBehaviour {
 			currentlySelectedObjects[i].ToggleSelection();
 		}
 		currentlySelectedObjects = new List<MapObject>();
+		instance.moSpatialDataPanel.SetActive(false);
 	}
 
 

@@ -8,6 +8,7 @@ public class SpatialDataController : MonoBehaviour {
 
 	// UI
 	[SerializeField] private Text moNameLabel;
+	[SerializeField] private Button renameMapObjectButton;
 	[SerializeField] private InputField moNameInput;
 	[SerializeField] private Button cancelRenameButton;
 
@@ -19,15 +20,8 @@ public class SpatialDataController : MonoBehaviour {
 		if (instance == null) { instance = this; }
 
 		// Listeners
-		moNameInput.onEndEdit.AddListener(delegate {
-			string newName = moNameInput.text;
-			if ((newName != "") && (newName != MapController.currentlySelectedObjects[0].mapObjectData.objectName)) {
-				MapController.currentlySelectedObjects[0].RenameSelf(newName);
-				moNameLabel.text = newName;
-			}
-			moNameInput.gameObject.SetActive(false);
-			moNameLabel.gameObject.SetActive(true);
-		});
+		moNameInput.onEndEdit.AddListener(delegate { FinishRename(); });
+		renameMapObjectButton.onClick.AddListener(StartRename);
 		cancelRenameButton.onClick.AddListener(CancelRename);
 	}
 
@@ -37,17 +31,35 @@ public class SpatialDataController : MonoBehaviour {
 	}
 
 	public static void PopulateSpatialData() {
-		// Debug.Log("---> PopulateSpatialData()");
+		Debug.Log("---> PopulateSpatialData()");
 		// Map object name
 		// Debug.Log("selected mo count: " + MapController.currentlySelectedObjects.Count);
 		if (MapController.currentlySelectedObjects.Count == 1) {
 			instance.moNameLabel.text = MapController.currentlySelectedObjects[0].mapObjectData.objectName;
 			instance.moNameLabel.fontStyle = FontStyle.Bold;
+			instance.renameMapObjectButton.gameObject.SetActive(true);
 		}
 		else {
 			instance.moNameLabel.text = "Multiple Objects";
 			instance.moNameLabel.fontStyle = FontStyle.Italic;
+			instance.renameMapObjectButton.gameObject.SetActive(false);
 		}
+	}
+
+	private void StartRename() {
+		moNameLabel.gameObject.SetActive(false);
+		moNameInput.gameObject.SetActive(true);
+		moNameInput.text = MapController.currentlySelectedObjects[0].mapObjectData.objectName;
+	}
+
+	private void FinishRename() {
+		string newName = moNameInput.text;
+		if ((newName != "") && (newName != MapController.currentlySelectedObjects[0].mapObjectData.objectName)) {
+			MapController.currentlySelectedObjects[0].RenameSelf(newName);
+			moNameLabel.text = newName;
+		}
+		moNameInput.gameObject.SetActive(false);
+		moNameLabel.gameObject.SetActive(true);
 	}
 
 	public static void CancelRename() {
