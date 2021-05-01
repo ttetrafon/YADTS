@@ -42,7 +42,7 @@ public class LoadMapScript : MonoBehaviour {
 	public static void LoadMap(string uid) {
 		// Debug.Log("---> LoadMap(" + uid + ")");
 		// Clear previous map data
-		// TODO: MapObjectControl.UnselectAll();
+		MapController.UnseslectAllMapObjects();
 		MapController.CleanMapObjects();
 		// Load the map data
 		MapData loadedMapData = GetMapData(uid);
@@ -67,7 +67,7 @@ public class LoadMapScript : MonoBehaviour {
 		// Debug.Log("---> InstantiateMapObjects(" + mos.Count + " items)");
 		for (int i = 0; i < mos.Count; i++) {
 			LoadMapObject(mos[i]);
-			yield return new WaitForSeconds(GeneralSettings.yieldLoop);
+			yield return null;
 		}
 	}
 

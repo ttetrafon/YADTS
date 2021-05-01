@@ -139,13 +139,17 @@ public class MapController : MonoBehaviour {
 	}
 
   	public static void DeleteSelectedMapObjects() {
-		for (int i = currentlySelectedObjects.Count - 1; i >=0; i--) {
-			currentlySelectedObjects[i].DeleteSelf();
-			// TODO: yield...
-		}
+		instance.StartCoroutine(instance.DeleteMapObjectsLoop());
     	currentlySelectedObjects = new List<MapObject>();
     	SaveCurrentMap();
   	}
+
+	private IEnumerator DeleteMapObjectsLoop() {
+		for (int i = currentlySelectedObjects.Count - 1; i >=0; i--) {
+			currentlySelectedObjects[i].DeleteSelf();
+			yield return null;
+		}
+	}
 
 	public static void ToggleMapObjectInSelection(MapObject mo) {
 		// Debug.Log("---> ToggleMapObjectInSelection(" + mo.mapObjectData.objectName + ")");
@@ -192,7 +196,7 @@ public class MapController : MonoBehaviour {
 			}
 			currentlySelectedObjects[i].UpdateSpacialData();
 			Helper.SaveMapObject(currentlySelectedObjects[i]);
-			yield return new WaitForSeconds(GeneralSettings.yieldLoop);
+			yield return null;
 		}
 		if (SpatialDataController.instance.gameObject.activeSelf) {
 			SpatialDataController.PopulateSpatialData();
@@ -279,6 +283,10 @@ public class MapController : MonoBehaviour {
 		float targetRotationZ = QuantiseRotation(rotationZ, currentMapData.rotationStepVertical);;
 			mo.gameObject.transform.Rotate(new Vector3(0, targetRotationZ - rotationZ, 0), Space.World);
 		}
+	}
+
+	private void SetScale(MapObject mo) {
+
 	}
 
 

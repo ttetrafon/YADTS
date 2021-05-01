@@ -127,7 +127,7 @@ public class MapObject: MonoBehaviour {
                 // Debug.Log("... changing material from " + this.modelNormal.GetComponent<MeshRenderer>().materials[i].name + " to (" + (this.isSelected ? 1 : 0) + "): " + Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)].name);
 				mats[i] = Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)];
             }
-			yield return new WaitForSeconds(GeneralSettings.yieldLoop);
+			yield return null;
         }
 		this.modelNormal.GetComponent<MeshRenderer>().materials = mats;
 	}

@@ -22,9 +22,21 @@ public class SpatialDataController : MonoBehaviour {
 	[SerializeField] private InputField positionZInput;
 	[SerializeField] private Button positionZPlus;
 	[SerializeField] private Button positionZMinus;
+	[Header("Position")]
+	[SerializeField] private InputField scaleXInput;
+	[SerializeField] private Button scaleXPlus;
+	[SerializeField] private Button scaleXMinus;
+	[SerializeField] private InputField scaleYInput;
+	[SerializeField] private Button scaleYPlus;
+	[SerializeField] private Button scaleYMinus;
+	[SerializeField] private InputField scaleZInput;
+	[SerializeField] private Button scaleZPlus;
+	[SerializeField] private Button scaleZMinus;
 
 	// Data
-  	public static Vector3 selectedMoPositions = Vector3.zero;
+	[Header("Data")]
+	public static Vector3 selectedMoPositions = Vector3.zero;
+	public static Vector3 selectedMoScales = Vector3.zero;
 
 
 	/////////////////////
@@ -41,8 +53,8 @@ public class SpatialDataController : MonoBehaviour {
 		positionXInput.onEndEdit.AddListener(delegate {
 			float input = 0;
 			float.TryParse(positionXInput.text, out input);
-			if (input != 0) {
-				float diff = input - selectedMoPositions.x;
+			float diff = input - selectedMoPositions.x;
+			if (diff != 0 && SpatialDataController.instance.gameObject.activeSelf) {
 				StartCoroutine(ChangePosition(diff, 0, 0));
 			}
 		});
@@ -55,8 +67,8 @@ public class SpatialDataController : MonoBehaviour {
 		positionYInput.onEndEdit.AddListener(delegate {
 			float input = 0;
 			float.TryParse(positionYInput.text, out input);
-			if (input != 0) {
-				float diff = input - selectedMoPositions.z;
+			float diff = input - selectedMoPositions.z;
+			if (diff != 0 && SpatialDataController.instance.gameObject.activeSelf) {
 				StartCoroutine(ChangePosition(0, diff, 0));
 			}
 		});
@@ -69,8 +81,8 @@ public class SpatialDataController : MonoBehaviour {
 		positionZInput.onEndEdit.AddListener(delegate {
 			float input = 0;
 			float.TryParse(positionZInput.text, out input);
-			if (input != 0) {
-				float diff = input - selectedMoPositions.y;
+			float diff = input - selectedMoPositions.y;
+			if (diff != 0 && SpatialDataController.instance.gameObject.activeSelf) {
 				StartCoroutine(ChangePosition(0, 0, diff));
 			}
 		});
@@ -79,6 +91,48 @@ public class SpatialDataController : MonoBehaviour {
 		});
 		positionZMinus.onClick.AddListener(delegate{
 			StartCoroutine(ChangePosition(0, 0, (MapController.currentMapData.gridType == Constants.gridTypeHex ? -1 : -1)));
+		});
+		scaleXInput.onEndEdit.AddListener(delegate {
+			float input = 0;
+			float.TryParse(scaleXInput.text, out input);
+			float diff = input - selectedMoScales.x;
+			if (diff != 0 && SpatialDataController.instance.gameObject.activeSelf) {
+				StartCoroutine(ChangeScale(diff, 0, 0));
+			}
+		});
+		scaleXPlus.onClick.AddListener(delegate {
+			StartCoroutine(ChangeScale(1, 0, 0));
+		});
+		scaleXMinus.onClick.AddListener(delegate {
+			StartCoroutine(ChangeScale(-1, 0, 0));
+		});
+		scaleYInput.onEndEdit.AddListener(delegate {
+			float input = 0;
+			float.TryParse(scaleYInput.text, out input);
+			float diff = input - selectedMoScales.z;
+			if (diff != 0 && SpatialDataController.instance.gameObject.activeSelf) {
+				StartCoroutine(ChangeScale(0, diff, 0));
+			}
+		});
+		scaleYPlus.onClick.AddListener(delegate {
+			StartCoroutine(ChangeScale(0, 1, 0));
+		});
+		scaleYMinus.onClick.AddListener(delegate {
+			StartCoroutine(ChangeScale(0, -1, 0));
+		});
+		scaleZInput.onEndEdit.AddListener(delegate {
+			float input = 0;
+			float.TryParse(scaleZInput.text, out input);
+			float diff = input - selectedMoScales.y;
+			if (diff != 0 && SpatialDataController.instance.gameObject.activeSelf) {
+				StartCoroutine(ChangeScale(0, 0, diff));
+			}
+		});
+		scaleZPlus.onClick.AddListener(delegate {
+			StartCoroutine(ChangeScale(0, 0, 1));
+		});
+		scaleZMinus.onClick.AddListener(delegate {
+			StartCoroutine(ChangeScale(1, 0, -1));
 		});
 	}
 
@@ -95,7 +149,7 @@ public class SpatialDataController : MonoBehaviour {
 		// Debug.Log("---> PopulateSpatialData()");
 		// Debug.Log("selected mo count: " + MapController.currentlySelectedObjects.Count);
 		instance.PopulateName();
-		instance.StartCoroutine(instance.PopulatePosition());
+		instance.StartCoroutine(instance.PopulateData());
 	}
 
 
@@ -141,28 +195,38 @@ public class SpatialDataController : MonoBehaviour {
 	}
 
 
-	////////////////////
-	///   POSITION   ///
-	////////////////////
-	private IEnumerator PopulatePosition() {
-		// Debug.Log("---> PopulatePosition()");
+	////////////////
+	///   DATA   ///
+	////////////////
+	private IEnumerator PopulateData() {
+		// Debug.Log("---> PopulateData()");
 		int moCount = MapController.currentlySelectedObjects.Count;
 		// Debug.Log("moCount: " + moCount);
 		selectedMoPositions = Vector3.zero;
+		selectedMoScales = Vector3.zero;
 		// Debug.Log("selectedMoPositions (pre): " + selectedMoPositions);
 		for (int i = 0; i < moCount; i++) {
-			selectedMoPositions += MapController.currentlySelectedObjects[i].gameObject.transform.position;
-			yield return new WaitForSeconds(GeneralSettings.yieldLoop);
+			selectedMoPositions += MapController.currentlySelectedObjects[i].transform.position;
+			selectedMoScales += MapController.currentlySelectedObjects[i].transform.localScale;
+			yield return null;
 		}
 		// Debug.Log("selectedMoPositions (aft): " + selectedMoPositions);
-		selectedMoPositions = selectedMoPositions / moCount;
-		selectedMoPositions.x = (float) decimal.Round((decimal) selectedMoPositions.x, 2);
-		selectedMoPositions.y = (float) decimal.Round((decimal) selectedMoPositions.y, 2);
-		selectedMoPositions.z = (float) decimal.Round((decimal) selectedMoPositions.z, 2);
+		if (moCount > 0) {
+			selectedMoPositions = selectedMoPositions / moCount;
+			selectedMoPositions.x = (float) decimal.Round((decimal) selectedMoPositions.x, 2);
+			selectedMoPositions.y = (float) decimal.Round((decimal) selectedMoPositions.y, 2);
+			selectedMoPositions.z = (float) decimal.Round((decimal) selectedMoPositions.z, 2);
+			selectedMoScales = selectedMoScales / moCount;
+			selectedMoScales.x = (float) decimal.Round((decimal) selectedMoScales.x, 2);
+			selectedMoScales.y = (float) decimal.Round((decimal) selectedMoScales.y, 2);
+			selectedMoScales.z = (float) decimal.Round((decimal) selectedMoScales.z, 2);
+		}
 		positionXInput.text = selectedMoPositions.x.ToString();
 		positionYInput.text = selectedMoPositions.z.ToString();
 		positionZInput.text = selectedMoPositions.y.ToString();
-		yield return new WaitForSeconds(GeneralSettings.yieldLoop);
+		scaleXInput.text = selectedMoScales.x.ToString();
+		scaleYInput.text = selectedMoScales.z.ToString();
+		scaleZInput.text = selectedMoScales.y.ToString();
 	}
 
 	private IEnumerator ChangePosition(float x, float y, float z) {
@@ -170,10 +234,19 @@ public class SpatialDataController : MonoBehaviour {
 			Vector3 pos = MapController.currentlySelectedObjects[i].transform.position;
 			pos += new Vector3(x, z, y);
 			MapController.currentlySelectedObjects[i].transform.position = pos;
-			yield return new WaitForSeconds(GeneralSettings.yieldLoop);
+			yield return null;
 		}
 		StartCoroutine(MapController.MapObjectMovementEnded());
-		yield return new WaitForSeconds(GeneralSettings.yieldLoop);
+	}
+
+	private IEnumerator ChangeScale(float x, float y, float z) {
+		for (int i = 0; i < MapController.currentlySelectedObjects.Count; i++) {
+			Vector3 scale = MapController.currentlySelectedObjects[i].transform.localScale;
+			scale += new Vector3(x, z, y);
+			MapController.currentlySelectedObjects[i].transform.localScale = scale;
+			yield return null;
+		}
+		StartCoroutine(MapController.MapObjectMovementEnded());
 	}
 
 }
