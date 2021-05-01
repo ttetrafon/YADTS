@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -64,18 +65,18 @@ public class MapObject: MonoBehaviour {
 
 	private void Update() {}
 
-	public void UpdateSpacialData(GameObject go) {
+	public void UpdateSpacialData() {
 		// rotation: (eulerAngles.y, localEulerAngles.x, localEulerAngles.z)
 		MapObjectSpacialData spacialData = new MapObjectSpacialData();
-		spacialData.positionX = go.transform.position.x;
-		spacialData.positionY = go.transform.position.y;
-		spacialData.positionZ = go.transform.position.z;
-		spacialData.zRotation= go.transform.eulerAngles.y;
-		spacialData.frontPan = go.transform.localEulerAngles.x;
-		spacialData.sidePan = go.transform.localEulerAngles.z;
-		spacialData.scaleX = go.transform.localScale.x;
-		spacialData.scaleY = go.transform.localScale.y;
-		spacialData.scaleZ = go.transform.localScale.z;
+		spacialData.positionX = this.gameObject.transform.position.x;
+		spacialData.positionY = this.gameObject.transform.position.z;
+		spacialData.positionZ = this.gameObject.transform.position.y;
+		spacialData.zRotation= this.gameObject.transform.eulerAngles.y;
+		spacialData.frontPan = this.gameObject.transform.localEulerAngles.x;
+		spacialData.sidePan = this.gameObject.transform.localEulerAngles.z;
+		spacialData.scaleX = this.gameObject.transform.localScale.x;
+		spacialData.scaleY = this.gameObject.transform.localScale.y;
+		spacialData.scaleZ = this.gameObject.transform.localScale.z;
 		if (mapObjectData.spatialData.ContainsKey(MapController.currentMapData.mapUid)) {
 			mapObjectData.spatialData[MapController.currentMapData.mapUid] = spacialData;
 		}
@@ -85,7 +86,7 @@ public class MapObject: MonoBehaviour {
 	}
 
 	public void SetSpacialData(MapObjectSpacialData sd) {
-		gameObject.transform.position = new Vector3(sd.positionX, sd.positionY, sd.positionZ);
+		gameObject.transform.position = new Vector3(sd.positionX, sd.positionZ, sd.positionY);
 		gameObject.transform.Rotate(new Vector3(0, sd.zRotation, 0), Space.World);
 		gameObject.transform.Rotate(new Vector3(sd.frontPan, 0, sd.sidePan), Space.Self);
 		gameObject.transform.localScale = new Vector3(sd.scaleX, sd.scaleY, sd.scaleZ);
@@ -93,7 +94,7 @@ public class MapObject: MonoBehaviour {
 
 	public void ToggleSelection(int active = 0) {
 		this.isSelected = (active == Constants.gameObjectActiveNoOverride ? !isSelected : (active == Constants.gameObjectActiveOverrideTrue));
-		HighlightSelf();
+		StartCoroutine(HighlightSelf());
 	}
 
 	public void RenameSelf(string newName) {
@@ -113,7 +114,7 @@ public class MapObject: MonoBehaviour {
 		Helper.SaveMapObject(this);
 	}
 
-	public void HighlightSelf() {
+	public IEnumerator HighlightSelf() {
 		// This method changes all materials of a map object's model to their highlighted version.
         // Debug.Log("---> HighlightSelf(" + this.mapObjectData.objectName + ", " + this.isSelected + ")");
 		Material[] mats = this.modelNormal.GetComponent<MeshRenderer>().materials;
@@ -126,6 +127,7 @@ public class MapObject: MonoBehaviour {
                 // Debug.Log("... changing material from " + this.modelNormal.GetComponent<MeshRenderer>().materials[i].name + " to (" + (this.isSelected ? 1 : 0) + "): " + Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)].name);
 				mats[i] = Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)];
             }
+			yield return new WaitForSeconds(GeneralSettings.yieldLoop);
         }
 		this.modelNormal.GetComponent<MeshRenderer>().materials = mats;
 	}

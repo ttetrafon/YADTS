@@ -160,10 +160,11 @@ public class Helper : MonoBehaviour {
 		//MapController.mapTree[MapController.currentMapData.mapUid].UpdateSelf();
 	}
 
-	public static void SaveMapObject(MapObject mo) {
+	public static void SaveMapObject(MapObject mo, Boolean debug = false) {
+		if(debug) { Debug.Log("---> SaveMapObject()"); }
 		string filename = MapController.mapObjectsDirectory + mo.mapObjectData.objectUuid + ".json";
-		Debug.Log("filename: " + filename);
-		string mapObjectData = JsonObject.ToJson(mo.mapObjectData);
+		if(debug) { Debug.Log("filename: " + filename); }
+		string mapObjectData = JsonObject.ToJson(mo.mapObjectData, 1, debug);
 		SaveFile(filename, mapObjectData);
 	}
 

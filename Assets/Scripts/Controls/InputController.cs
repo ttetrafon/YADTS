@@ -27,6 +27,10 @@ public class InputController : MonoBehaviour {
 	public static float moRotateFront = 0;
 	public static float moRotateSide = 0;
 
+
+  /////////////////////
+  ///   LIFECYCLE   ///
+  /////////////////////
   private void Awake() {
     controls = new Controls();
     controls.Common.MouseDelta.performed += ctx => MouseDelta(ctx.ReadValue<Vector2>());
@@ -74,6 +78,10 @@ public class InputController : MonoBehaviour {
     }
   }
 
+
+  ////////////////////
+  ///   CONTROLS   ///
+  ////////////////////
   public static void SwitchControlsMode(string mode) {
     // Debug.Log("---> SwitchControlsMode(" + mode + ")");
     switch(mode) {
@@ -119,6 +127,10 @@ public class InputController : MonoBehaviour {
     }
   }
 
+
+  ////////////////////
+  ///   MAP MODE   ///
+  ////////////////////
 	private void MapClick() {
 		// Debug.Log("---> Map Click()");
     // Ignore the hits if we are over a UI element.
@@ -151,5 +163,10 @@ public class InputController : MonoBehaviour {
       MainMenu.CloseMenus();
     }
   }
+
+
+  /////////////////////
+  ///   GAME MODE   ///
+  /////////////////////
 
 }

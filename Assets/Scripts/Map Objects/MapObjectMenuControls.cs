@@ -35,6 +35,9 @@ public class MapObjectMenuControls : MonoBehaviour {
 	[SerializeField] private InputField rotationStepFrontInput;
 	[SerializeField] private InputField rotationStepSideInput;
 
+	/////////////////////
+	///   LIFECYCLE   ///
+	/////////////////////
 	private void Start() {
 		if (instance == null) { instance = this; }
 
@@ -110,6 +113,10 @@ public class MapObjectMenuControls : MonoBehaviour {
 		PostLoad.FinishedInitialLoading();
 	}
 
+
+	/////////////////////////
+	///   CONFIGURATION   ///
+	/////////////////////////
 	private void PopulateMapObjectDropdownAndTags() {
 		//Debug.Log("---> PopulateMapObjectDropdownAndTags()");
 		addMapObjectSelector.ClearOptions();
@@ -180,6 +187,22 @@ public class MapObjectMenuControls : MonoBehaviour {
 		Helper.FillDropdown(addMapObjectSelector, selectorOptions);
 	}
 
+	public static void SetMapConfigurationOptions() {
+		// Debug.Log("---> SetMapConfigurationOptions()");
+		// Grid Type
+		instance.gridNoneToggle.isOn = MapController.currentMapData.gridType == Constants.gridTypeNone;
+		instance.gridHexToggle.isOn = MapController.currentMapData.gridType == Constants.gridTypeHex;
+		instance.gridSquareToggle.isOn = MapController.currentMapData.gridType == Constants.gridTypeSquare;
+		// Rotation angle steps
+		instance.rotationStepFrontInput.text = MapController.currentMapData.rotationStepFront.ToString();
+		instance.rotationStepSideInput.text = MapController.currentMapData.rotationStepSide.ToString();
+		instance.rotationStepVerticalInput.text = MapController.currentMapData.rotationStepVertical.ToString();
+	}
+
+
+	///////////////////////////////
+	///   MAP OBJECT CREATION   ///
+	///////////////////////////////
 	private void CreateNewMapObject(bool debug = false) {
 		if (debug) { Debug.Log("---> CreateNewMapObject()"); }
 
@@ -205,41 +228,33 @@ public class MapObjectMenuControls : MonoBehaviour {
 		mo.mapObjectData.prefabName = selectedPrefabName;
 		mo.mapObjectData.objectType = moType;
 		Debug.Log(go.transform.localScale);
-		mo.UpdateSpacialData(go);
+		mo.UpdateSpacialData();
 		MapController.currentMapData.AddMapObjectInMap(uid);
 		Helper.SaveCurrentMap();
 		Helper.SaveMapObject(mo);
 		MainMenu.CloseMenus();
 	}
 
-	public static void SetMapConfigurationOptions() {
-		// Debug.Log("---> SetMapConfigurationOptions()");
-		// Grid Type
-    instance.gridNoneToggle.isOn = MapController.currentMapData.gridType == Constants.gridTypeNone;
-    instance.gridHexToggle.isOn = MapController.currentMapData.gridType == Constants.gridTypeHex;
-    instance.gridSquareToggle.isOn = MapController.currentMapData.gridType == Constants.gridTypeSquare;
-		// Rotation angle steps
-    instance.rotationStepFrontInput.text = MapController.currentMapData.rotationStepFront.ToString();
-    instance.rotationStepSideInput.text = MapController.currentMapData.rotationStepSide.ToString();
-    instance.rotationStepVerticalInput.text = MapController.currentMapData.rotationStepVertical.ToString();
-	}
 
-  private int GetRotationStep(InputField input) {
-    // Debug.Log("---> GetRotationStep()");
-    int rot = 0;
-    int.TryParse(input.text, out rot);
-    // Debug.Log("got " + rot);
-    if (!Constants.circleDivisors.Contains(rot)) {
-      List<int> distances = new List<int>(Constants.circleDivisors.Select(x => Mathf.Abs(rot - x)));
-      // Debug.Log("distances: " + Helper.PrintIntList(distances));
-      int min = distances.Min();
-      // Debug.Log("min distance: " + min);
-      int pos = distances.FindIndex(elem => elem == min);
-      // Debug.Log("min position: " + pos);
-      rot = Constants.circleDivisors[pos];
-      input.text = rot.ToString();
-    }
-    return rot;
-  }
+	///////////////////////////////
+	///   MAP OBJECT MOVEMENT   ///
+	///////////////////////////////
+	private int GetRotationStep(InputField input) {
+		// Debug.Log("---> GetRotationStep()");
+		int rot = 0;
+		int.TryParse(input.text, out rot);
+		// Debug.Log("got " + rot);
+		if (!Constants.circleDivisors.Contains(rot)) {
+			List<int> distances = new List<int>(Constants.circleDivisors.Select(x => Mathf.Abs(rot - x)));
+			// Debug.Log("distances: " + Helper.PrintIntList(distances));
+			int min = distances.Min();
+			// Debug.Log("min distance: " + min);
+			int pos = distances.FindIndex(elem => elem == min);
+			// Debug.Log("min position: " + pos);
+			rot = Constants.circleDivisors[pos];
+			input.text = rot.ToString();
+		}
+		return rot;
+	}
 
 }

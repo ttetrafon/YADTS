@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -39,7 +40,7 @@ public class MapController : MonoBehaviour {
 	private void Awake() {
 		//Debug.Log("===> MapController Awake");
 		if (instance == null) {
-		instance = this;
+			instance = this;
 		}
 		// Assign the references.
 		treeNodesDirectory = GameController.saveFolder + "map tree hierarchy" + "/";
@@ -82,15 +83,15 @@ public class MapController : MonoBehaviour {
 	private void Update() {
 		if (!Helper.isUIActive()) {
 			for (int i = 0; i < currentlySelectedObjects.Count; i++) {
-        if (currentlySelectedObjects[i]) {
-				currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * InputController.moMoveXY.y * xyMovementSensitivity * MapObjectControlsShiftModifier();
-				currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z) * InputController.moMoveXY.x * xyMovementSensitivity * MapObjectControlsShiftModifier();
-				currentlySelectedObjects[i].transform.Translate(new Vector3(0, InputController.moMoveZ * zMovementSensitivity * MapObjectControlsShiftModifier(), 0));
-				currentlySelectedObjects[i].transform.Rotate(new Vector3(0, InputController.moRotateZ * rotationSensitivity * MapObjectControlsShiftModifier()), Space.World);
-				currentlySelectedObjects[i].transform.Rotate(new Vector3(InputController.moRotateFront, 0, InputController.moRotateSide) * rotationSensitivity * MapObjectControlsShiftModifier(), Space.Self);
-        }
+		        if (currentlySelectedObjects[i]) {
+					currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * InputController.moMoveXY.y * xyMovementSensitivity * MapObjectControlsShiftModifier();
+					currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z) * InputController.moMoveXY.x * xyMovementSensitivity * MapObjectControlsShiftModifier();
+					currentlySelectedObjects[i].transform.Translate(new Vector3(0, InputController.moMoveZ * zMovementSensitivity * MapObjectControlsShiftModifier(), 0));
+					currentlySelectedObjects[i].transform.Rotate(new Vector3(0, InputController.moRotateZ * rotationSensitivity * MapObjectControlsShiftModifier()), Space.World);
+					currentlySelectedObjects[i].transform.Rotate(new Vector3(InputController.moRotateFront, 0, InputController.moRotateSide) * rotationSensitivity * MapObjectControlsShiftModifier(), Space.Self);
+        		}
 			}
-			// UpdatePositionDiplay();
+			MapObjectMovementEnded();
 		}
 	}
 
@@ -180,17 +181,21 @@ public class MapController : MonoBehaviour {
 	///////////////////////
 	///   MO MOVEMENT   ///
 	///////////////////////
-	private void MapObjectMovementEnded() {
-		Debug.Log("---> MapObjectMovementEnded()");
+	public static IEnumerator MapObjectMovementEnded() {
+		// Debug.Log("---> MapObjectMovementEnded()");
 		for (int i = 0; i < currentlySelectedObjects.Count; i++) {
 			if (currentMapData.gridType != Constants.gridTypeNone) {
-				SetGridPosition(currentlySelectedObjects[i]);
+				instance.SetGridPosition(currentlySelectedObjects[i]);
 			}
 			if (currentMapData.rotationStepFront + currentMapData.rotationStepSide + currentMapData.rotationStepVertical > 0) {
-				SetRotation(currentlySelectedObjects[i]);
+				instance.SetRotation(currentlySelectedObjects[i]);
 			}
-			currentlySelectedObjects[i].UpdateSpacialData(currentlySelectedObjects[i].gameObject);
+			currentlySelectedObjects[i].UpdateSpacialData();
 			Helper.SaveMapObject(currentlySelectedObjects[i]);
+			yield return new WaitForSeconds(GeneralSettings.yieldLoop);
+		}
+		if (SpatialDataController.instance.gameObject.activeSelf) {
+			SpatialDataController.PopulateSpatialData();
 		}
 	}
 
