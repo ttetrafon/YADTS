@@ -83,15 +83,19 @@ public class MapController : MonoBehaviour {
 	private void Update() {
 		if (!Helper.isUIActive()) {
 			for (int i = 0; i < currentlySelectedObjects.Count; i++) {
-		        if (currentlySelectedObjects[i]) {
+				if (currentlySelectedObjects[i]) {
 					currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * InputController.moMoveXY.y * xyMovementSensitivity * MapObjectControlsShiftModifier();
 					currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z) * InputController.moMoveXY.x * xyMovementSensitivity * MapObjectControlsShiftModifier();
 					currentlySelectedObjects[i].transform.Translate(new Vector3(0, InputController.moMoveZ * zMovementSensitivity * MapObjectControlsShiftModifier(), 0));
 					currentlySelectedObjects[i].transform.Rotate(new Vector3(0, InputController.moRotateZ * rotationSensitivity * MapObjectControlsShiftModifier()), Space.World);
 					currentlySelectedObjects[i].transform.Rotate(new Vector3(InputController.moRotateFront, 0, InputController.moRotateSide) * rotationSensitivity * MapObjectControlsShiftModifier(), Space.Self);
-        		}
+					MapObjectMovementEnded(currentlySelectedObjects[i]);
+				}
 			}
-			MapObjectMovementEnded();
+			if (SpatialDataController.instance.gameObject.activeSelf) {
+				SpatialDataController.PopulateSpatialData();
+			}
+			// MapObjectMovementEnded();
 		}
 	}
 
@@ -127,9 +131,9 @@ public class MapController : MonoBehaviour {
 	}
 
 
-  ////////////////////////
-  ///   MO SELECTION   ///
-  ////////////////////////
+	////////////////////////
+	///   MO SELECTION   ///
+	////////////////////////
 	public static void CleanMapObjects() {
 		List<string> mos = new List<string>(mapObjects.Keys);
 		for (int i = 0; i < mos.Count; i++) {
@@ -185,42 +189,34 @@ public class MapController : MonoBehaviour {
 	///////////////////////
 	///   MO MOVEMENT   ///
 	///////////////////////
-	public static IEnumerator MapObjectMovementEnded() {
-		// Debug.Log("---> MapObjectMovementEnded()");
-		for (int i = 0; i < currentlySelectedObjects.Count; i++) {
-			if (currentMapData.gridType != Constants.gridTypeNone) {
-				instance.SetGridPosition(currentlySelectedObjects[i]);
-			}
-			if (currentMapData.rotationStepFront + currentMapData.rotationStepSide + currentMapData.rotationStepVertical > 0) {
-				instance.SetRotation(currentlySelectedObjects[i]);
-			}
-			currentlySelectedObjects[i].UpdateSpacialData();
-			Helper.SaveMapObject(currentlySelectedObjects[i]);
-			yield return null;
-		}
-		if (SpatialDataController.instance.gameObject.activeSelf) {
-			SpatialDataController.PopulateSpatialData();
-		}
-	}
+	// public static IEnumerator MapObjectMovementEnded() {
+	// 	// Debug.Log("---> MapObjectMovementEnded()");
+	// 	for (int i = 0; i < currentlySelectedObjects.Count; i++) {
+	// 		if (currentMapData.gridType != Constants.gridTypeNone) {
+	// 			instance.SetGridPosition(currentlySelectedObjects[i]);
+	// 		}
+	// 		if (currentMapData.rotationStepFront + currentMapData.rotationStepSide + currentMapData.rotationStepVertical > 0) {
+	// 			instance.SetRotation(currentlySelectedObjects[i]);
+	// 		}
+	// 		currentlySelectedObjects[i].UpdateSpacialData();
+	// 		Helper.SaveMapObject(currentlySelectedObjects[i]);
+	// 		yield return null;
+	// 	}
+	// 	if (SpatialDataController.instance.gameObject.activeSelf) {
+	// 		SpatialDataController.PopulateSpatialData();
+	// 	}
+	// }
 
-	private float QuantiseRotation(float angle, int quantum) {
-		// Debug.Log("---> QuantiseRotation(" + angle + ", " + quantum + ")");
-		float mod = Mathf.Floor(angle / quantum);
-		// Debug.Log("mod: " + mod);
-		if (mod == 0) {
-			return angle;
+	public static void MapObjectMovementEnded(MapObject mo) {
+		// Debug.Log("---> MapObjectMovementEnded()");
+		if (currentMapData.gridType != Constants.gridTypeNone) {
+			instance.SetGridPosition(mo);
 		}
-		float low = mod * quantum;
-		float high = low + quantum;
-		// Debug.Log(">>> " + low + " - " + high + " <<<");
-		if ((angle - low) < (high - angle)) {
-			// Debug.Log("returning " + low);
-			return low;
+		if (currentMapData.rotationStepFront + currentMapData.rotationStepSide + currentMapData.rotationStepVertical > 0) {
+			instance.SetRotation(mo);
 		}
-		else {
-			// Debug.Log("returning " + high);
-			return high;
-		}
+		mo.UpdateSpacialData();
+		Helper.SaveMapObject(mo);
 	}
 
 	private void SetGridPosition(MapObject mo) {
@@ -269,24 +265,40 @@ public class MapController : MonoBehaviour {
 
 	private void SetRotation(MapObject mo) {
 		if (currentMapData.rotationStepFront > 0) {
-		float rotationFront = mo.gameObject.transform.localEulerAngles.x;
-		float targetRotationFront = QuantiseRotation(rotationFront, currentMapData.rotationStepFront);
+			float rotationFront = mo.gameObject.transform.localEulerAngles.x;
+			float targetRotationFront = QuantiseRotation(rotationFront, currentMapData.rotationStepFront);
 			mo.gameObject.transform.Rotate(new Vector3(targetRotationFront - rotationFront, 0, 0), Space.Self);
 		}
 		if (currentMapData.rotationStepSide > 0) {
-		float rotationSide = mo.gameObject.transform.localEulerAngles.z;
-		float targetRotationSide = QuantiseRotation(rotationSide, currentMapData.rotationStepSide);
+			float rotationSide = mo.gameObject.transform.localEulerAngles.z;
+			float targetRotationSide = QuantiseRotation(rotationSide, currentMapData.rotationStepSide);
 			mo.gameObject.transform.Rotate(new Vector3(0, 0, targetRotationSide - rotationSide), Space.Self);
 		}
 		if (currentMapData.rotationStepVertical > 0) {
-		float rotationZ = mo.gameObject.transform.eulerAngles.y;
-		float targetRotationZ = QuantiseRotation(rotationZ, currentMapData.rotationStepVertical);;
+			float rotationZ = mo.gameObject.transform.eulerAngles.y;
+			float targetRotationZ = QuantiseRotation(rotationZ, currentMapData.rotationStepVertical);
 			mo.gameObject.transform.Rotate(new Vector3(0, targetRotationZ - rotationZ, 0), Space.World);
 		}
 	}
 
-	private void SetScale(MapObject mo) {
-
+	private float QuantiseRotation(float angle, int quantum) {
+		// Debug.Log("---> QuantiseRotation(" + angle + ", " + quantum + ")");
+		float mod = Mathf.Floor(angle / quantum);
+		// Debug.Log("mod: " + mod);
+		if (mod == 0) {
+			return angle;
+		}
+		float low = mod * quantum;
+		float high = low + quantum;
+		// Debug.Log(">>> " + low + " - " + high + " <<<");
+		if ((angle - low) < (high - angle)) {
+			// Debug.Log("returning " + low);
+			return low;
+		}
+		else {
+			// Debug.Log("returning " + high);
+			return high;
+		}
 	}
 
 
