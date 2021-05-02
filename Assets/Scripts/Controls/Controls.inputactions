@@ -200,6 +200,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "MapObjectScale",
+                    "type": "Button",
+                    "id": "ff81da2d-79b2-444d-ac9d-288a6a443250",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -475,6 +483,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MapObjectRotationSide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a107e040-cf44-4363-844b-113e192d9258",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapObjectScale",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

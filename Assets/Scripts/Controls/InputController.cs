@@ -27,11 +27,12 @@ public class InputController : MonoBehaviour {
   public static bool moRotateZ = false;
   public static bool moRotateFront = false;
   public static bool moRotateSide = false;
+  public static bool moScale = false;
   public static float slowMovementModifier = 0.25f;
   public static float xyMovementSensitivity = 0.5f;
   public static float zMovementSensitivity = 0.5f;
   public static float rotationSensitivity = 5.0f;
-
+  public static float scaleSensitivity = 0.1f;
 
   /////////////////////
   ///   LIFECYCLE   ///
@@ -85,6 +86,13 @@ public class InputController : MonoBehaviour {
         moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
       }
     };
+    controls.MapMode.MapObjectScale.performed += ctx => moScale = true;
+    controls.MapMode.MapObjectScale.canceled += ctx => {
+      moScale = false;
+      if (moMovementCoroutine == null) {
+        moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
+      }
+    };
   }
 
   private void OnEnable() {
@@ -114,9 +122,6 @@ public class InputController : MonoBehaviour {
       else {
         this.hoveringOverMo = null;
         TooltipController.HideMoTooltip();
-      }
-      if (controls.MapMode.MapObjectMoveXY.ReadValue<float>() > 0) {
-        Debug.Log("... pressing x!");
       }
     }
   }
@@ -212,6 +217,7 @@ public class InputController : MonoBehaviour {
       MapController.MapObjectMovementEnded(MapController.currentlySelectedObjects[i]);
     }
     yield return null;
+    moMovementCoroutine = null;
   }
 
 

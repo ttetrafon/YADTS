@@ -81,6 +81,11 @@ public class MapObject: MonoBehaviour {
 			if (InputController.moRotateSide) {
 				transform.Rotate(new Vector3(0, 0, InputController.controls.Common.MouseDelta.ReadValue<Vector2>().x) * InputController.rotationSensitivity * InputController.CameraSpeedModifier(), Space.Self);
 			}
+      if (InputController.moScale) {
+        float target = InputController.CameraSpeedModifier() * InputController.controls.Common.MouseDelta.ReadValue<Vector2>().y * InputController.scaleSensitivity;
+        Vector3 updatedScale = new Vector3(target, target, target) + transform.localScale;
+        transform.localScale = updatedScale;
+      }
 		}
 	}
 

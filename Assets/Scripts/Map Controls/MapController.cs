@@ -77,13 +77,6 @@ public class MapController : MonoBehaviour {
 
 	private void Update() {
 		if (!Helper.isUIActive()) {
-			// for (int i = 0; i < currentlySelectedObjects.Count; i++) {
-			// 	if (currentlySelectedObjects[i]) {
-			// 		currentlySelectedObjects[i].
-			// 		currentlySelectedObjects[i].
-			// 		MapObjectMovementEnded(currentlySelectedObjects[i]);
-			// 	}
-			// }
 			if (SpatialDataController.instance != null && SpatialDataController.instance.gameObject.activeSelf) {
 				SpatialDataController.PopulateSpatialData();
 			}
