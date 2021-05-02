@@ -63,7 +63,18 @@ public class MapObject: MonoBehaviour {
 		}
 	}
 
-	private void Update() {}
+	private void Update() {
+		if (isSelected && !Helper.isUIActive()) {
+			if (InputController.moMoveXY) {
+				transform.position += new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * InputController.controls.Common.MouseDelta.ReadValue<Vector2>().y * InputController.xyMovementSensitivity * InputController.CameraSpeedModifier();
+				transform.position += new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z) * InputController.controls.Common.MouseDelta.ReadValue<Vector2>().x * InputController.xyMovementSensitivity * InputController.CameraSpeedModifier();
+			}
+			if (InputController.moMoveZ) {
+				transform.Translate(new Vector3(0, InputController.controls.Common.MouseDelta.ReadValue<Vector2>().y * InputController.zMovementSensitivity * InputController.CameraSpeedModifier(), 0));
+			}
+			// MapController.MapObjectMovementEnded(this);
+		}
+	}
 
 	public void UpdateSpacialData() {
 		// rotation: (eulerAngles.y, localEulerAngles.x, localEulerAngles.z)

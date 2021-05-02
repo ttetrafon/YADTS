@@ -12,6 +12,7 @@ public class InputController : MonoBehaviour {
 
   // Operational
   private String hoveringOverMo = null;
+  private IEnumerator moMovementCoroutine = null;
 
   // Camera
   public static Vector2 camPan = Vector2.zero;
@@ -21,11 +22,14 @@ public class InputController : MonoBehaviour {
   public static Vector2 camMouseLook = Vector2.zero;
 
   // Map Objects
-  public static Vector2 moMoveXY = Vector2.zero;
-	public static float moMoveZ = 0;
-	public static float moRotateZ = 0;
-	public static float moRotateFront = 0;
-	public static float moRotateSide = 0;
+  public static bool moMoveXY = false;
+	public static bool moMoveZ = false;
+	// public static float moRotateZ = 0;
+	// public static float moRotateFront = 0;
+	// public static float moRotateSide = 0;
+  public static float slowMovementModifier = 0.25f;
+	public static float xyMovementSensitivity = 0.5f;
+	public static float zMovementSensitivity = 0.5f;
 
 
   /////////////////////
@@ -45,6 +49,20 @@ public class InputController : MonoBehaviour {
     controls.MapMode.RotateZ.canceled += ctx => camTopRotate = 0;
     controls.MapMode.LookAt.performed += ctx => CameraControl.CameraFocusOn();
     controls.MapMode.Delete.performed += ctx => MapController.DeleteSelectedMapObjects();
+    controls.MapMode.MapObjectMoveXY.performed += ctx => moMoveXY = true;
+    controls.MapMode.MapObjectMoveXY.canceled += ctx => {
+      moMoveXY = false;
+      if (moMovementCoroutine == null) {
+        moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
+      }
+    };
+    controls.MapMode.MapObjectMoveZ.performed += ctx => moMoveZ = true;
+    controls.MapMode.MapObjectMoveZ.canceled += ctx => {
+      moMoveZ = false;
+      if (moMovementCoroutine == null) {
+        moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
+      }
+    };
   }
 
   private void OnEnable() {
@@ -74,6 +92,9 @@ public class InputController : MonoBehaviour {
       else {
         this.hoveringOverMo = null;
         TooltipController.HideMoTooltip();
+      }
+      if (controls.MapMode.MapObjectMoveXY.ReadValue<float>() > 0) {
+        Debug.Log("... pressing x!");
       }
     }
   }
@@ -162,6 +183,13 @@ public class InputController : MonoBehaviour {
       MapController.UnseslectAllMapObjects();
       MainMenu.CloseMenus();
     }
+  }
+
+  private IEnumerator MapObjectSpatialControlReleasedLoop() {
+    for (int i = 0; i < MapController.currentlySelectedObjects.Count; i++) {
+      MapController.MapObjectMovementEnded(MapController.currentlySelectedObjects[i]);
+    }
+    yield return null;
   }
 
 

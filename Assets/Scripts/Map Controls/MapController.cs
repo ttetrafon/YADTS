@@ -21,9 +21,6 @@ public class MapController : MonoBehaviour {
 	// Map Objects
 	public static List<MapObject> currentlySelectedObjects = new List<MapObject>(); // Holds a list of all currently selected map objects.
 	public static Dictionary<string, MapObject> mapObjects = new Dictionary<string, MapObject>();
-  	public float slowMovementModifier = 0.25f;
-	private float xyMovementSensitivity = 0.5f;
-	private float zMovementSensitivity = 0.5f;
 	// private float arrowMovementSensitivity = 5.0f;
 	private float rotationSensitivity = 5.0f;
 	public GameObject moSpatialDataPanel;
@@ -82,20 +79,17 @@ public class MapController : MonoBehaviour {
 
 	private void Update() {
 		if (!Helper.isUIActive()) {
-			for (int i = 0; i < currentlySelectedObjects.Count; i++) {
-				if (currentlySelectedObjects[i]) {
-					currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z) * InputController.moMoveXY.y * xyMovementSensitivity * MapObjectControlsShiftModifier();
-					currentlySelectedObjects[i].transform.position += new Vector3(Camera.main.transform.right.x, 0, Camera.main.transform.right.z) * InputController.moMoveXY.x * xyMovementSensitivity * MapObjectControlsShiftModifier();
-					currentlySelectedObjects[i].transform.Translate(new Vector3(0, InputController.moMoveZ * zMovementSensitivity * MapObjectControlsShiftModifier(), 0));
-					currentlySelectedObjects[i].transform.Rotate(new Vector3(0, InputController.moRotateZ * rotationSensitivity * MapObjectControlsShiftModifier()), Space.World);
-					currentlySelectedObjects[i].transform.Rotate(new Vector3(InputController.moRotateFront, 0, InputController.moRotateSide) * rotationSensitivity * MapObjectControlsShiftModifier(), Space.Self);
-					MapObjectMovementEnded(currentlySelectedObjects[i]);
-				}
-			}
-			if (SpatialDataController.instance.gameObject.activeSelf) {
+			// for (int i = 0; i < currentlySelectedObjects.Count; i++) {
+			// 	if (currentlySelectedObjects[i]) {
+			// 		currentlySelectedObjects[i].
+			// 		currentlySelectedObjects[i].transform.Rotate(new Vector3(0, InputController.moRotateZ * rotationSensitivity * MapObjectControlsShiftModifier()), Space.World);
+			// 		currentlySelectedObjects[i].transform.Rotate(new Vector3(InputController.moRotateFront, 0, InputController.moRotateSide) * rotationSensitivity * MapObjectControlsShiftModifier(), Space.Self);
+			// 		MapObjectMovementEnded(currentlySelectedObjects[i]);
+			// 	}
+			// }
+			if (SpatialDataController.instance != null && SpatialDataController.instance.gameObject.activeSelf) {
 				SpatialDataController.PopulateSpatialData();
 			}
-			// MapObjectMovementEnded();
 		}
 	}
 
@@ -116,13 +110,6 @@ public class MapController : MonoBehaviour {
 		// 	}
 		// }
 	// }
-
-	private float MapObjectControlsShiftModifier() {
-		// if (moControls.MapController.Modifier_Shift.ReadValue<float>() > 0) {
-		//   return slowMovementModifier;
-		// }
-		return 1.0f;
-	}
 
 	private void CancelAllMapOperations() {
 		// Distance tool
@@ -189,24 +176,6 @@ public class MapController : MonoBehaviour {
 	///////////////////////
 	///   MO MOVEMENT   ///
 	///////////////////////
-	// public static IEnumerator MapObjectMovementEnded() {
-	// 	// Debug.Log("---> MapObjectMovementEnded()");
-	// 	for (int i = 0; i < currentlySelectedObjects.Count; i++) {
-	// 		if (currentMapData.gridType != Constants.gridTypeNone) {
-	// 			instance.SetGridPosition(currentlySelectedObjects[i]);
-	// 		}
-	// 		if (currentMapData.rotationStepFront + currentMapData.rotationStepSide + currentMapData.rotationStepVertical > 0) {
-	// 			instance.SetRotation(currentlySelectedObjects[i]);
-	// 		}
-	// 		currentlySelectedObjects[i].UpdateSpacialData();
-	// 		Helper.SaveMapObject(currentlySelectedObjects[i]);
-	// 		yield return null;
-	// 	}
-	// 	if (SpatialDataController.instance.gameObject.activeSelf) {
-	// 		SpatialDataController.PopulateSpatialData();
-	// 	}
-	// }
-
 	public static void MapObjectMovementEnded(MapObject mo) {
 		// Debug.Log("---> MapObjectMovementEnded()");
 		if (currentMapData.gridType != Constants.gridTypeNone) {
@@ -337,7 +306,7 @@ public class MapController : MonoBehaviour {
 			}
 			else {
 				Helper.SaveFile(filename, JsonObject.ToJson(node));
-			// TODO: Fix errors in the children/parent relationships... Especially missing links!
+				// TODO: Fix errors in the children/parent relationships... Especially missing links!
 			}
 		}
 	}

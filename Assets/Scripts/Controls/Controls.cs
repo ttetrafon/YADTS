@@ -173,6 +173,22 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MapObjectMoveXY"",
+                    ""type"": ""Button"",
+                    ""id"": ""3389ebc4-58c1-4171-956f-8ed17542b155"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MapObjectMoveZ"",
+                    ""type"": ""Button"",
+                    ""id"": ""f736825e-e5c7-4531-a130-09cab2d16562"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -393,6 +409,28 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22e030d1-f9ff-4ae9-accd-e85ec3dfa2b5"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapObjectMoveXY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa6b574e-25eb-4e47-b1fd-7906cf3e61e6"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapObjectMoveZ"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -941,6 +979,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_MapMode_MiddleMouse = m_MapMode.FindAction("MiddleMouse", throwIfNotFound: true);
         m_MapMode_RightMouse = m_MapMode.FindAction("RightMouse", throwIfNotFound: true);
         m_MapMode_Delete = m_MapMode.FindAction("Delete", throwIfNotFound: true);
+        m_MapMode_MapObjectMoveXY = m_MapMode.FindAction("MapObjectMoveXY", throwIfNotFound: true);
+        m_MapMode_MapObjectMoveZ = m_MapMode.FindAction("MapObjectMoveZ", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1068,6 +1108,8 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_MapMode_MiddleMouse;
     private readonly InputAction m_MapMode_RightMouse;
     private readonly InputAction m_MapMode_Delete;
+    private readonly InputAction m_MapMode_MapObjectMoveXY;
+    private readonly InputAction m_MapMode_MapObjectMoveZ;
     public struct MapModeActions
     {
         private @Controls m_Wrapper;
@@ -1081,6 +1123,8 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @MiddleMouse => m_Wrapper.m_MapMode_MiddleMouse;
         public InputAction @RightMouse => m_Wrapper.m_MapMode_RightMouse;
         public InputAction @Delete => m_Wrapper.m_MapMode_Delete;
+        public InputAction @MapObjectMoveXY => m_Wrapper.m_MapMode_MapObjectMoveXY;
+        public InputAction @MapObjectMoveZ => m_Wrapper.m_MapMode_MapObjectMoveZ;
         public InputActionMap Get() { return m_Wrapper.m_MapMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1117,6 +1161,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Delete.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnDelete;
                 @Delete.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnDelete;
                 @Delete.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnDelete;
+                @MapObjectMoveXY.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectMoveXY;
+                @MapObjectMoveXY.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectMoveXY;
+                @MapObjectMoveXY.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectMoveXY;
+                @MapObjectMoveZ.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectMoveZ;
+                @MapObjectMoveZ.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectMoveZ;
+                @MapObjectMoveZ.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectMoveZ;
             }
             m_Wrapper.m_MapModeActionsCallbackInterface = instance;
             if (instance != null)
@@ -1148,6 +1198,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Delete.started += instance.OnDelete;
                 @Delete.performed += instance.OnDelete;
                 @Delete.canceled += instance.OnDelete;
+                @MapObjectMoveXY.started += instance.OnMapObjectMoveXY;
+                @MapObjectMoveXY.performed += instance.OnMapObjectMoveXY;
+                @MapObjectMoveXY.canceled += instance.OnMapObjectMoveXY;
+                @MapObjectMoveZ.started += instance.OnMapObjectMoveZ;
+                @MapObjectMoveZ.performed += instance.OnMapObjectMoveZ;
+                @MapObjectMoveZ.canceled += instance.OnMapObjectMoveZ;
             }
         }
     }
@@ -1284,6 +1340,8 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnMiddleMouse(InputAction.CallbackContext context);
         void OnRightMouse(InputAction.CallbackContext context);
         void OnDelete(InputAction.CallbackContext context);
+        void OnMapObjectMoveXY(InputAction.CallbackContext context);
+        void OnMapObjectMoveZ(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

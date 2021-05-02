@@ -160,6 +160,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "MapObjectMoveXY",
+                    "type": "Button",
+                    "id": "3389ebc4-58c1-4171-956f-8ed17542b155",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MapObjectMoveZ",
+                    "type": "Button",
+                    "id": "f736825e-e5c7-4531-a130-09cab2d16562",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -380,6 +396,28 @@
                     "processors": "",
                     "groups": "Keyboard & Mouse",
                     "action": "Delete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22e030d1-f9ff-4ae9-accd-e85ec3dfa2b5",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapObjectMoveXY",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa6b574e-25eb-4e47-b1fd-7906cf3e61e6",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapObjectMoveZ",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
