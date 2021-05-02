@@ -23,13 +23,14 @@ public class InputController : MonoBehaviour {
 
   // Map Objects
   public static bool moMoveXY = false;
-	public static bool moMoveZ = false;
-	// public static float moRotateZ = 0;
-	// public static float moRotateFront = 0;
-	// public static float moRotateSide = 0;
+  public static bool moMoveZ = false;
+  public static bool moRotateZ = false;
+  public static bool moRotateFront = false;
+  public static bool moRotateSide = false;
   public static float slowMovementModifier = 0.25f;
-	public static float xyMovementSensitivity = 0.5f;
-	public static float zMovementSensitivity = 0.5f;
+  public static float xyMovementSensitivity = 0.5f;
+  public static float zMovementSensitivity = 0.5f;
+  public static float rotationSensitivity = 5.0f;
 
 
   /////////////////////
@@ -59,6 +60,27 @@ public class InputController : MonoBehaviour {
     controls.MapMode.MapObjectMoveZ.performed += ctx => moMoveZ = true;
     controls.MapMode.MapObjectMoveZ.canceled += ctx => {
       moMoveZ = false;
+      if (moMovementCoroutine == null) {
+        moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
+      }
+    };
+    controls.MapMode.MapObjectRotationZ.performed += ctx => moRotateZ = true;
+    controls.MapMode.MapObjectRotationZ.canceled += ctx => {
+      moRotateZ = false;
+      if (moMovementCoroutine == null) {
+        moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
+      }
+    };
+    controls.MapMode.MapObjectRotationFront.performed += ctx => moRotateFront = true;
+    controls.MapMode.MapObjectRotationFront.canceled += ctx => {
+      moRotateFront = false;
+      if (moMovementCoroutine == null) {
+        moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
+      }
+    };
+    controls.MapMode.MapObjectRotationSide.performed += ctx => moRotateSide = true;
+    controls.MapMode.MapObjectRotationSide.canceled += ctx => {
+      moRotateSide = false;
       if (moMovementCoroutine == null) {
         moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
       }

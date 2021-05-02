@@ -189,6 +189,30 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MapObjectRotationZ"",
+                    ""type"": ""Button"",
+                    ""id"": ""128e2465-717f-46f6-85be-e1f0f56e1b69"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MapObjectRotationFront"",
+                    ""type"": ""Button"",
+                    ""id"": ""e776f485-cf25-43a5-a9c6-07e0d78ffca9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MapObjectRotationSide"",
+                    ""type"": ""Button"",
+                    ""id"": ""660538b6-093e-4510-82f4-a7a5aa25d316"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -418,7 +442,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""MapObjectMoveXY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -429,8 +453,41 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard & Mouse"",
                     ""action"": ""MapObjectMoveZ"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""159bbb9d-8373-4059-90d9-e62122a36ee1"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MapObjectRotationZ"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62850bfc-7e01-400b-9f19-7720e3cc57a3"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""MapObjectRotationFront"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86c38588-ea5c-4723-aa91-87ade7a7eaaa"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapObjectRotationSide"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -981,6 +1038,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_MapMode_Delete = m_MapMode.FindAction("Delete", throwIfNotFound: true);
         m_MapMode_MapObjectMoveXY = m_MapMode.FindAction("MapObjectMoveXY", throwIfNotFound: true);
         m_MapMode_MapObjectMoveZ = m_MapMode.FindAction("MapObjectMoveZ", throwIfNotFound: true);
+        m_MapMode_MapObjectRotationZ = m_MapMode.FindAction("MapObjectRotationZ", throwIfNotFound: true);
+        m_MapMode_MapObjectRotationFront = m_MapMode.FindAction("MapObjectRotationFront", throwIfNotFound: true);
+        m_MapMode_MapObjectRotationSide = m_MapMode.FindAction("MapObjectRotationSide", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1110,6 +1170,9 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_MapMode_Delete;
     private readonly InputAction m_MapMode_MapObjectMoveXY;
     private readonly InputAction m_MapMode_MapObjectMoveZ;
+    private readonly InputAction m_MapMode_MapObjectRotationZ;
+    private readonly InputAction m_MapMode_MapObjectRotationFront;
+    private readonly InputAction m_MapMode_MapObjectRotationSide;
     public struct MapModeActions
     {
         private @Controls m_Wrapper;
@@ -1125,6 +1188,9 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @Delete => m_Wrapper.m_MapMode_Delete;
         public InputAction @MapObjectMoveXY => m_Wrapper.m_MapMode_MapObjectMoveXY;
         public InputAction @MapObjectMoveZ => m_Wrapper.m_MapMode_MapObjectMoveZ;
+        public InputAction @MapObjectRotationZ => m_Wrapper.m_MapMode_MapObjectRotationZ;
+        public InputAction @MapObjectRotationFront => m_Wrapper.m_MapMode_MapObjectRotationFront;
+        public InputAction @MapObjectRotationSide => m_Wrapper.m_MapMode_MapObjectRotationSide;
         public InputActionMap Get() { return m_Wrapper.m_MapMode; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1167,6 +1233,15 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MapObjectMoveZ.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectMoveZ;
                 @MapObjectMoveZ.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectMoveZ;
                 @MapObjectMoveZ.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectMoveZ;
+                @MapObjectRotationZ.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectRotationZ;
+                @MapObjectRotationZ.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectRotationZ;
+                @MapObjectRotationZ.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectRotationZ;
+                @MapObjectRotationFront.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectRotationFront;
+                @MapObjectRotationFront.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectRotationFront;
+                @MapObjectRotationFront.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectRotationFront;
+                @MapObjectRotationSide.started -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectRotationSide;
+                @MapObjectRotationSide.performed -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectRotationSide;
+                @MapObjectRotationSide.canceled -= m_Wrapper.m_MapModeActionsCallbackInterface.OnMapObjectRotationSide;
             }
             m_Wrapper.m_MapModeActionsCallbackInterface = instance;
             if (instance != null)
@@ -1204,6 +1279,15 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MapObjectMoveZ.started += instance.OnMapObjectMoveZ;
                 @MapObjectMoveZ.performed += instance.OnMapObjectMoveZ;
                 @MapObjectMoveZ.canceled += instance.OnMapObjectMoveZ;
+                @MapObjectRotationZ.started += instance.OnMapObjectRotationZ;
+                @MapObjectRotationZ.performed += instance.OnMapObjectRotationZ;
+                @MapObjectRotationZ.canceled += instance.OnMapObjectRotationZ;
+                @MapObjectRotationFront.started += instance.OnMapObjectRotationFront;
+                @MapObjectRotationFront.performed += instance.OnMapObjectRotationFront;
+                @MapObjectRotationFront.canceled += instance.OnMapObjectRotationFront;
+                @MapObjectRotationSide.started += instance.OnMapObjectRotationSide;
+                @MapObjectRotationSide.performed += instance.OnMapObjectRotationSide;
+                @MapObjectRotationSide.canceled += instance.OnMapObjectRotationSide;
             }
         }
     }
@@ -1342,6 +1426,9 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnDelete(InputAction.CallbackContext context);
         void OnMapObjectMoveXY(InputAction.CallbackContext context);
         void OnMapObjectMoveZ(InputAction.CallbackContext context);
+        void OnMapObjectRotationZ(InputAction.CallbackContext context);
+        void OnMapObjectRotationFront(InputAction.CallbackContext context);
+        void OnMapObjectRotationSide(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

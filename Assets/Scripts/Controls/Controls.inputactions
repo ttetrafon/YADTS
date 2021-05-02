@@ -176,6 +176,30 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "MapObjectRotationZ",
+                    "type": "Button",
+                    "id": "128e2465-717f-46f6-85be-e1f0f56e1b69",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MapObjectRotationFront",
+                    "type": "Button",
+                    "id": "e776f485-cf25-43a5-a9c6-07e0d78ffca9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MapObjectRotationSide",
+                    "type": "Button",
+                    "id": "660538b6-093e-4510-82f4-a7a5aa25d316",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -405,7 +429,7 @@
                     "path": "<Keyboard>/x",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard & Mouse",
                     "action": "MapObjectMoveXY",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -416,8 +440,41 @@
                     "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard & Mouse",
                     "action": "MapObjectMoveZ",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "159bbb9d-8373-4059-90d9-e62122a36ee1",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "MapObjectRotationZ",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62850bfc-7e01-400b-9f19-7720e3cc57a3",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "MapObjectRotationFront",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86c38588-ea5c-4723-aa91-87ade7a7eaaa",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MapObjectRotationSide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -72,7 +72,15 @@ public class MapObject: MonoBehaviour {
 			if (InputController.moMoveZ) {
 				transform.Translate(new Vector3(0, InputController.controls.Common.MouseDelta.ReadValue<Vector2>().y * InputController.zMovementSensitivity * InputController.CameraSpeedModifier(), 0));
 			}
-			// MapController.MapObjectMovementEnded(this);
+			if (InputController.moRotateZ) {
+				transform.Rotate(new Vector3(0, InputController.controls.Common.MouseDelta.ReadValue<Vector2>().x * InputController.rotationSensitivity * InputController.CameraSpeedModifier()), Space.World);
+			}
+			if (InputController.moRotateFront) {
+				transform.Rotate(new Vector3(InputController.controls.Common.MouseDelta.ReadValue<Vector2>().y, 0, 0) * InputController.rotationSensitivity * InputController.CameraSpeedModifier(), Space.Self);
+			}
+			if (InputController.moRotateSide) {
+				transform.Rotate(new Vector3(0, 0, InputController.controls.Common.MouseDelta.ReadValue<Vector2>().x) * InputController.rotationSensitivity * InputController.CameraSpeedModifier(), Space.Self);
+			}
 		}
 	}
 
@@ -127,19 +135,19 @@ public class MapObject: MonoBehaviour {
 
 	public IEnumerator HighlightSelf() {
 		// This method changes all materials of a map object's model to their highlighted version.
-        // Debug.Log("---> HighlightSelf(" + this.mapObjectData.objectName + ", " + this.isSelected + ")");
+    // Debug.Log("---> HighlightSelf(" + this.mapObjectData.objectName + ", " + this.isSelected + ")");
 		Material[] mats = this.modelNormal.GetComponent<MeshRenderer>().materials;
-        for (int i = 0; i < this.mapObjectData.materials.Count; i++) {
-            string mat = this.mapObjectData.materials[i];
-            // Debug.Log("mat: " + mat);
-            if (Materials.materialsDictionary.ContainsKey(mat)) {
-                // Debug.Log(Materials.materialsDictionary[mat][0].name);
-                // Debug.Log(Materials.materialsDictionary[mat][1].name);
-                // Debug.Log("... changing material from " + this.modelNormal.GetComponent<MeshRenderer>().materials[i].name + " to (" + (this.isSelected ? 1 : 0) + "): " + Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)].name);
+    for (int i = 0; i < this.mapObjectData.materials.Count; i++) {
+      string mat = this.mapObjectData.materials[i];
+      // Debug.Log("mat: " + mat);
+      if (Materials.materialsDictionary.ContainsKey(mat)) {
+        // Debug.Log(Materials.materialsDictionary[mat][0].name);
+        // Debug.Log(Materials.materialsDictionary[mat][1].name);
+        // Debug.Log("... changing material from " + this.modelNormal.GetComponent<MeshRenderer>().materials[i].name + " to (" + (this.isSelected ? 1 : 0) + "): " + Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)].name);
 				mats[i] = Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)];
-            }
+      }
 			yield return null;
-        }
+    }
 		this.modelNormal.GetComponent<MeshRenderer>().materials = mats;
 	}
 

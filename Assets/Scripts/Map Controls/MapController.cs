@@ -21,8 +21,6 @@ public class MapController : MonoBehaviour {
 	// Map Objects
 	public static List<MapObject> currentlySelectedObjects = new List<MapObject>(); // Holds a list of all currently selected map objects.
 	public static Dictionary<string, MapObject> mapObjects = new Dictionary<string, MapObject>();
-	// private float arrowMovementSensitivity = 5.0f;
-	private float rotationSensitivity = 5.0f;
 	public GameObject moSpatialDataPanel;
 
 	[Header("Map Tools")]
@@ -82,8 +80,7 @@ public class MapController : MonoBehaviour {
 			// for (int i = 0; i < currentlySelectedObjects.Count; i++) {
 			// 	if (currentlySelectedObjects[i]) {
 			// 		currentlySelectedObjects[i].
-			// 		currentlySelectedObjects[i].transform.Rotate(new Vector3(0, InputController.moRotateZ * rotationSensitivity * MapObjectControlsShiftModifier()), Space.World);
-			// 		currentlySelectedObjects[i].transform.Rotate(new Vector3(InputController.moRotateFront, 0, InputController.moRotateSide) * rotationSensitivity * MapObjectControlsShiftModifier(), Space.Self);
+			// 		currentlySelectedObjects[i].
 			// 		MapObjectMovementEnded(currentlySelectedObjects[i]);
 			// 	}
 			// }
