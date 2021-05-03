@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour {
 	[SerializeField] private GameObject mapInfoPanel;
 	[SerializeField] private GameObject addMapObjectPanel;
 	[SerializeField] private GameObject mapConfigurationPanel;
+	[SerializeField] private GameObject mapObjectPanel;
 	// main menu
 	[Header("Main Menu")]
 	[SerializeField] private Button mainMenuButton;
@@ -91,6 +92,8 @@ public class MainMenu : MonoBehaviour {
 		TogglePanel("AddMapObject", true, false);
 		TogglePanel("MapConfiguration", true, false);
 		TogglePanel("Settings", true, false);
+		TogglePanel("UserInfo", true, false);
+		TogglePanel("MapObject", true, false);
 		CameraControl.cameraBlock = false;
 	}
 
@@ -122,6 +125,9 @@ public class MainMenu : MonoBehaviour {
 		}
 		if (instance.campaignsPanel) {
 			instance.campaignsPanel.SetActive((panel == "Campaigns") && (_override ? state : !instance.campaignsPanel.activeSelf));
+		}
+		if (instance.campaignsPanel) {
+			instance.mapObjectPanel.SetActive((panel == "MapObject") && (_override ? state : !instance.mapObjectPanel.activeSelf));
 		}
 	}
 

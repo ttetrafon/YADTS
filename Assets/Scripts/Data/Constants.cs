@@ -20,4 +20,8 @@ public class Constants {
 	public static string chatElementTypeChatYell = "yell";
 	public static string chatElementTypeLogRollSuccess = "rollSuccess";
 	public static string chatElementTypeLogRollFailure = "rollFailure";
+
+
+	public static string mapObjectPanelBio = "bio";
+	public static string mapObjectPanelProperties = "properties";
 }

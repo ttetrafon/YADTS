@@ -19,6 +19,7 @@ public class MapController : MonoBehaviour {
 	[SerializeField] private Button mapInfoButton;
 
 	// Map Objects
+	[SerializeField] private Button mapObjectInfoButton;
 	public static List<MapObject> currentlySelectedObjects = new List<MapObject>(); // Holds a list of all currently selected map objects.
 	public static Dictionary<string, MapObject> mapObjects = new Dictionary<string, MapObject>();
 	public GameObject moSpatialDataPanel;
@@ -67,6 +68,9 @@ public class MapController : MonoBehaviour {
 		});
 		mapInfoButton.onClick.AddListener(delegate {
 			MainMenu.TogglePanel("MapInfo");
+		});
+		mapObjectInfoButton.onClick.AddListener(delegate {
+			MainMenu.TogglePanel("MapObject");
 		});
 
 		// Finished Loading
