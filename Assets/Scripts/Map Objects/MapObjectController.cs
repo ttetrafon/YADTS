@@ -7,6 +7,10 @@ public class MapObjectController : MonoBehaviour {
     public static MapObjectController instance = null;
     private string selectedPanel = Constants.mapObjectPanelBio; // Use this to remember which panel was last open in the panel. This is ignored between sessions.
 
+    [Header("General")]
+    [SerializeField] private Dropdown moCategorySelector;
+    [SerializeField] private Dropdown moSelector;
+
     [Header("Bio")]
     [SerializeField] private Button bioTab;
     [SerializeField] private GameObject bioContainer;
@@ -25,6 +29,9 @@ public class MapObjectController : MonoBehaviour {
             instance = this;
         }
 
+        // Initiation
+        Helper.FillDropdown(moCategorySelector, Localization.dropdowns["eng"]["Map Object Categories"]);
+
         // Listeners
         bioTab.onClick.AddListener(delegate{
             DisplaySelection(Constants.mapObjectPanelBio);
@@ -38,6 +45,7 @@ public class MapObjectController : MonoBehaviour {
 
     private void OnEnable() {
         DisplaySelection(selectedPanel);
+        FillMapObjectsList();
     }
 
 
@@ -47,6 +55,28 @@ public class MapObjectController : MonoBehaviour {
     private void DisplaySelection(string panel) {
         bioContainer.SetActive(panel == Constants.mapObjectPanelBio);
         propertiesContainer.SetActive(panel == Constants.mapObjectPanelProperties);
+    }
+
+
+    ///////////////////////
+    ///   UI CONTROLS   ///
+    ///////////////////////
+    private void FillMapObjectsList() {
+        Debug.Log("---> FillMapObjectsList()");
+        string category = Helper.GetDropdownSelectedText(moCategorySelector);
+        switch(category) {
+            case "Currenty selected":
+                List<string> values = new List<string>() { "-" };
+                for (int i = 0; i < MapController.currentlySelectedObjects.Count; i++) {
+                    MapObjectData mod = MapController.currentlySelectedObjects[i].mapObjectData;
+                    values.Add(mod.objectName + " (" + mod.objectUuid + ")");
+                }
+                Helper.FillDropdown(moSelector, values, "-");
+                break;
+            default:
+                Debug.LogError("No category selected...");
+                break;
+        }
     }
 
 }

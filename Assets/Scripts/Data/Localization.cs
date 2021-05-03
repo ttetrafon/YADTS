@@ -34,6 +34,8 @@ public class Localization {
 			{"Map Config Button", "Map Configuration"},
 			{"Map Info Button", "Map Info"},
 			{"Map Menu Button", "Map"},
+			{"Map Object Category Selector", "Select Category"},
+			{"Map Object Selector", "Select Map Object"},
 			{"Map Objects Button", "Map Objects Info"},
 			{"Move Down Button", "Move Down"},
 			{"Move Up Button", "Move Up"},
@@ -76,6 +78,9 @@ public class Localization {
 				"Planet", "Settlement",
 				"Building",
 				"Vehicle"
+			}},
+			{"Map Object Categories", new List<string>() {
+				"Currenty selected", "Creatures in map", "Vehicles in map", "In map", "All creatures", "All vehicles", "All other", "All"
 			}},
 			{"Map Object Types", new List<string>() {
 				"Terrain", "Item", "Vehicle", "Creature", "Effect"
