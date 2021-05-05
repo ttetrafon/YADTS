@@ -19,7 +19,7 @@ public class LoadMapScript : MonoBehaviour {
 	private void Start() {
 		// Add listeners
 		loadMapButton.onClick.AddListener(delegate {
-			string mapUid = Helper.ExtractMapUidFromMapDropdown(mapSelectionDropdown.options[mapSelectionDropdown.value].text);
+			string mapUid = Helper.ExtractUidFromDropdown(mapSelectionDropdown.options[mapSelectionDropdown.value].text);
 			//Debug.Log("map to load: " + GameController.dictionaries.NameGet(mapUid) + " (" + mapUid + ")");
 			LoadMap(mapUid);
 		});

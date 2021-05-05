@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class MapObjectController : MonoBehaviour {
     public static MapObjectController instance = null;
     private string selectedPanel = Constants.mapObjectPanelBio; // Use this to remember which panel was last open in the panel. This is ignored between sessions.
+    public static MapObject selectedMapObject; // The selected Map Object, if it exists in the map!
+    public static MapObjectData selectedMapObjectData; // The selected Map Object, if it does not exist in the map!
 
     [Header("General")]
     [SerializeField] private Dropdown moCategorySelector;
@@ -41,11 +43,18 @@ public class MapObjectController : MonoBehaviour {
             DisplaySelection(Constants.mapObjectPanelProperties);
             selectedPanel = Constants.mapObjectPanelProperties;
         });
+        moCategorySelector.onValueChanged.AddListener(delegate {
+            FillMapObjectsList();
+        });
+        moSelector.onValueChanged.AddListener(delegate {
+            SelectMapObject();
+        });
     }
 
     private void OnEnable() {
         DisplaySelection(selectedPanel);
         FillMapObjectsList();
+        selectedMapObject = null;
     }
 
 
@@ -57,10 +66,6 @@ public class MapObjectController : MonoBehaviour {
         propertiesContainer.SetActive(panel == Constants.mapObjectPanelProperties);
     }
 
-
-    ///////////////////////
-    ///   UI CONTROLS   ///
-    ///////////////////////
     private void FillMapObjectsList() {
         Debug.Log("---> FillMapObjectsList()");
         string category = Helper.GetDropdownSelectedText(moCategorySelector);
@@ -69,9 +74,45 @@ public class MapObjectController : MonoBehaviour {
                 List<string> values = new List<string>() { "-" };
                 for (int i = 0; i < MapController.currentlySelectedObjects.Count; i++) {
                     MapObjectData mod = MapController.currentlySelectedObjects[i].mapObjectData;
-                    values.Add(mod.objectName + " (" + mod.objectUuid + ")");
+                    values.Add(mod.objectName + " [" + mod.objectUuid + "]");
                 }
                 Helper.FillDropdown(moSelector, values, "-");
+                break;
+            default:
+                Debug.LogError("No category selected...");
+                break;
+        }
+    }
+
+    private void SelectMapObject() {
+        Debug.Log("---> FillMapObjectsList()");
+        string category = Helper.GetDropdownSelectedText(moCategorySelector);
+        string moUid = Helper.ExtractUidFromDropdown(Helper.GetDropdownSelectedText(moSelector));
+        // Debug.Log();
+        switch(category) {
+            case "Currenty selected":
+                for (int i = 0; i < MapController.currentlySelectedObjects.Count; i++) {
+                    if (MapController.currentlySelectedObjects[i].name == moUid) {
+                        selectedMapObject = MapController.currentlySelectedObjects[i];
+                        selectedMapObjectData = MapController.currentlySelectedObjects[i].mapObjectData;
+                        break;
+                    }
+                }
+                Debug.Log("selected mo: " + selectedMapObject.mapObjectData.objectName);
+                break;
+            case "Creatures in map":
+            case "Vehicles in map":
+            case "Items in map":
+            case "Terrain in map":
+            case "Effects in map":
+            case "In map":
+                break;
+            case "All creatures":
+            case "All vehicles":
+            case "All items":
+            case "All terrain":
+            case "All effects":
+            case "All":
                 break;
             default:
                 Debug.LogError("No category selected...");

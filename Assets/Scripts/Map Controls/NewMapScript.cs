@@ -26,7 +26,7 @@ public class NewMapScript : MonoBehaviour {
 		string newUid = Helper.GenerateUid();
 		GameController.dictionaries.NameAdd(newUid, newMapName);
 		// ... map tree node
-		string nodeParent = Helper.ExtractMapUidFromMapDropdown(parentDropdown.options[parentDropdown.value].text);
+		string nodeParent = Helper.ExtractUidFromDropdown(parentDropdown.options[parentDropdown.value].text);
 		MapTreeNode mapTreeNode = new MapTreeNode(newUid, nodeParent);
 		MapController.mapTree[nodeParent].AddChild(newUid);
 		MapController.mapTree.Add(newUid, mapTreeNode);

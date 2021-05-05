@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class MapController : MonoBehaviour {
 	public static MapController instance = null;
-	// General
+
+	[Header("General")]
 	public static string rootMap = "MAP00000-TREE-ROOT-0000-000000000000";
 	public static string rootMapFile;
 	public static MapData currentMapData = new MapData(rootMap);
@@ -18,7 +19,7 @@ public class MapController : MonoBehaviour {
 	public static Dictionary<string, MapTreeNode> mapTree = new Dictionary<string, MapTreeNode>();
 	[SerializeField] private Button mapInfoButton;
 
-	// Map Objects
+	[Header("Map Objects")]
 	[SerializeField] private Button mapObjectInfoButton;
 	public static List<MapObject> currentlySelectedObjects = new List<MapObject>(); // Holds a list of all currently selected map objects.
 	public static Dictionary<string, MapObject> mapObjects = new Dictionary<string, MapObject>();

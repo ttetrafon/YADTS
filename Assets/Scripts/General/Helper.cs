@@ -193,7 +193,7 @@ public class Helper : MonoBehaviour {
 		selector.value = selector.options.FindIndex((u) => { return u.text.Contains(value); });
 	}
 
-	public static string ExtractMapUidFromMapDropdown(string fullName) {
+	public static string ExtractUidFromDropdown(string fullName) {
 		return fullName.Substring(fullName.LastIndexOf("[") + 1, 36);
 	}
 
