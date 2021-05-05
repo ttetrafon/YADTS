@@ -80,10 +80,22 @@ public class Localization {
 				"Vehicle"
 			}},
 			{"Map Object Categories", new List<string>() {
-				"Currenty selected", "Creatures in map", "Vehicles in map", "In map", "All creatures", "All vehicles", "All other", "All"
+				"Currenty selected",
+				"Creatures in map",
+				"Vehicles in map",
+				"Items in map",
+				"Terrain in map",
+				"Effects in map",
+				"In map",
+				"All creatures",
+				"All vehicles",
+				"All items",
+				"All terrain",
+				"All effects",
+				"All"
 			}},
 			{"Map Object Types", new List<string>() {
-				"Terrain", "Item", "Vehicle", "Creature", "Effect"
+				"terrain", "item", "vehicle", "creature", "effect"
 			}},
 			{"Text Format Choices", new List<string>() {
 				"Section",
@@ -103,7 +115,7 @@ public class Localization {
 				"Note",
 				"Important"
 			}},
-			{"User Roles", new List<string>() {"DM", "Player", "Observer"}}
+			{"User Roles", new List<string>() {"GM", "Player", "Observer"}}
 		}}
 	};
 

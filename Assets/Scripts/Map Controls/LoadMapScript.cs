@@ -56,25 +56,24 @@ public class LoadMapScript : MonoBehaviour {
 		MainMenu.CloseMenus();
 		// Load map objects. (TODO: Do this in parallel if possible...)
 		instance.StartCoroutine(instance.InstantiateMapObjects(loadedMapData.mapObjectsInMap));
-		// Instead of calling the coroutine directly, a reference can be set, so it can be stopped later.
-		// i.e.:
-		// IEnumerator moLoader = InstantiateMapObjects(loadedMapData.mapObjectsInMap);
-		// instance.StartCoroutine(moLoader);
-		// instance.StopCoroutine(moLoader);
 	}
 
-	private IEnumerator InstantiateMapObjects(List<string> mos) {
-		// Debug.Log("---> InstantiateMapObjects(" + mos.Count + " items)");
-		for (int i = 0; i < mos.Count; i++) {
-			LoadMapObject(mos[i]);
+	private IEnumerator InstantiateMapObjects(Dictionary<string, List<string>> mos) {
+		// Debug.Log("---> InstantiateMapObjects()");
+		for (int j = 0; j < Localization.dropdowns["eng"]["Map Object Types"].Count; j++) {
+			string type = Localization.dropdowns["eng"]["Map Object Types"][j];
+			for (int i = 0; i < mos[type].Count; i++) {
+				LoadMapObject(mos[type][i], type);
+				yield return null;
+			}
 			yield return null;
 		}
 	}
 
-	public static void LoadMapObject(string uid) {
+	public static void LoadMapObject(string uid, string type) {
 		//Debug.Log("---> LoadMap(" + uid + ")");
 		MapObjectData mod = new MapObjectData();
-		string filename = MapController.mapObjectsDirectory + uid + ".json";
+		string filename = MapController.mapObjectsDirectory + type + "/" + uid + ".json";
 		// Load map object data.
 		if (File.Exists(filename)) {
 			mod = (MapObjectData)JsonObject.FromJson(mod, Helper.ReadFile(filename));

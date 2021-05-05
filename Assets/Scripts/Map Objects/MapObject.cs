@@ -158,7 +158,7 @@ public class MapObject: MonoBehaviour {
 
 	public void DeleteSelf() {
 		// Remove from the current map's list of map objects.
-		MapController.currentMapData.RemoveMapObjectInMap(mapObjectData.objectUuid);
+		MapController.currentMapData.RemoveMapObjectInMap(mapObjectData.objectUuid, mapObjectData.objectType);
 		// Remove the location for the current map.
 		mapObjectData.RemovedFromMap(MapController.currentMapData.mapUid);
 		// Check if it is the last instance and, if not a creature or vehicle, remove the file itself and the names dictionary entry.

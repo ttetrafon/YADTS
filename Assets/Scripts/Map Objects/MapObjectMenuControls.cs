@@ -229,7 +229,7 @@ public class MapObjectMenuControls : MonoBehaviour {
 		mo.mapObjectData.objectType = moType;
 		Debug.Log(go.transform.localScale);
 		mo.UpdateSpacialData();
-		MapController.currentMapData.AddMapObjectInMap(uid);
+		MapController.currentMapData.AddMapObjectInMap(uid, moType);
 		Helper.SaveCurrentMap();
 		Helper.SaveMapObject(mo);
 		MainMenu.CloseMenus();

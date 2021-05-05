@@ -20,13 +20,15 @@ public class GameController : MonoBehaviour {
 	public static string saveFolder;
 	public static string backupFolder;
 	private List<string> subfolders = new List<string>() {
-		"creatures",
 		"dictionaries",
 		"game system",
 		"maps",
-		"map objects",
-		"map tree hierarchy",
-		"vehicles"
+		"map objects/effect",
+		"map objects/creature",
+		"map objects/item",
+		"map objects/terrain",
+		"map objects/vehicle",
+		"map tree hierarchy"
 	};
 	// General Game Data
 	public static Dictionaries dictionaries = new Dictionaries();

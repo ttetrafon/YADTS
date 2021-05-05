@@ -64,7 +64,7 @@ public class MapObjectController : MonoBehaviour {
     private void FillMapObjectsList() {
         Debug.Log("---> FillMapObjectsList()");
         string category = Helper.GetDropdownSelectedText(moCategorySelector);
-        switch(category) {
+        switch(category) { // FIXME: This won't work with different localization...
             case "Currenty selected":
                 List<string> values = new List<string>() { "-" };
                 for (int i = 0; i < MapController.currentlySelectedObjects.Count; i++) {
