@@ -48,6 +48,7 @@ public class MapObjectControllerProperties : MonoBehaviour {
         mat.onValueChanged.AddListener(delegate {
           string selectedMaterial = Helper.GetDropdownSelectedText(mat);
           Debug.Log("selected materials: " + selectedMaterial);
+          MapObjectController.selectedMapObject.UpdateMaterial(k, selectedMaterial);
         });
       }
     }

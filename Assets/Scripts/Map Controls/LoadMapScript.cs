@@ -100,6 +100,7 @@ public class LoadMapScript : MonoBehaviour {
 			loadedMapObject.SetSpacialData(mod.spatialData[MapController.currentMapData.mapUid]);
 		}
 		loadedMapObject.mapObjectData = mod;
+    loadedMapObject.InitialiseMaterials();
 		MapController.mapObjects.Add(uid, loadedMapObject);
 	}
 

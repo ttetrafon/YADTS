@@ -138,15 +138,25 @@ public class MapObject: MonoBehaviour {
 		Helper.SaveMapObject(this);
 	}
 
+  public void InitialiseMaterials() {
+    Debug.Log("---> InitialiseMaterials()");
+    Material[] mats = this.modelNormal.GetComponent<MeshRenderer>().materials;
+    List<string> materialNames = this.mapObjectData.materials;
+    for (int i = 0; i < materialNames.Count; i++) {
+      mats[i] = Materials.materialsDictionary[materialNames[i]][0];
+    }
+    this.modelNormal.GetComponent<MeshRenderer>().materials = mats;
+  }
+
 	public IEnumerator HighlightSelf() {
-		// This method changes all materials of a map object's model to their highlighted version.
+	  // This method changes all materials of a map object's model to their highlighted version.
     // Debug.Log("---> HighlightSelf(" + this.mapObjectData.objectName + ", " + this.isSelected + ")");
-		Material[] mats = this.modelNormal.GetComponent<MeshRenderer>().materials;
+  	Material[] mats = this.modelNormal.GetComponent<MeshRenderer>().materials;
     for (int i = 0; i < this.mapObjectData.materials.Count; i++) {
       string mat = this.mapObjectData.materials[i];
       // Debug.Log("mat: " + mat);
       if (Materials.materialsDictionary.ContainsKey(mat)) {
-        // Debug.Log(Materials.materialsDictionary[mat][0].name);
+		    // Debug.Log(Materials.materialsDictionary[mat][0].name);
         // Debug.Log(Materials.materialsDictionary[mat][1].name);
         // Debug.Log("... changing material from " + this.modelNormal.GetComponent<MeshRenderer>().materials[i].name + " to (" + (this.isSelected ? 1 : 0) + "): " + Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)].name);
 				mats[i] = Materials.materialsDictionary[mat][(this.isSelected ? 1 : 0)];
@@ -154,6 +164,19 @@ public class MapObject: MonoBehaviour {
 			yield return null;
     }
 		this.modelNormal.GetComponent<MeshRenderer>().materials = mats;
+	}
+
+	public void UpdateMaterial(int index, string material) {
+    // This method changes a single material to the selected one.
+    Debug.Log("---> UpdateMaterial(" + index + ", " + material + ")");
+    // ... change the saved material
+    this.mapObjectData.materials[index] = material;
+    // ... change the actual material
+    Material[] mats = this.modelNormal.GetComponent<MeshRenderer>().materials;
+    mats[index] = Materials.materialsDictionary[material][(this.isSelected ? 1 : 0)];
+    this.modelNormal.GetComponent<MeshRenderer>().materials = mats;
+    // ... save the mo
+    Helper.SaveMapObject(this);
 	}
 
 	public void DeleteSelf() {
