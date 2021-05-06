@@ -31,7 +31,7 @@ public class MapObjectControllerProperties : MonoBehaviour {
     // materials
     // instance.materialSelectors = new List<Dropdown>();
     for (int i = instance.materialList.transform.childCount; i > 0; i--) {
-      Destroy(instance.materialList.transform.GetChild(i).gameObject);
+      Destroy(instance.materialList.transform.GetChild(i - 1).gameObject);
     }
   }
 

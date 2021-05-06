@@ -194,7 +194,13 @@ public class Helper : MonoBehaviour {
 	}
 
 	public static string ExtractUidFromDropdown(string fullName) {
-		return fullName.Substring(fullName.LastIndexOf("[") + 1, 36);
+		int index = fullName.LastIndexOf("[") + 1;
+		if (index > 0) {
+			return fullName.Substring(index, 36);
+		}
+		else {
+			return "-";
+		}
 	}
 
 	public static string GetDropdownSelectedText(Dropdown selector) {
