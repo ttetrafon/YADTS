@@ -22,7 +22,9 @@ public class GameController : MonoBehaviour {
 	private List<string> subfolders = new List<string>() {
 		"dictionaries",
 		"game system",
+		"game system/name generator",
 		"maps",
+		"map objects",
 		"map objects/effect",
 		"map objects/creature",
 		"map objects/item",

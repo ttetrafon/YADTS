@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
 	public static MainMenu instance = null;
-	// panels
+
 	[Header("Panels")]
 	[SerializeField] private GameObject mainMenuPanel;
 	[SerializeField] private GameObject mapMenuPanel;
@@ -18,22 +18,27 @@ public class MainMenu : MonoBehaviour {
 	[SerializeField] private GameObject addMapObjectPanel;
 	[SerializeField] private GameObject mapConfigurationPanel;
 	[SerializeField] private GameObject mapObjectPanel;
-	// main menu
+	[SerializeField] private GameObject gameSystemMenuPanel;
+
 	[Header("Main Menu")]
 	[SerializeField] private Button mainMenuButton;
 	[SerializeField] private Button userButton;
 	[SerializeField] private Button campaignsButton;
 	[SerializeField] private Button settingsButton;
 	[SerializeField] private Button exitAppButton;
-	// map menu
+
 	[Header("Map Menu")]
-	[SerializeField] private Button mapManuButton;
+	[SerializeField] private Button mapMenuButton;
 	[SerializeField] private Text mapHeaderText;
 	[SerializeField] private Button newMapButton;
 	[SerializeField] private Button saveMapButton;
 	[SerializeField] private Button loadMapButton;
 	[SerializeField] private Button editMapButton;
 	[SerializeField] private Button deleteMapButton;
+	// game system menu
+	[Header("Game System Menu")]
+	[SerializeField] private Button gameSystemMenuButton;
+
 
 	private void Awake() {
 		if (instance == null) { instance = this; }
@@ -59,7 +64,7 @@ public class MainMenu : MonoBehaviour {
 			Application.Quit();
 		});
 		// (map menu)
-		mapManuButton.onClick.AddListener(delegate {
+		mapMenuButton.onClick.AddListener(delegate {
 			mainMenuPanel.SetActive(false);
 			mapMenuPanel.SetActive(!mapMenuPanel.activeSelf);
 		});
@@ -72,6 +77,10 @@ public class MainMenu : MonoBehaviour {
 		});
 		loadMapButton.onClick.AddListener(delegate {
 			TogglePanel("LoadMap");
+		});
+		// (game system menu)
+		gameSystemMenuButton.onClick.AddListener(delegate {
+			TogglePanel("GameSystem");
 		});
 
 		// Finished initialisation...
@@ -94,6 +103,7 @@ public class MainMenu : MonoBehaviour {
 		TogglePanel("Settings", true, false);
 		TogglePanel("UserInfo", true, false);
 		TogglePanel("MapObject", true, false);
+		TogglePanel("GameSystem", true, false);
 		CameraControl.cameraBlock = false;
 	}
 
@@ -128,6 +138,9 @@ public class MainMenu : MonoBehaviour {
 		}
 		if (instance.campaignsPanel) {
 			instance.mapObjectPanel.SetActive((panel == "MapObject") && (_override ? state : !instance.mapObjectPanel.activeSelf));
+		}
+		if (instance.gameSystemMenuPanel) {
+			instance.gameSystemMenuPanel.SetActive((panel == "GameSystem") && (_override ? state : !instance.gameSystemMenuPanel.activeSelf));
 		}
 	}
 

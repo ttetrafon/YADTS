@@ -19,7 +19,7 @@ public class Materials : MonoBehaviour {
   [SerializeField] private Material universePlaneOfExistenceYellowSelected;
 
   [Header("Structures")]
-  public static Dictionary<string, List<Material>> materialsDictionary;
+  public static Dictionary<string, List<Material>> materialsDictionary; // Will keep all material variants, for easy access. (0) normal, (1) normal highlighted
 
   public void Awake() {
     if (instance == null) {
