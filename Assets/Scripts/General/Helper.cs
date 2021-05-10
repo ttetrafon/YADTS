@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -207,6 +208,13 @@ public class Helper : MonoBehaviour {
 	public static string GetDropdownSelectedText(Dropdown selector) {
 		return selector.options[selector.value].text;
 	}
+
+  public static string ParseInfoInputText(string text) {
+    // This method takes the input string from an info text and produces the formatted text to be displayed in the TMP text field.
+    Debug.Log("---> ParseTmInputText()");
+    // ...
+    return text;
+  }
 
 
 	/////////////////

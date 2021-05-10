@@ -69,7 +69,7 @@ public class MapInfoItem : MonoBehaviour {
 	private void UpdateInfo() {
 		// text
 		MapController.currentMapData.mapInfoItems[index].text = textInput.text;
-		textDisplay.text = textInput.text;
+		textDisplay.text = Helper.ParseInfoInputText(textInput.text);
 		// player visible
 		playerVisibleIndicator.gameObject.SetActive(this.playerVisibleToggle.isOn);
 		if (MapController.currentMapData.mapInfoItems.ContainsKey(this.index)) {
