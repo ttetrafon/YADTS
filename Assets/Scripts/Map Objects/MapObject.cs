@@ -139,7 +139,7 @@ public class MapObject: MonoBehaviour {
 	}
 
   public void InitialiseMaterials() {
-    Debug.Log("---> InitialiseMaterials()");
+    // Debug.Log("---> InitialiseMaterials()");
     Material[] mats = this.modelNormal.GetComponent<MeshRenderer>().materials;
     List<string> materialNames = this.mapObjectData.materials;
     for (int i = 0; i < materialNames.Count; i++) {
@@ -168,7 +168,7 @@ public class MapObject: MonoBehaviour {
 
 	public void UpdateMaterial(int index, string material) {
     // This method changes a single material to the selected one.
-    Debug.Log("---> UpdateMaterial(" + index + ", " + material + ")");
+    // Debug.Log("---> UpdateMaterial(" + index + ", " + material + ")");
     // ... change the saved material
     this.mapObjectData.materials[index] = material;
     // ... change the actual material

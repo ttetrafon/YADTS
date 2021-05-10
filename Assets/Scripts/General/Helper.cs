@@ -23,6 +23,7 @@ public class Helper : MonoBehaviour {
 	}
 
 	public static bool isUIActive() {
+		// Debug.Log(EventSystem.current.currentSelectedGameObject);
 		return EventSystem.current.currentSelectedGameObject != null;
 	}
 

@@ -16,6 +16,9 @@ public class MapInfoPanel : MonoBehaviour {
 	[SerializeField] private InputField newMapItemIndexInput;
 	[SerializeField] private Button addMapInfoItemButton;
 
+	// Controls
+	public static int changeCounter = 0;
+
 	private void Start() {
 		// Create required data
 		Helper.FillDropdown(mapTypeSelector, Localization.dropdowns["eng"]["Map Types"]);
@@ -30,7 +33,9 @@ public class MapInfoPanel : MonoBehaviour {
 
 	private void Update() {
 		// TODO: Change to use a counter and only do 2 updates (like with text chat) instead of on every update...
-		RefreshMapInfoPanel();
+		if (changeCounter < 2) {
+			RefreshMapInfoPanel();
+		}
 	}
 
 	private void OnEnable() {
@@ -93,6 +98,7 @@ public class MapInfoPanel : MonoBehaviour {
 			mii.ResizeViewPanel();
 		}
 		LayoutRebuilder.ForceRebuildLayoutImmediate(mapInfoContainer.GetComponent<RectTransform>());
+		changeCounter++;
 	}
 
 	private void SetNewMapItemIndex() {

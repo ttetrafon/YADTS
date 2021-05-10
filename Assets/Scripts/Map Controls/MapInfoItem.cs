@@ -35,7 +35,6 @@ public class MapInfoItem : MonoBehaviour {
 		parent = this.gameObject.transform.parent.gameObject;
 		Helper.FillDropdown(typeSelector, Localization.dropdowns["eng"]["Text Format Choices"]);
 
-
 		// Set listeners
 		editButton.onClick.AddListener(delegate {
 			FillEditElements();
@@ -64,8 +63,7 @@ public class MapInfoItem : MonoBehaviour {
 		if (viewMode.activeSelf) {
 			ResizeViewPanel();
 		}
-		// TODO: This forced layout rebuild is probably needed due to a mistake in how the layout components in MapItemData are set...
-		LayoutRebuilder.ForceRebuildLayoutImmediate(parent.GetComponent<RectTransform>());
+		MapInfoPanel.changeCounter = 0;
 	}
 
 	private void UpdateInfo() {

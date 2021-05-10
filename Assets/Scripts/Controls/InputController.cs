@@ -53,9 +53,10 @@ public class InputController : MonoBehaviour {
     controls.MapMode.Delete.performed += ctx => MapController.DeleteSelectedMapObjects();
     controls.MapMode.MapObjectMoveXY.performed += ctx => moMoveXY = true;
     controls.MapMode.MapObjectMoveXY.canceled += ctx => {
-      Debug.Log("x released...");
-      moMoveXY = false;
-      StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      if (!Helper.isUIActive()) {
+        moMoveXY = false;
+        StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      }
       // Debug.Log(moMovementCoroutine);
       // if (moMovementCoroutine != null) {
       //   StopCoroutine(moMovementCoroutine);
@@ -64,40 +65,50 @@ public class InputController : MonoBehaviour {
     };
     controls.MapMode.MapObjectMoveZ.performed += ctx => moMoveZ = true;
     controls.MapMode.MapObjectMoveZ.canceled += ctx => {
-      moMoveZ = false;
-      StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      if (!Helper.isUIActive()) {
+        moMoveZ = false;
+        StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      }
       // if (moMovementCoroutine == null) {
       //   moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
       // }
     };
     controls.MapMode.MapObjectRotationZ.performed += ctx => moRotateZ = true;
     controls.MapMode.MapObjectRotationZ.canceled += ctx => {
-      moRotateZ = false;
-      StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      if (!Helper.isUIActive()) {
+        moRotateZ = false;
+        StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      }
       // if (moMovementCoroutine == null) {
       //   moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
       // }
     };
     controls.MapMode.MapObjectRotationFront.performed += ctx => moRotateFront = true;
     controls.MapMode.MapObjectRotationFront.canceled += ctx => {
-      moRotateFront = false;
-      StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      if (!Helper.isUIActive()) {
+        moRotateFront = false;
+        StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      }
       // if (moMovementCoroutine == null) {
       //   moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
       // }
     };
     controls.MapMode.MapObjectRotationSide.performed += ctx => moRotateSide = true;
     controls.MapMode.MapObjectRotationSide.canceled += ctx => {
-      moRotateSide = false;
-      StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      if (!Helper.isUIActive()) {
+        moRotateSide = false;
+        StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      }
       // if (moMovementCoroutine == null) {
       //   moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
       // }
     };
     controls.MapMode.MapObjectScale.performed += ctx => moScale = true;
     controls.MapMode.MapObjectScale.canceled += ctx => {
-      moScale = false;
-      StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      if (!Helper.isUIActive()) {
+        moScale = false;
+        StartCoroutine(MapObjectSpatialControlReleasedLoop());
+      }
       // if (moMovementCoroutine == null) {
       //   moMovementCoroutine = MapObjectSpatialControlReleasedLoop();
       // }
@@ -222,7 +233,7 @@ public class InputController : MonoBehaviour {
   }
 
   private IEnumerator MapObjectSpatialControlReleasedLoop() {
-    Debug.Log("---> MapObjectSpatialControlReleasedLoop()");
+    // Debug.Log("---> MapObjectSpatialControlReleasedLoop()");
     for (int i = 0; i < MapController.currentlySelectedObjects.Count; i++) {
       MapController.MapObjectMovementEnded(MapController.currentlySelectedObjects[i]);
     }
