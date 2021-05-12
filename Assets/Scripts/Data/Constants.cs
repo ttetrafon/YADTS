@@ -24,4 +24,10 @@ public class Constants {
 
 	public static string mapObjectPanelBio = "bio";
 	public static string mapObjectPanelProperties = "properties";
+
+
+	public static string nameGeneratorModeNew = "new";
+	public static string nameGeneratorModeLoad = "load";
+	public static string nameGeneratorModeDelete = "delete";
+
 }

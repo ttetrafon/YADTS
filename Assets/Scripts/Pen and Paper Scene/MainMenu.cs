@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour {
 	[SerializeField] private GameObject mapConfigurationPanel;
 	[SerializeField] private GameObject mapObjectPanel;
 	[SerializeField] private GameObject gameSystemMenuPanel;
+	[SerializeField] private GameObject nameGeneratorPanel;
 
 	[Header("Main Menu")]
 	[SerializeField] private Button mainMenuButton;
@@ -38,6 +39,7 @@ public class MainMenu : MonoBehaviour {
 	// game system menu
 	[Header("Game System Menu")]
 	[SerializeField] private Button gameSystemMenuButton;
+	[SerializeField] private Button nameGeneratorButton;
 
 
 	private void Awake() {
@@ -82,6 +84,9 @@ public class MainMenu : MonoBehaviour {
 		gameSystemMenuButton.onClick.AddListener(delegate {
 			TogglePanel("GameSystem");
 		});
+		nameGeneratorButton.onClick.AddListener(delegate {
+			TogglePanel("NameGenerator");
+		});
 
 		// Finished initialisation...
 		GameController.loadedMainMenu = true;
@@ -104,6 +109,7 @@ public class MainMenu : MonoBehaviour {
 		TogglePanel("UserInfo", true, false);
 		TogglePanel("MapObject", true, false);
 		TogglePanel("GameSystem", true, false);
+		TogglePanel("NameGenerator", true, false);
 		CameraControl.cameraBlock = false;
 	}
 
@@ -141,6 +147,9 @@ public class MainMenu : MonoBehaviour {
 		}
 		if (instance.gameSystemMenuPanel) {
 			instance.gameSystemMenuPanel.SetActive((panel == "GameSystem") && (_override ? state : !instance.gameSystemMenuPanel.activeSelf));
+		}
+		if (instance.nameGeneratorPanel) {
+			instance.nameGeneratorPanel.SetActive((panel == "NameGenerator") && (_override ? state : !instance.nameGeneratorPanel.activeSelf));
 		}
 	}
 

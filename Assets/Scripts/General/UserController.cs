@@ -7,11 +7,11 @@ public class UserController : MonoBehaviour {
   // Username
   [SerializeField] private InputField usernameInput;
 
+
   /////////////////////
   ///   LIFECYCLE   ///
   /////////////////////
   private void Awake() {
-
     // Listeners
     usernameInput.onEndEdit.AddListener(delegate {
       string newUsername = usernameInput.text;
@@ -26,5 +26,6 @@ public class UserController : MonoBehaviour {
     // Date Assignments
     usernameInput.text = GameController.userData.userName;
   }
+
 
 }
