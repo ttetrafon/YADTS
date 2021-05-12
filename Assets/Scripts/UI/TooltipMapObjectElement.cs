@@ -7,7 +7,12 @@ public class TooltipMapObjectElement : MonoBehaviour {
   [SerializeField] private TMP_Text moName;
   private Vector2 screenSize;
   private Vector2 textSize;
-  private Vector2 standardOffset = new Vector2(10, 0);
+  private Vector2 standardOffset = new Vector2(3, 3);
+
+  private void OnEnable() {
+    ResizeSelf();
+    screenSize = new Vector2 (Screen.width, Screen.height);
+  }
 
   private void LateUpdate() {
     Vector2 pos = InputController.controls.Common.MousePosition.ReadValue<Vector2>() + standardOffset;
@@ -18,7 +23,7 @@ public class TooltipMapObjectElement : MonoBehaviour {
       pos.x -= (textSize.x + standardOffset.x);
     }
     if (pos.y + textSize.y > screenSize.y) {
-      pos.y -= 2 * (textSize.y + standardOffset.y);
+      pos.y -= (textSize.y + standardOffset.y);
     }
     // Debug.Log("tooltip size: " + gameObject.GetComponent<RectTransform>().sizeDelta);
     this.gameObject.transform.position = pos;

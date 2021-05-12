@@ -5,7 +5,7 @@ public class TooltipUiElement : MonoBehaviour {
   [SerializeField] private TMP_Text tooltipText;
   private Vector2 screenSize;
   private Vector2 textSize;
-  private Vector2 standardOffset = new Vector2(10, 0);
+  private Vector2 standardOffset = new Vector2(3, 3);
 
   private void OnEnable() {
     ResizeSelf();
@@ -21,7 +21,7 @@ public class TooltipUiElement : MonoBehaviour {
       pos.x -= (textSize.x + standardOffset.x);
     }
     if (pos.y + textSize.y > screenSize.y) {
-      pos.y -= 2 * (textSize.y + standardOffset.y);
+      pos.y -= (textSize.y + standardOffset.y);
     }
     // Debug.Log("tooltip size: " + gameObject.GetComponent<RectTransform>().sizeDelta);
     this.gameObject.transform.position = pos;
