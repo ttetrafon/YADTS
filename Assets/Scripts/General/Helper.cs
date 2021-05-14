@@ -33,9 +33,9 @@ public class Helper : MonoBehaviour {
 	}
 
 
-	///////////////////////////////
-	///   REGULAR EXPRESSIONS   ///
-	///////////////////////////////
+	////////////////
+	///   TEXT   ///
+	////////////////
 	public static Regex regexLegalFileSystemCharacters = new Regex( @"^[\w\s\'\,]*$" );
 
 	public static bool TestVsRegex(string expression, Regex regex) {

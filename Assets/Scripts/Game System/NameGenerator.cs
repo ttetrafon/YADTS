@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+// using Unity.Jobs;
+// using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +21,9 @@ public class NameGenerator : MonoBehaviour {
   [SerializeField] private Button newGeneratorButton;
   [SerializeField] private Button resetButton;
   [SerializeField] private Button confirmButton;
+  [SerializeField] private InputField generatorNameInput;
+  [SerializeField] private InputField seedInput;
+  [SerializeField] private Button buldMarkovDictionariesButton;
 
   [Header("Controls")]
   private string mode;
@@ -43,6 +48,11 @@ public class NameGenerator : MonoBehaviour {
     deleteGeneratorButton.onClick.AddListener(delegate { SetMode(Constants.nameGeneratorModeDelete); });
     confirmButton.onClick.AddListener(Confirm);
     resetButton.onClick.AddListener(Reset);
+    seedInput.onEndEdit.AddListener(delegate { GetSeedWords(); });
+    // buldMarkovDictionariesButton.onClick.AddListener(delegate {
+    //   JobHandle jh = BuildMarkovDictionaries();
+    //   jh.Complete();
+    // });
   }
 
 
@@ -54,10 +64,29 @@ public class NameGenerator : MonoBehaviour {
     this.mode = mode;
     // enable/disable controls & panels as appropriate for the selected mode
     this.resetButton.gameObject.SetActive(mode != Constants.nameGeneratorModeDelete);
+    // setup the data
+    if (this.mode == Constants.nameGeneratorModeNew) { // new
+      nameGeneratorData = new MarkovData();
+    }
+    else if (this.mode == Constants.nameGeneratorModeLoad) { // load
+
+    }
+    else { // delete
+
+    }
   }
 
   private void Confirm() {
     Debug.Log("--> Confirm()");
+    if (this.mode == Constants.nameGeneratorModeNew) { // new
+
+    }
+    else if (this.mode == Constants.nameGeneratorModeLoad) { // load
+
+    }
+    else { // delete
+
+    }
   }
 
   private void Reset() {
@@ -68,13 +97,35 @@ public class NameGenerator : MonoBehaviour {
   ////////////////
   ///   DATA   ///
   ////////////////
-
+  private void GetSeedWords() {
+    string text = this.seedInput.text;
+    nameGeneratorData.namesSeed = new List<string>();
+    if (!string.IsNullOrEmpty(text)) {
+      string[] words = text.Split('\n');
+      for (int i = 0; i < words.Length; i++) {
+        nameGeneratorData.namesSeed.Add(words[i].Trim());
+      }
+    }
+  }
 
 
   //////////////////
   ///   MARKOV   ///
   //////////////////
-
+  // private JobHandle BuildMarkovDictionaries() {
+  //   BuildMarkovDictionariesJob buildMarkovDictionariesJob = new BuildMarkovDictionariesJob();
+  //   return buildMarkovDictionariesJob.Schedule();
+  // }
 
 
 }
+
+
+// public struct BuildMarkovDictionariesJob : IJob {
+//   public void Execute() {
+//     float value = 0.0f;
+//     for (int i = 0; i < 50000; i++) {
+//       value = Mathf.Exp(i);
+//     }
+//   }
+// }
