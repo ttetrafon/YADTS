@@ -1581,7 +1581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133912959}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4481,7 +4481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2015236549133351553, guid: d225031508a097b48a2ab8d6866f9cd0, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2015236549133351554, guid: d225031508a097b48a2ab8d6866f9cd0, type: 3}
       propertyPath: m_Name
@@ -7848,7 +7848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2015236549133351553, guid: d225031508a097b48a2ab8d6866f9cd0, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
-      value: 31
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2015236549133351554, guid: d225031508a097b48a2ab8d6866f9cd0, type: 3}
       propertyPath: m_Name
@@ -15492,7 +15492,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335508066}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -17145,7 +17145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2015236549133351553, guid: d225031508a097b48a2ab8d6866f9cd0, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
-      value: 31
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2015236549133351554, guid: d225031508a097b48a2ab8d6866f9cd0, type: 3}
       propertyPath: m_Name
@@ -18175,7 +18175,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596223075}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -19920,6 +19920,9 @@ MonoBehaviour:
   newGeneratorButton: {fileID: 1122269370}
   resetButton: {fileID: 666644896}
   confirmButton: {fileID: 1238488976}
+  generatorNameInput: {fileID: 0}
+  seedInput: {fileID: 0}
+  buldMarkovDictionariesButton: {fileID: 0}
 --- !u!1 &1718740472
 GameObject:
   m_ObjectHideFlags: 0
@@ -20244,7 +20247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9036751464710764156, guid: cacec6d11efe5594c8af5eb2e37be306, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000019073486
+      value: -0.000034332275
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cacec6d11efe5594c8af5eb2e37be306, type: 3}
@@ -25914,7 +25917,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 741164125937673902, guid: fe0712c8fcfb1d349ade00405846cc22, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 741164125937673902, guid: fe0712c8fcfb1d349ade00405846cc22, type: 3}
       propertyPath: m_LocalPosition.z
