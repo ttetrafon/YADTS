@@ -24,6 +24,8 @@ public class NameGenerator : MonoBehaviour {
   [SerializeField] private InputField generatorNameInput;
   [SerializeField] private InputField seedInput;
   [SerializeField] private Button buldMarkovDictionariesButton;
+  [SerializeField] private Toggle markovGeneration;
+  [SerializeField] private Text markovGenerationLabel;
 
   [Header("Controls")]
   private string mode;
@@ -41,6 +43,7 @@ public class NameGenerator : MonoBehaviour {
   private void Start() {
     // initial setup
     this.mode = Constants.nameGeneratorModeLoad;
+    nameGeneratorData = new MarkovData();
 
     // Listeners
     newGeneratorButton.onClick.AddListener(delegate { SetMode(Constants.nameGeneratorModeNew); });
@@ -53,6 +56,10 @@ public class NameGenerator : MonoBehaviour {
     //   JobHandle jh = BuildMarkovDictionaries();
     //   jh.Complete();
     // });
+    markovGeneration.onValueChanged.AddListener(delegate {
+      nameGeneratorData.markovGeneration = markovGeneration.isOn;
+      this.markovGenerationLabel.text = (this.markovGeneration.isOn ? "Markov Generation" : "Random Selection");
+    });
   }
 
 

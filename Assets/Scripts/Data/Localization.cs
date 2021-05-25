@@ -14,6 +14,7 @@ public class Localization {
 			{"Add Map Info Item Button", "Add Map Info Item"},
 			{"Add Map Object Button", "Add Map Object"},
 			{"Bio Tab", "Bio"},
+			{"Build Markov Dictionaries Button", "Build Dictionaries"},
 			{"Cancel Button", "Cancel"},
 			{"Confirm Button", "Confirm"},
 			{"Connect to Server Button", "Connect to Server"},
