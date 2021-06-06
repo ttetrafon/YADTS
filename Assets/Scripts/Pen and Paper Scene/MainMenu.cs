@@ -99,57 +99,58 @@ public class MainMenu : MonoBehaviour {
 	public static void CloseMenus() {
 		instance.mainMenuPanel.SetActive(false);
 		instance.mapMenuPanel.SetActive(false);
-		TogglePanel("NewMap", true, false);
-		TogglePanel("DeleteMap", true, false);
-		TogglePanel("LoadMap", true, false);
-		TogglePanel("MapInfo", true, false);
 		TogglePanel("AddMapObject", true, false);
+		TogglePanel("Campaigns", true, false);
+		TogglePanel("DeleteMap", true, false);
+		TogglePanel("GameSystem", true, false);
+		TogglePanel("LoadMap", true, false);
 		TogglePanel("MapConfiguration", true, false);
+		TogglePanel("MapInfo", true, false);
+		TogglePanel("MapObject", true, false);
+		TogglePanel("NameGenerator", true, false);
+		TogglePanel("NewMap", true, false);
 		TogglePanel("Settings", true, false);
 		TogglePanel("UserInfo", true, false);
-		TogglePanel("MapObject", true, false);
-		TogglePanel("GameSystem", true, false);
-		TogglePanel("NameGenerator", true, false);
 		CameraControl.cameraBlock = false;
 	}
 
 	public static void TogglePanel(string panel = "none", bool _override = false, bool state = false) {
 		//Debug.Log("---> TogglePanel(" + panel + ", " + _override + ", " + state + ")");
-		if (instance.newMapPanel) {
-			instance.newMapPanel.SetActive((panel == "NewMap") && (_override ? state : !instance.newMapPanel.activeSelf));
+		if (instance.addMapObjectPanel) {
+			instance.addMapObjectPanel.SetActive((panel == "AddMapObject") && (_override ? state : !instance.addMapObjectPanel.activeSelf));
+		}
+		if (instance.campaignsPanel) {
+			instance.campaignsPanel.SetActive((panel == "Campaigns") && (_override ? state : !instance.campaignsPanel.activeSelf));
 		}
 		if (instance.deleteMapPanel) {
 			instance.deleteMapPanel.SetActive((panel == "DeleteMap") && (_override ? state : !instance.deleteMapPanel.activeSelf));
 		}
+		if (instance.gameSystemMenuPanel) {
+			instance.gameSystemMenuPanel.SetActive((panel == "GameSystem") && (_override ? state : !instance.gameSystemMenuPanel.activeSelf));
+		}
 		if (instance.loadMapPanel) {
 			instance.loadMapPanel.SetActive((panel == "LoadMap") && (_override ? state : !instance.loadMapPanel.activeSelf));
+		}
+		if (instance.mapConfigurationPanel) {
+			instance.mapConfigurationPanel.SetActive((panel == "MapConfiguration") && (_override ? state : !instance.mapConfigurationPanel.activeSelf));
 		}
 		if (instance.mapInfoPanel) {
 			instance.mapInfoPanel.SetActive((panel == "MapInfo") && (_override ? state : !instance.mapInfoPanel.activeSelf));
 		}
-		if (instance.addMapObjectPanel) {
-			instance.addMapObjectPanel.SetActive((panel == "AddMapObject") && (_override ? state : !instance.addMapObjectPanel.activeSelf));
+		if (instance.mapObjectPanel) {
+			instance.mapObjectPanel.SetActive((panel == "MapObject") && (_override ? state : !instance.mapObjectPanel.activeSelf));
 		}
-		if (instance.mapConfigurationPanel) {
-			instance.mapConfigurationPanel.SetActive((panel == "MapConfiguration") && (_override ? state : !instance.mapConfigurationPanel.activeSelf));
+		if (instance.nameGeneratorPanel) {
+			instance.nameGeneratorPanel.SetActive((panel == "NameGenerator") && (_override ? state : !instance.nameGeneratorPanel.activeSelf));
+		}
+		if (instance.newMapPanel) {
+			instance.newMapPanel.SetActive((panel == "NewMap") && (_override ? state : !instance.newMapPanel.activeSelf));
 		}
 		if (instance.settingsPanel) {
 			instance.settingsPanel.SetActive((panel == "Settings") && (_override ? state : !instance.settingsPanel.activeSelf));
 		}
 		if (instance.userPanel) {
 			instance.userPanel.SetActive((panel == "UserInfo") && (_override ? state : !instance.userPanel.activeSelf));
-		}
-		if (instance.campaignsPanel) {
-			instance.campaignsPanel.SetActive((panel == "Campaigns") && (_override ? state : !instance.campaignsPanel.activeSelf));
-		}
-		if (instance.campaignsPanel) {
-			instance.mapObjectPanel.SetActive((panel == "MapObject") && (_override ? state : !instance.mapObjectPanel.activeSelf));
-		}
-		if (instance.gameSystemMenuPanel) {
-			instance.gameSystemMenuPanel.SetActive((panel == "GameSystem") && (_override ? state : !instance.gameSystemMenuPanel.activeSelf));
-		}
-		if (instance.nameGeneratorPanel) {
-			instance.nameGeneratorPanel.SetActive((panel == "NameGenerator") && (_override ? state : !instance.nameGeneratorPanel.activeSelf));
 		}
 	}
 

@@ -39,22 +39,10 @@ public class MapController : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 		}
-		// Assign the references.
-		treeNodesDirectory = GameController.saveFolder + "map tree hierarchy" + "/";
-		//Debug.Log("treeNodesDirectory: " + treeNodesDirectory);
-		mapDirectory = GameController.saveFolder + "maps" + "/";
-		//Debug.Log("mapDirectory: " + mapDirectory);
-		mapObjectsDirectory = GameController.saveFolder + "map objects" + "/";
-		//Debug.Log("mapObjectsDirectory: " + mapObjectsDirectory);
 	}
 
 	private void Start() {
 		//Debug.Log("===> MapController Start");
-		// Set values.
-		rootMapFile = treeNodesDirectory + rootMap + ".json";
-		//Debug.Log("rootMapFile: " + rootMapFile);
-		ConstructMapTree(rootMapFile);
-		//Debug.Log("initial map: " + currentMapData.mapUid);
 
 		// Add listeners.
 		distanceMeasurementButton.onClick.AddListener(delegate {

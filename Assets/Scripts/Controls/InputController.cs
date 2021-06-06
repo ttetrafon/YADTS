@@ -116,13 +116,11 @@ public class InputController : MonoBehaviour {
   }
 
   private void OnEnable() {
-    controls.Common.Enable();
-    controls.MapMode.Enable();
+    CampaignManager.EnableControls(true);
   }
 
   private void OnDisable() {
-    controls.Common.Disable();
-    controls.MapMode.Disable();
+    CampaignManager.EnableControls(false);
   }
 
   private void Update() {

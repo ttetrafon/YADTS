@@ -19,19 +19,6 @@ public class GameController : MonoBehaviour {
 	public static string baseFolder;
 	public static string saveFolder;
 	public static string backupFolder;
-	private List<string> subfolders = new List<string>() {
-		"dictionaries",
-		"game system",
-		"game system/name generator",
-		"maps",
-		"map objects",
-		"map objects/effect",
-		"map objects/creature",
-		"map objects/item",
-		"map objects/terrain",
-		"map objects/vehicle",
-		"map tree hierarchy"
-	};
 	// General Game Data
 	public static Dictionaries dictionaries = new Dictionaries();
 	public static MapHierarchy mapHierarchy = new MapHierarchy();
@@ -39,6 +26,7 @@ public class GameController : MonoBehaviour {
 	public static UserData userData = new UserData();
 	public static Options options = new Options();
 	// Loading Checks
+	public static Boolean campaignLoaded = false;
 	public static Boolean loadedGameController = false;
 	public static Boolean loadedMapController = false;
 	public static Boolean loadedMainMenu = false;
@@ -62,33 +50,19 @@ public class GameController : MonoBehaviour {
 		else {
 			SceneManager.LoadScene(0);
 		}
-		saveFolder = baseFolder + userData.selectedCampaign + "/";
-		backupFolder = saveFolder + "BACKUPS" + "/";
+		campaignLoaded = !String.IsNullOrEmpty(userData.selectedCampaign);
+		if (campaignLoaded) {
+			CampaignManager.SetCampaignFolders();
+		}
 	}
 
 	private void Start() {
 		//Debug.Log("===> GameController Start");
-		string dictionariesFile = saveFolder + "dictionaries/dictionaries.json";
-		//Debug.Log("dictionariesFile: " + dictionariesFile);
-		if (File.Exists(dictionariesFile)) {
-			//Debug.Log("... reading dictionaries");
-			//Debug.Log(Helper.ReadFile(dictionariesFile));
-			dictionaries = (Dictionaries)JsonObject.FromJson(new Dictionaries(), Helper.ReadFile(dictionariesFile));
-		}
-		if (!dictionaries.UuidExists(MapController.rootMap)) {
-			dictionaries.NameAdd(MapController.rootMap, "Multiverse");
-		}
-
-		// Create any missing subfolders.
-		for (int i = 0; i < subfolders.Count; i++) {
-			if (!Directory.Exists(saveFolder + subfolders[i])) {
-				Directory.CreateDirectory(saveFolder + subfolders[i]);
-			}
-		}
-
+    CampaignManager.StartCampaignData();
 		loadedGameController = true;
 		PostLoad.FinishedInitialLoading();
 	}
+
 
 	////////////////////////
 	///   MOUSE CURSOR   ///
