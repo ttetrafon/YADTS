@@ -30,4 +30,7 @@ public class Constants {
 	public static string nameGeneratorModeLoad = "load";
 	public static string nameGeneratorModeDelete = "delete";
 
+	public static string infoItemCampaign = "campaign";
+	public static string infoItemCreature = "creature";
+	public static string infoItemMap = "map";
 }
