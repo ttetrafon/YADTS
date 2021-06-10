@@ -2,7 +2,7 @@
   "dependencies": {
     "com.hwaet.projectcloner": "https://github.com/hwaet/UnityProjectCloner.git",
     "com.unity.burst": "1.5.4",
-    "com.unity.cinemachine": "2.7.3",
+    "com.unity.cinemachine": "2.7.4",
     "com.unity.collab-proxy": "1.5.7",
     "com.unity.formats.fbx": "4.0.1",
     "com.unity.ide.vscode": "1.2.3",
