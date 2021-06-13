@@ -84,7 +84,7 @@ public class CampaignManager : MonoBehaviour {
   ///   INITIALISATION   ///
   //////////////////////////
   public static void SetCampaignFolders() {
-		Debug.Log("---> SetCampaignFolders()");
+		// Debug.Log("---> SetCampaignFolders()");
 		GameController.saveFolder = GameController.baseFolder + GameController.userData.selectedCampaign + "/";
 		//Debug.Log("saveFolder: " + GameController.saveFolder);
 		GameController.backupFolder = GameController.saveFolder + "BACKUPS" + "/";
@@ -100,7 +100,7 @@ public class CampaignManager : MonoBehaviour {
 	}
 
   public static void EnableControls(bool enable = true) {
-		Debug.Log("---> EnableControls(" + enable + ")");
+		// Debug.Log("---> EnableControls(" + enable + ")");
     if (enable) {
       InputController.controls.Common.Enable();
       InputController.controls.MapMode.Enable();
@@ -112,7 +112,7 @@ public class CampaignManager : MonoBehaviour {
   }
 
   public static void StartCampaignData() {
-    Debug.Log("---> StartCampaignData()");
+    // Debug.Log("---> StartCampaignData()");
     string dictionariesFile = GameController.saveFolder + "dictionaries/dictionaries.json";
     //Debug.Log("dictionariesFile: " + dictionariesFile);
     if (File.Exists(dictionariesFile)) {
