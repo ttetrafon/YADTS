@@ -128,7 +128,7 @@ public class MapInfoItem : MonoBehaviour {
     indexDisplay.text = index.ToString();
     textDisplay.text = data.text;
     textDisplay.textStyle = stylesheet.GetStyle(Localization.tmpProStyleHashes[MapController.currentMapData.mapInfoItems[index].type]);
-    playerVisibleIndicator.gameObject.SetActive(data.playerVisibile);
+    playerVisibleIndicator.gameObject.SetActive(data.playerVisible);
   }
 
   public void SetIndexDisplay(int index) {
@@ -145,7 +145,7 @@ public class MapInfoItem : MonoBehaviour {
     // player visible
     playerVisibleIndicator.gameObject.SetActive(this.playerVisibleToggle.isOn);
     if (MapController.currentMapData.mapInfoItems.ContainsKey(this.index)) {
-      MapController.currentMapData.mapInfoItems[index].playerVisibile = this.playerVisibleToggle.isOn;
+      MapController.currentMapData.mapInfoItems[index].playerVisible = this.playerVisibleToggle.isOn;
     }
     // type
     MapController.currentMapData.mapInfoItems[index].type = Helper.GetDropdownSelectedText(typeSelector);
@@ -163,7 +163,7 @@ public class MapInfoItem : MonoBehaviour {
   private void FillEditElements() {
     positionInput.text = index.ToString();
     moveAssociatedItemsToggle.isOn = false;
-    playerVisibleToggle.isOn = MapController.currentMapData.mapInfoItems[index].playerVisibile;
+    playerVisibleToggle.isOn = MapController.currentMapData.mapInfoItems[index].playerVisible;
     textInput.text = MapController.currentMapData.mapInfoItems[index].text;
     Helper.SelectDropdownValue(typeSelector, MapController.currentMapData.mapInfoItems[index].type);
   }
