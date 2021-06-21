@@ -52,7 +52,7 @@ public class DeleteMapScript : MonoBehaviour {
 		MapController.ConstructMapTree(MapController.rootMapFile);
 		// Load the root map.
 		LoadMapScript.LoadMap(MapController.rootMap);
-		MainMenu.CloseMenus();
+		PanelController.CloseAllPanels();
 	}
 
 	public static void DeleteMapComponents(string mapUid, bool debug = false) {

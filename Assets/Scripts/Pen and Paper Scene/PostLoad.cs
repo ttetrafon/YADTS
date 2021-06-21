@@ -21,7 +21,7 @@ public class PostLoad : MonoBehaviour {
       GameController.initiationFinished = true;
     }
     else {
-      MainMenu.TogglePanel("Campaigns", true, true);
+      PanelController.OpenPanel(Constants.panelCampaign);
       CampaignManager.EnableControls(false);
       // Display message that no campaign has been loaded!
     }

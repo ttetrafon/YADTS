@@ -69,10 +69,6 @@ public class CampaignManager : MonoBehaviour {
 
       // load the root map
       LoadMapScript.LoadMap(MapController.rootMap);
-
-      // close all panels
-      MainMenu.CloseMenus();
-
     });
   }
 

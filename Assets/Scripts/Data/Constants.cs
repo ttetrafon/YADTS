@@ -33,4 +33,19 @@ public class Constants {
 	public static string infoItemCampaign = "campaign";
 	public static string infoItemCreature = "creature";
 	public static string infoItemMap = "map";
+
+	public static string panelMainMenu = "main menu";
+	public static string panelMapMenu = "map menu";
+	public static string panelGameSystemMenu = "game system menu";
+	public static string panelUser = "user panel";
+	public static string panelCampaign = "campaigns panel";
+	public static string panelSettings = "settings panel";
+	public static string panelNewMap = "new map panel";
+	public static string panelLoadMap = "load map panel";
+	public static string panelDeleteMap = "delete map panel";
+	public static string panelMapInfo = "map info panel";
+	public static string panelAddMapObject = "add map object panel";
+	public static string panelMapConfiguration = "map configuration panel";
+	public static string panelMapObject = "map object panel";
+	public static string panelNameGenerator = "name generator panel";
 }

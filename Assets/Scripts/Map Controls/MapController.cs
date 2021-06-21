@@ -56,10 +56,12 @@ public class MapController : MonoBehaviour {
 			}
 		});
 		mapInfoButton.onClick.AddListener(delegate {
-			MainMenu.TogglePanel("MapInfo");
+			PanelController.CloseAllPanels();
+			PanelController.OpenPanel(Constants.panelMapInfo);
 		});
 		mapObjectInfoButton.onClick.AddListener(delegate {
-			MainMenu.TogglePanel("MapObject");
+			PanelController.CloseAllPanels();
+			PanelController.OpenPanel(Constants.panelMapObject);
 		});
 
 		// Finished Loading
@@ -146,8 +148,8 @@ public class MapController : MonoBehaviour {
     	}
 	}
 
-	public static void UnseslectAllMapObjects() {
-		//Debug.Log("---> UnseslectAllMapObjects()");
+	public static void UnselectAllMapObjects() {
+		//Debug.Log("---> UnselectAllMapObjects()");
 		for (int i = 0; i < currentlySelectedObjects.Count; i++) {
 			currentlySelectedObjects[i].ToggleSelection();
 		}
@@ -308,7 +310,7 @@ public class MapController : MonoBehaviour {
 		Helper.SaveCurrentMap();
 		mapTree[currentMapData.mapUid].UpdateSelf();
 		// Finish
-		MainMenu.CloseMenus();
+		PanelController.CloseAllPanels();
 	}
 
 }

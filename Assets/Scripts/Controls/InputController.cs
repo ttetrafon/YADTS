@@ -219,14 +219,14 @@ public class InputController : MonoBehaviour {
         MapController.ToggleMapObjectInSelection(mo);
       }
       else {
-        MapController.UnseslectAllMapObjects();
+        MapController.UnselectAllMapObjects();
         mo.ToggleSelection();
         MapController.ToggleMapObjectInSelection(mo);
       }
     }
     else {
-      MapController.UnseslectAllMapObjects();
-      MainMenu.CloseMenus();
+      MapController.UnselectAllMapObjects();
+      PanelController.CloseAllPanels();
     }
   }
 
