@@ -28,6 +28,7 @@ public class PanelController : MonoBehaviour {
 	[SerializeField] private GameObject mapObjectPanel;
 
   [Header("Game System Menu")]
+  [SerializeField] private GameObject planesOfExistencePanel;
 	[SerializeField] private GameObject nameGeneratorPanel;
 
 
@@ -54,7 +55,8 @@ public class PanelController : MonoBehaviour {
       this.addMapObjectPanel,
       this.mapConfigurationPanel,
       this.mapObjectPanel,
-      this.nameGeneratorPanel
+      this.nameGeneratorPanel,
+      this.planesOfExistencePanel
     };
     this.panelCount = this.panelList.Count;
 
@@ -118,9 +120,9 @@ public class PanelController : MonoBehaviour {
     else if (panel == Constants.panelNameGenerator) {
       instance.nameGeneratorPanel.SetActive(!instance.nameGeneratorPanel.activeSelf);
     }
-    // else if (panel == Constants.) {
-    //   instance..SetActive(!instance..activeSelf);
-    // }
+    else if (panel == Constants.panelPlanesOfExistence) {
+      instance.planesOfExistencePanel.SetActive(!instance.planesOfExistencePanel.activeSelf);
+    }
   }
 
 }

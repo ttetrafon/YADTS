@@ -7,18 +7,19 @@ using UnityEngine.UI;
 public class CampaignManager : MonoBehaviour {
   // Data
   public static List<string> campaignSubfolders = new List<string>() {
-		"dictionaries",
-		"game system",
-		"game system/name generator",
-		"maps",
-		"map objects",
-		"map objects/effect",
-		"map objects/creature",
-		"map objects/item",
-		"map objects/terrain",
-		"map objects/vehicle",
-		"map tree hierarchy"
-	};
+    "dictionaries",
+    "game system",
+    "game system/name generator",
+    "game system/planes of existence",
+    "maps",
+    "map objects",
+    "map objects/effect",
+    "map objects/creature",
+    "map objects/item",
+    "map objects/terrain",
+    "map objects/vehicle",
+    "map tree hierarchy"
+  };
 
   // Controls
   [SerializeField] private Dropdown campaignSelector;
@@ -80,23 +81,23 @@ public class CampaignManager : MonoBehaviour {
   ///   INITIALISATION   ///
   //////////////////////////
   public static void SetCampaignFolders() {
-		// Debug.Log("---> SetCampaignFolders()");
-		GameController.saveFolder = GameController.baseFolder + GameController.userData.selectedCampaign + "/";
-		//Debug.Log("saveFolder: " + GameController.saveFolder);
-		GameController.backupFolder = GameController.saveFolder + "BACKUPS" + "/";
-		//Debug.Log("backupFolder: " + GameController.saveFolder);
-		MapController.treeNodesDirectory = GameController.saveFolder + "map tree hierarchy" + "/";
-		//Debug.Log("treeNodesDirectory: " + MapController.treeNodesDirectory);
-		MapController.mapDirectory = GameController.saveFolder + "maps" + "/";
-		//Debug.Log("mapDirectory: " + MapController.mapDirectory);
-		MapController.mapObjectsDirectory = GameController.saveFolder + "map objects" + "/";
-		//Debug.Log("mapObjectsDirectory: " + MapController.mapObjectsDirectory);
-		MapController.rootMapFile = MapController.treeNodesDirectory + MapController.rootMap + ".json";
-		//Debug.Log("rootMapFile: " + MapController.rootMapFile);
-	}
+    // Debug.Log("---> SetCampaignFolders()");
+    GameController.saveFolder = GameController.baseFolder + GameController.userData.selectedCampaign + "/";
+    //Debug.Log("saveFolder: " + GameController.saveFolder);
+    GameController.backupFolder = GameController.saveFolder + "BACKUPS" + "/";
+    //Debug.Log("backupFolder: " + GameController.saveFolder);
+    MapController.treeNodesDirectory = GameController.saveFolder + "map tree hierarchy" + "/";
+    //Debug.Log("treeNodesDirectory: " + MapController.treeNodesDirectory);
+    MapController.mapDirectory = GameController.saveFolder + "maps" + "/";
+    //Debug.Log("mapDirectory: " + MapController.mapDirectory);
+    MapController.mapObjectsDirectory = GameController.saveFolder + "map objects" + "/";
+    //Debug.Log("mapObjectsDirectory: " + MapController.mapObjectsDirectory);
+    MapController.rootMapFile = MapController.treeNodesDirectory + MapController.rootMap + ".json";
+    //Debug.Log("rootMapFile: " + MapController.rootMapFile);
+  }
 
   public static void EnableControls(bool enable = true) {
-		// Debug.Log("---> EnableControls(" + enable + ")");
+    // Debug.Log("---> EnableControls(" + enable + ")");
     if (enable) {
       InputController.controls.Common.Enable();
       InputController.controls.MapMode.Enable();

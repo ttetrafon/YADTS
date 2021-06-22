@@ -48,4 +48,5 @@ public class Constants {
 	public static string panelMapConfiguration = "map configuration panel";
 	public static string panelMapObject = "map object panel";
 	public static string panelNameGenerator = "name generator panel";
+	public static string panelPlanesOfExistence = "planes of existence panel";
 }

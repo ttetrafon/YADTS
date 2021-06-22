@@ -47,6 +47,7 @@ public class Localization {
 			{"Network Button", "Network"},
 			{"New Generator Button", "Create New Name Generator"},
 			{"New Map Button", "New Map"},
+			{"Planes of Existence Button", "Planes of Existence"},
 			{"Position Decrement Button x", "Decrement X"},
 			{"Position Decrement Button y", "Decrement Y"},
 			{"Position Decrement Button z", "Decrement Z"},

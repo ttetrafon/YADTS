@@ -23,6 +23,7 @@ public class MainMenu : MonoBehaviour {
   [Header("Game System Menu")]
   [SerializeField] private Button gameSystemMenuButton;
   [SerializeField] private Button nameGeneratorButton;
+  [SerializeField] private Button planesOfExistenceButton;
 
 
   private void Awake() {
@@ -76,6 +77,10 @@ public class MainMenu : MonoBehaviour {
     nameGeneratorButton.onClick.AddListener(delegate {
       PanelController.CloseAllPanels();
       PanelController.OpenPanel(Constants.panelNameGenerator);
+    });
+    planesOfExistenceButton.onClick.AddListener(delegate {
+      PanelController.CloseAllPanels();
+      PanelController.OpenPanel(Constants.panelPlanesOfExistence);
     });
 
     // Finished initialisation...
