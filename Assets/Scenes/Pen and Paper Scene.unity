@@ -6521,7 +6521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_AnchorMin.x
@@ -6529,7 +6529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_SizeDelta.x
@@ -6569,11 +6569,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -14562,7 +14562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_AnchorMin.x
@@ -14570,7 +14570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_SizeDelta.x
@@ -14610,11 +14610,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 2177702338737159, guid: 06997609366dffb419e7b5bc28816ee7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -17645,7 +17645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1427860335
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17665,7 +17665,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 2, y: -110}
-  m_SizeDelta: {x: 0, y: 40}
+  m_SizeDelta: {x: 86, y: 40}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1427860336
 MonoBehaviour:
@@ -17980,6 +17980,7 @@ GameObject:
   - component: {fileID: 1452980516}
   - component: {fileID: 1452980515}
   - component: {fileID: 1452980514}
+  - component: {fileID: 1452980518}
   m_Layer: 5
   m_Name: planes of existence panel
   m_TagString: Untagged
@@ -18086,6 +18087,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452980512}
   m_CullTransparentMesh: 1
+--- !u!114 &1452980518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452980512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbf0b51bdef68b4f8ced14914b2e4c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1460110395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21428,33 +21441,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2015236549133351558, guid: d225031508a097b48a2ab8d6866f9cd0, type: 3}
   m_PrefabInstance: {fileID: 1710996869}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1710996871 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2015236549133351554, guid: d225031508a097b48a2ab8d6866f9cd0, type: 3}
-  m_PrefabInstance: {fileID: 1710996869}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1710996872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1710996871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6992c4f887cbefa469228ecda002b614, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deleteGeneratorButton: {fileID: 1126216782}
-  loadGeneratorButton: {fileID: 1322425034}
-  newGeneratorButton: {fileID: 1122269370}
-  resetButton: {fileID: 666644896}
-  confirmButton: {fileID: 1238488976}
-  generatorNameInput: {fileID: 535781509}
-  seedInput: {fileID: 1708907084}
-  buldMarkovDictionariesButton: {fileID: 1630134686}
-  markovGeneration: {fileID: 1011084567}
-  markovGenerationLabel: {fileID: 1011084568}
 --- !u!1 &1718740472
 GameObject:
   m_ObjectHideFlags: 0
@@ -21779,7 +21765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9036751464710764156, guid: cacec6d11efe5594c8af5eb2e37be306, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000076293945
+      value: -0.0000076293945
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cacec6d11efe5594c8af5eb2e37be306, type: 3}
@@ -24551,6 +24537,7 @@ GameObject:
   - component: {fileID: 1917605979}
   - component: {fileID: 1917605978}
   - component: {fileID: 1917605977}
+  - component: {fileID: 1917605976}
   m_Layer: 5
   m_Name: name generator panel
   m_TagString: Untagged
@@ -24584,6 +24571,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1917605976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917605974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6992c4f887cbefa469228ecda002b614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deleteGeneratorButton: {fileID: 1126216782}
+  loadGeneratorButton: {fileID: 1322425034}
+  newGeneratorButton: {fileID: 1122269370}
+  resetButton: {fileID: 666644896}
+  confirmButton: {fileID: 1238488976}
+  generatorNameInput: {fileID: 535781509}
+  seedInput: {fileID: 1708907084}
+  buldMarkovDictionariesButton: {fileID: 1630134686}
+  markovGeneration: {fileID: 1011084567}
+  markovGenerationLabel: {fileID: 1011084568}
 --- !u!114 &1917605977
 MonoBehaviour:
   m_ObjectHideFlags: 0
